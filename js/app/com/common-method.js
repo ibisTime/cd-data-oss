@@ -647,8 +647,6 @@ function buildList(options) {
             } else if (item.type1 == 'date' || item.type1 == "datetime") {
                 dateTimeList.push(item);
                 html += '<li style="width: 50%;"><label>' + item.title1 + '</label><input id="' + item.field1 + '" name="' + item.field1 + '" class="lay-input"/><label style="float:none;padding-left: 10px;">至</label><input id="' + item.field2 + '" name="' + item.field2 + '" class="lay-input"/></li>';
-            } else if (item.type1 == 'normalRange') {
-                html += '<li style="width: 50%;"><label>' + item.title1 + '</label><input id="' + item.field1 + '" name="' + item.field1 + '" class="lay-input"/><label style="float:none;padding-left: 10px;">至</label><input id="' + item.field2 + '" name="' + item.field2 + '" class="lay-input"/></li>';
             } else if (item.type == "citySelect") {
                 html += '<li class="clearfix" style="width:56%;"><label>' + item.title + '</label><div id="city-group"><select id="province" name="province" class="control-def prov"></select>' +
                     '<select id="city" name="city" class="control-def city"></select>' +
@@ -2013,6 +2011,72 @@ function buildDetail(options) {
 
                 if (item.afterSet) {
                     item.afterSet(displayValue, data);
+                }
+
+                if (item.formatter) {
+                    if (item.type == 'img') {
+                        var realValue = item.formatter(displayValue, data);
+                        var sp = realValue && realValue.split('||') || [];
+                        var imgsHtml = '';
+                        var defaultFile = getDefaultFileIcon();
+                        sp.length && sp.forEach(function(item) {
+                            var suffix = item.slice(item.lastIndexOf('.') + 1);
+                            var src = (item.indexOf('http://') > -1 ? item : (OSS.picBaseUrl + '/' + item));
+                            //                          var src1 = (item.indexOf('http://') > -1 ? item.substring(item.lastIndexOf("/") + 1) : item);
+                            var src1 = item;
+                            if (item.indexOf('http://') > -1) {
+                                var name = src.substring(src.lastIndexOf("/") + 1);
+                            } else {
+                                var name = src1.substring(0, src1.lastIndexOf("_")) + "." + suffix;
+                            }
+                            if (isDocOrAviOrZip(suffix)) {
+                                imgsHtml += '<div class="img-ctn" data-src="' + src1 + '" style="display: inline-block;position: relative;">' +
+                                    '<div class="center-img-wrap">' +
+                                    '<img width="100" src="' + getDocOrAviOrZipIcon(suffix) + '" />' +
+                                    '<i class="zmdi zmdi-close-circle-o zmdi-hc-fw"></i>' +
+                                    '<i class="zmdi zmdi-download zmdi-hc-fw"></i>' +
+                                    '</div>' +
+                                    '<div class="t_3dot w100p" title="' + name + '">' + name + '</div>' +
+                                    '</div>';
+                            } else if (isAcceptImg(suffix)) {
+                                imgsHtml += '<div class="img-ctn" data-src="' + src1 + '" style="display: inline-block;position: relative;">' +
+                                    '<div class="center-img-wrap">' +
+                                    '<img src="' + src + OSS.picShow + '" class="center-img" />' +
+                                    '<i class="zmdi zmdi-close-circle-o zmdi-hc-fw"></i>' +
+                                    '<i class="zmdi zmdi-download zmdi-hc-fw"></i>' +
+                                    '</div>' +
+                                    '<div class="t_3dot w100p" title="' + name + '">' + name + '</div>' +
+                                    '</div>';
+                            } else {
+                                imgsHtml += '<div class="img-ctn" data-src="' + src1 + '" style="display: inline-block;position: relative;">' +
+                                    '<div class="center-img-wrap">' +
+                                    '<img width="100" src="' + defaultFile + '" />' +
+                                    '<i class="zmdi zmdi-close-circle-o zmdi-hc-fw"></i>' +
+                                    '<i class="zmdi zmdi-download zmdi-hc-fw"></i>' +
+                                    '</div>' +
+                                    '<div class="t_3dot w100p" title="' + name + '">' + name + '</div>' +
+                                    '</div>';
+                            }
+                        });
+                        $('#' + item.field).html(imgsHtml);
+                        item.single && setImgDisabled($('#' + item.field));
+                        $('#' + item.field).find('.zmdi-close-circle-o').on('click', function(e) {
+                            var el = $(this).parent().parent(), el_parent = el.parent();
+                            el.remove();
+                            el_parent[0].cfg.single && setImgDisabled(el_parent);
+                            // $(this).parents("[data-src]").remove();
+                        });
+                        $('#' + item.field).find('.zmdi-download').on('click', function(e) {
+                            var dSrc = OSS.picBaseUrl + '/' + $(this).parents("[data-src]").attr('data-src');
+                            window.open(dSrc, '_blank');
+                        });
+                    }  else if (item.type == 'textarea' && !item.normalArea) {
+                        $('#' + item.field)[0].editor.$txt.html(item.formatter(displayValue, data));
+                    } else if (item.type == 'textarea' && item.normalArea) {
+                        $('#' + item.field).val(item.formatter(displayValue, data));
+                    } 
+
+
                 }
             }
             options.afterData && options.afterData(data);

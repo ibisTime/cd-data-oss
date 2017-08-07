@@ -6,15 +6,19 @@ $(function() {
             title: '',
             checkbox: true
         },{
-            title: '业务编号',
-            field: 'bizNo',
-            search: true
-        },{
             title: "真实姓名",
             field: "realName",
             search: true
+        },{
+            field: 'idNo',
+            title: '身份证号',
+            search: true
+        },{
+            field: 'openId',
+            title: '芝麻openId',
+            search: true
         }, {
-            title: '是否在名单',
+            title: '是否被关注',
             field: 'isMatched',
             type:'select',
             data: {
@@ -25,12 +29,8 @@ $(function() {
             title: '行业关注名单信息',
             field: 'details',
         },{
-            field: 'idNo',
-            title: '身份证号',
-            search: true
-        },{
-            field: 'openId',
-            title: '芝麻开放平台唯一标识',
+            title: '芝麻业务号',
+            field: 'bizNo',
             search: true
         },{
             title: "创建时间",
