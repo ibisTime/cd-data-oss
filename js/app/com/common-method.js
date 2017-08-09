@@ -623,6 +623,7 @@ function buildList(options) {
         showPermissionControl();
     }
 
+    var searchs = JSON.parse(sessionStorage.getItem('listSearchs') || '{}')[location.pathname];
     options.router = options.router || /.*\/([^\/]*)\.html/.exec(location.href)[1];
 
     var html = '<ul>';
@@ -802,8 +803,14 @@ function buildList(options) {
     });
 
     $('#searchBtn').click(function() {
+        updateListSearch();
         $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
     });
+
+    var searchValue;
+    for (searchValue in searchs) {
+        $('#' + searchValue).val(searchs[searchValue]);
+    }    
 
     if ($('.search-form').find('li').length == 1) {
         $('.search-form').find('li').hide();
@@ -840,6 +847,7 @@ function buildList(options) {
         }
         window.location.href = options.router + "_addedit.html?code=" + (selRecords[0].code || selRecords[0].id) + urlParamsStr + codeParams;
     });
+    
 
     $('#deleteBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
@@ -875,6 +883,7 @@ function buildList(options) {
     });
 
     $('#detailBtn').click(function() {
+        updateListSelect()
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
             toastr.info("请选择记录");
@@ -1024,9 +1033,10 @@ function buildList(options) {
         pageSize: options.pageSize || 10,
         pageList: options.pageList || [10, 20, 30, 40, 50],
         columns: options.columns
-    });
+    });    
 
     chosen();
+
 }
 
 function selectImage(file, name) {
@@ -1564,7 +1574,7 @@ function buildDetail(options) {
                                 type: 'o2m'
                             };
                             item.detailFormatter && (options1.detailFormatter = item.detailFormatter);
-                            buildList(options1);
+                            buildList(options1);                         
                         } else {
                             if (item.useData) {
                                 displayValue = $.isArray(item.useData) ? item.useData : (data || []);
@@ -3585,3 +3595,19 @@ $(function() {
         }, +OSS.userValidTime * 60 * 1000);
     });
 });
+
+function updateListSearch() {
+    var searchs = JSON.parse(sessionStorage.getItem('listSearchs') || '{}');
+    var pathName = location.pathname;
+    var params = $('.search-form').serializeObject();
+    searchs[pathName] = params;
+    sessionStorage.setItem('listSearchs', JSON.stringify(searchs));
+}
+
+function updateListSelect() {
+    var select = JSON.parse(sessionStorage.getItem('listSelected') || '{}');
+    var pathName = location.pathname;
+    var params = $('.selected').attr('data-index');
+    select[pathName] = params;
+    sessionStorage.setItem('listSelected', JSON.stringify(select));
+}

@@ -7,7 +7,7 @@ $(function(){
 	
 	// 获取用户
 	reqApi({
-		code: '805056',
+		code: '805121',
 		cache: true,
 		sync: true,
 		json: {
@@ -32,7 +32,7 @@ $(function(){
     });
 	
 	// 设置根目录
-	window.parentCode = 'DATASM201600000000000000';
+	window.parentCode = 'YLQSM201600000000000000';
 	
 	var data={"parentCode":window.parentCode,"type":"1", 'roleCode': sessionStorage.getItem('roleCode')};
 	reqApi({

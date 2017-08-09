@@ -24,7 +24,7 @@
         showExport: true,
         exportDataType: 'all', // basic, all, selected
         // 'json', 'xml', 'png', 'csv', 'txt', 'sql', 'doc', 'excel', 'powerpoint', 'pdf'
-        exportTypes: ['excel'],
+        exportTypes: ['excel', 'pdf'],
         exportOptions: {},
         fileName: '表格导出'
     });
@@ -53,7 +53,7 @@
                             sprintf(' btn-%s', this.options.buttonsClass) +
                             sprintf(' btn-%s', this.options.iconSize) +
                             '" ' +
-                            'data-type="excel" type="button">',
+                            'data-type="' + (this.options.type || 'excel') +'" type="button">',
                             sprintf('<i class="%s %s"></i> ', this.options.iconsPrefix, this.options.icons.export),
                         '导出</button>' +
                     '</div>'].join('')).appendTo($btnGroup);

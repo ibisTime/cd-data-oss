@@ -31,9 +31,10 @@ $(function() {
     buildList({
         router: 'user',
         columns: columns,
-        pageCode: '805054',
+        pageCode: '805120',
         searchParams: {
-            kind: '01'
+            kind: 'P',
+            companyCode:OSS.companyCode
         }
     });
 
@@ -73,7 +74,7 @@ $(function() {
             toStatus;
         status == 0 ? toStatus = 2 : toStatus = 0;
         reqApi({
-            code: '805052',
+            code: '805091',
             json: {
                 userId: selRecords[0].userId,
                 toStatus: toStatus
@@ -90,7 +91,7 @@ $(function() {
             return;
         }
         reqApi({
-            code: '805052',
+            code: '805091',
             json: {
                 userId: selRecords[0].userId,
                 toStatus: '0'

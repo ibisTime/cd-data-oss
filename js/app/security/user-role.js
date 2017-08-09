@@ -18,7 +18,7 @@ $(function() {
 	//查询当前用户的角色
 	var data = {"userId":$("#userId").html()};
 	reqApi({
-		code: '805056',
+		code: '805121',
 		json: data
 	}).done(function(data) {
 		$("#roleCode").val(data.roleCode);
@@ -33,7 +33,7 @@ $(function() {
 		var url = $("#basePath").val()+"/user/role/change";
 		var data = {"userId":$("#userId").html(),"roleCode":$("#roleCode").val(), 'remark': $('#remark').val()};
 		reqApi({
-			code: '805053',
+			code: '805092',
 			json: data
 		}).done(function(data) {
 			sucDetail();

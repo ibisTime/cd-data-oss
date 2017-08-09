@@ -11,7 +11,7 @@ $(function() {
 		field: 'parentKey',
 		required: true,
 		type: 'select',
-		listCode: '807706',
+		listCode: '805906',
 		params: {
 			type: 0
 		},
@@ -39,9 +39,9 @@ $(function() {
 	buildDetail({
 		fields: fields,
 		code: code,
-		addCode: '807700',
-		editCode: '807702',
-		detailCode: '807707'
+		addCode: '805900',
+		editCode: '805902',
+		detailCode: '805907'
 	});
 	
 	$('#parentKey').on('change', function() {

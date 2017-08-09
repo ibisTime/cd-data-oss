@@ -9,7 +9,7 @@ $(function() {
 		title : '种类',
 		search: true,
 		type: 'select',
-		listCode: '807706',
+		listCode: '805906',
 		params: {
 			type: 0
 		},
@@ -35,7 +35,10 @@ $(function() {
 	buildList({
 		router: 'dict',
 		columns: columns,
-		pageCode: '807705',
-		deleteCode: '807701'
+		searchParams:{
+            companyCode:OSS.companyCode	
+        },		
+		pageCode: '805905',
+		deleteCode: '805901'
 	});
 });

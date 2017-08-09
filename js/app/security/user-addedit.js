@@ -5,7 +5,7 @@ $(function() {
 	var fields = [{
 		field: 'kind',
 		type: 'hidden',
-		value: '01'
+		value: 'P'
 	}, {
 		title: '用户名',
 		field: 'loginName',
@@ -28,7 +28,7 @@ $(function() {
 	buildDetail({
 		fields: fields,
 		code: code,
-		detailCode: '805056',
+		detailCode: '805121',
 		addCode: '805042'
 	});
 	

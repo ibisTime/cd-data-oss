@@ -7,7 +7,7 @@ $(function() {
         required: true
     };
     reqApi({
-        code: '807716',
+        code: '805916',
         json: {
             id: code
         },
@@ -40,8 +40,8 @@ $(function() {
     buildDetail({
         fields: fields,
         code: code,
-        addCode: "807710",
-        detailCode: '807716',
-        editCode: '807711'
+        addCode: "805910",
+        detailCode: '805916',
+        editCode: '805911'
     });
 });

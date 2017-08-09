@@ -6,7 +6,7 @@ function getQueryString(name) {
 	}
 	return '';
 }
-sessionStorage.setItem('loginKind', getQueryString('kind') || '01');
+sessionStorage.setItem('loginKind', getQueryString('kind') || 'P');
 $(function(){
 	window.sessionStorage.setItem('systemCode', OSS.system);
     // frameset框架嵌套，跳转到最外层
@@ -30,7 +30,7 @@ $(function(){
 		    if (r != null) {
 				data.kind = decodeURIComponent(r[2]);
 			}else{
-				data.kind = '01';
+				data.kind = 'P';
 			}
 			
 			$.each(t, function() {
@@ -38,7 +38,7 @@ $(function(){
 			});
 			
 			reqApi({
-				code: '805043',
+				code: '805050',
 				json: data
 			}).then(function(data) {
 				location.href = "main.html";

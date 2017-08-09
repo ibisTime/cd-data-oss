@@ -24,6 +24,6 @@ $(function() {
         searchParams:{
             type:"2"
         },
-        pageCode: '807715'
+        pageCode: '805915'
     });
 });
