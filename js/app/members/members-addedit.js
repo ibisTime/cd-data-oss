@@ -38,28 +38,30 @@ $(function() {
         title: '手机号',
         field: 'mobile',
         readonly: true,
-    },{
-        field: 'userReferee',
-        title: '推荐人',
-        readonly: true,
-        formatter: function(v, data) {
-            if(data.referrer){
-                userReferee = data.referrer.userId;
-                var res1 = data.referrer.kind ;
-                var res2 = data.referrer.mobile;
-                var level = data.referrer.level ;
-                if(res1 && res2){
-                    if (res1 == 'f1') {
-                        return Dict.getNameForList1("user_level","807706",level)+ '/' +res2
-                    }else{
-                        return userRefereeType[res1]+ '/' +res2
-                    }
-                }else{
-                   return "-" 
-                }                
-            }        
-        }
-    }, {
+    }
+    // ,{
+    //     field: 'userReferee',
+    //     title: '推荐人',
+    //     readonly: true,
+    //     formatter: function(v, data) {
+    //         if(data.referrer){
+    //             userReferee = data.referrer.userId;
+    //             var res1 = data.referrer.kind ;
+    //             var res2 = data.referrer.mobile;
+    //             var level = data.referrer.level ;
+    //             if(res1 && res2){
+    //                 if (res1 == 'f1') {
+    //                     return Dict.getNameForList1("user_level","807706",level)+ '/' +res2
+    //                 }else{
+    //                     return userRefereeType[res1]+ '/' +res2
+    //                 }
+    //             }else{
+    //                return "-" 
+    //             }                
+    //         }        
+    //     }
+    // }
+    , {
         title: "用户类型",
         field: "level",
         type: "select",

@@ -45,6 +45,7 @@ $(function() {
 							if (url.indexOf('/') == 0) {
 								url = url.replace('/', '');
 							}
+							
 							if (url.lastIndexOf('l') !=0) {
 								url = url + 'l';
 							}

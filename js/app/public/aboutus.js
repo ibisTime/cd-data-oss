@@ -3,7 +3,8 @@ $(function() {
     reqApi({
         code: "805917",
         json: {
-            ckey: "aboutUs"
+            ckey: "aboutUs",
+            type:"1"
         },
         sync: true
     }).then(function(data) {

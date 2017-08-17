@@ -1,7 +1,7 @@
 $(function() {
     var userKind = {
-        "c": "C端用户",
-        "b": "B端用户"
+        "C": "C端用户",
+        // "P": "平台用户"
     };
     var userRefereeType = {
         "operator": "市/区运营商",
@@ -27,35 +27,37 @@ $(function() {
             title: '手机号',
             field: 'mobile',
             search: true
-        },{
-            field: 'userReferee',
-            title: '推荐人',
-            type: 'select',
-            formatter: function(v, data) {
-                if(data.referrer){
-                    if(data.referrer){
-                        var res1 = data.referrer.kind ;
-                        var res2 = data.referrer.mobile;
-                        var level = data.referrer.level ;
-                        if(res1 && res2){
-                            if (res1 == 'f1') {
-                                return Dict.getNameForList1("user_level","807706",level)+ '/' +res2
-                            }else{
-                                return userRefereeType[res1]+ '/' +res2
-                            }
-                        }else{
-                           return "-" 
-                        }                
-                    }
-                }        
-            }
-        }, {
+        }
+        // ,{
+        //     field: 'userReferee',
+        //     title: '推荐人',
+        //     type: 'select',
+        //     formatter: function(v, data) {
+        //         if(data.referrer){
+        //             if(data.referrer){
+        //                 var res1 = data.referrer.kind ;
+        //                 var res2 = data.referrer.mobile;
+        //                 var level = data.referrer.level ;
+        //                 if(res1 && res2){
+        //                     if (res1 == 'f1') {
+        //                         return Dict.getNameForList1("user_level","807706",level)+ '/' +res2
+        //                     }else{
+        //                         return userRefereeType[res1]+ '/' +res2
+        //                     }
+        //                 }else{
+        //                    return "-" 
+        //                 }                
+        //             }
+        //         }        
+        //     }
+        // }
+        , {
             title: "用户类型",
             field: "kind",
             type: "select",
-            key: "user_level",
-            formatter: Dict.getNameForList("user_level"),
-            search: true
+            formatter: function(v,data){
+                return userKind[data.kind]
+            }
         }, {
             title: "状态",
             field: "status",
@@ -77,10 +79,32 @@ $(function() {
         columns: columns,
         pageCode: '805120',
         searchParams: {
-            kind: "c",
+            kind: "C",
             companyCode:OSS.companyCode
         }
     });
+
+    $('#discountBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "./discount.html?userId=" + selRecords[0].userId;
+
+    });
+
+    $("#borrowBtn").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "./borrow.html?userId=" + selRecords[0].userId;
+
+    });    
+    
+
     $('#rockBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -133,26 +157,8 @@ $(function() {
 
         });
     });
-    $('#accountBtn').click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        window.location.href = "account.html?userId=" + selRecords[0].userId;
+    
 
-    });
-
-    $("#orderBtn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        window.location.href = "custom_achieve.html?userId=" + selRecords[0].userId;
-
-    });
-    $("#ledgerBtn").remove();
 
     $('#editBtn').off("click").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
@@ -170,23 +176,5 @@ $(function() {
         }
         window.location.href = "./custom_detail.html?Code=" + selRecords[0].code+'&userId='+selRecords[0].userId;
     });    
-    $('#revenueBtn').off("click").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        // console.log(selRecords[0].userId)
-        window.location.href = "./custom_revenue.html?userId=" + selRecords[0].userId;
-    });
-
-    $('#JF_revenueBtn').off("click").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        // console.log(selRecords[0].userId)
-        window.location.href = "./custom_JFrevenue.html?userId=" + selRecords[0].userId;
-    });       
+      
 });

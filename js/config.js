@@ -6,7 +6,7 @@ OSS.system = 'CD-YLQ000014';
 //公司编号
 OSS.companyCode = 'CD-YLQ000014';
 // picUrl
-OSS.picBaseUrl = 'http://or4e1nykg.bkt.clouddn.com';
+OSS.picBaseUrl = 'http://oucrrtx1y.bkt.clouddn.com';
 // picShow
 OSS.picShow = '?imageMogr2/auto-orient/thumbnail/!100x100r';
 //系统userid

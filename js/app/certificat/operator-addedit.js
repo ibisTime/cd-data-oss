@@ -203,7 +203,9 @@ $(function() {
             $('#tableList34').bootstrapTable('append', data.call_service_analysis);
             $('#tableList35').bootstrapTable('append', data.main_service);
             $('#tableList36 tbody').hide(); 
-            $('#tableList37').bootstrapTable('append', data.roam_detail);                                          
+            $('#tableList37').bootstrapTable('append', data.roam_detail);
+            $('#tableList38 tbody').hide();
+            $('#tableList39 tbody').hide();                                          
     });  
 
     $('#tableList38').bootstrapTable({
