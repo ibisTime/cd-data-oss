@@ -14,7 +14,9 @@ $(function() {
     }).done(function(d) {
 
         d.forEach(function(v, i) {
-            useKind[v.dkey] = v.dvalue
+            if(v.dvalue == "C端用户"){
+                useKind[v.dkey] = v.dvalue
+            }
         })
 
         var fields = [{

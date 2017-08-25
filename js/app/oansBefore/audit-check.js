@@ -3,31 +3,33 @@ $(function() {
 	var code = getQueryString('code');
     var userId = getQueryString('userId');
     var view = getQueryString('v');
-	
+	var html='<div class="tools" style="float: right;margin-left: 20px;">'+
+                '<ul class="toolbar">'+
+                    '<li style="display:block;" id="reportBtn"><span><img src="/static/images/t01.png"></span>查看资信报告</li>'+
+                '</ul>'+
+            '</div>';
+
 	var fields = [{
+        field: 'mobile',
+        title: '申请人',
+        formatter: function(v,data){          
+            return data.user.mobile
+        },
+        afterSet:function(data){
+            $('#mobile').append(html);
+            $('#reportBtn').click(function() {
+                window.location.href = "audit_report.html?userId=" + userId;
+            });            
+        },
+        readonly: view
+    },{
         field: 'name',
-        title: '商品名',
+        title: '申请产品',
         readonly: view,
         formatter:function(v,data){
             return data.product.name
         }
-    }
-    // , {
-    //     field: 'level',
-    //     title: '商品等级',
-    //     type: "select",
-    //  	listCode: "623907",
-    //     params:{
-    //         parentKey:"product_level",
-    //     },
-    //     keyName:"dkey",
-    //     valueName:"dvalue",
-    //     readonly: view,
-    //     formatter:function(v,data){
-    //         return data.product.level
-    //     }
-    // }
-    , {
+    }, {
         field: 'amount',
         title: '借款金额',
         readonly: view,
@@ -51,6 +53,7 @@ $(function() {
     }, {
         field: 'status',
         title: '状态',
+        formatter: Dict.getNameForList("apply_status","623907"),
         readonly: view,
     }, {
         field: 'remark',
@@ -60,10 +63,13 @@ $(function() {
         field: 'sxAmount',
         title: '授信金额',
         required: true,
+        formatter:function(v,data){
+            return moneyFormat(data.product.amount)
+        },      
         maxlength: 250
     },{
         field: 'approveNote',
-        title: '审核意见',
+        title: '审核意见',        
         required: true,
         maxlength: 250
     }];
@@ -119,5 +125,10 @@ $(function() {
     }];
 
     buildDetail(options);
+
+
+
+
+        
 
 });

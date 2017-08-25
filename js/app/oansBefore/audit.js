@@ -3,6 +3,7 @@ $(function() {
         "C": "C端用户",
         // "P": "平台用户"
     };
+    var data1 = {},data2 = {};
   
 
     var columns = [{
@@ -12,33 +13,24 @@ $(function() {
     }, {
         field: 'applyUser',
         title: '申请人',
+        type: 'select',
         formatter: function(v,data){
+            data1[v] = data.user.mobile;
+            $('#applyUser').renderDropdown2(data1);           
             return data.user.mobile
-        }
+        },
+        search: true
     }, {
-        field: 'name',
-        title: '产品名',
-        search: true,
+        field: 'productCode',
+        title: '申请产品',
+        type: 'select',
         formatter: function(v,data){
+            data2[data.productCode] = data.product.name;
+            $('#productCode').renderDropdown2(data2);            
             return data.product.name
-        }
-    }
-    // , {
-    //     field: 'level',
-    //     title: '产品等级',
-    //     type: "select",
-    //     keyCode: "623907",
-    //     params:{
-    //         parentKey:"product_level",
-    //     },
-    //     keyName:"dkey",
-    //     valueName:"dvalue",
-    //     required: true,       
-    //     formatter: function(v,data){
-    //         return data.product.level
-    //     }        
-    // }
-    , {
+        },
+        search: true
+    }, {
         field: 'amount',
         title: '借款金额',
         formatter: function(v,data){
@@ -68,8 +60,7 @@ $(function() {
         valueName:"dvalue",
         formatter: function(v,data){
             return data.status
-        },
-        search: true
+        }
     },{
         field: 'remark',
         title: '备注',
@@ -79,7 +70,7 @@ $(function() {
         columns: columns,
         pageCode: '623030',
         searchParams: {
-            // companyCode:OSS.companyCode
+            status: 2
         }
     });
 
@@ -101,12 +92,12 @@ $(function() {
         }
 
         if (selRecords[0].status != 2) {
-                    toastr.info(selRecords[0].code + "不是待审核状态!");
+                    toastr.info(selRecords[0].user.mobile + "不是待审核状态!");
                     return;
                 }        
 
         var dataCode = selRecords[0].code;
-        window.location.href = "audit_check.html?userId=" + selRecords[0].userId+"&code="+selRecords[0].code+"&v=1";
+        window.location.href = "audit_check.html?userId=" + selRecords[0].user.userId+"&code="+selRecords[0].code+"&v=1";
 
     });       
 

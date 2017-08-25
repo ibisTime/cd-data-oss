@@ -11,13 +11,8 @@ $(function() {
         },
         readonly:view,
     }, {
-        field: 'applyUser',
-        title: '申请人编号',       
-        search: true,
-        readonly:view,
-    }, {
         field: 'mobile',
-        title: '申请人手机号',
+        title: '申请人',
         formatter:function(v,data){
             return data.user.mobile
         },
@@ -28,32 +23,13 @@ $(function() {
         amount: true,
         readonly:view,
     }, {
-        field: 'yhAmount',
-        title: '优惠金额',
-        // amount: true,
-        formatter:moneyFormat,
-        readonly:view,
-    }, {
         field: 'duration',
         title: '借款时长(天)',
-        readonly:view,
-    }, {
-        field: 'yqDays',
-        title: '逾期天数',
-        formatter:function(v,data){
-            return data.yqDays
-        },
         readonly:view,
     }, {
         field: 'lxAmount',
         title: '正常利息',
         amount: true,
-        readonly:view,
-    }, {
-        field: 'yqlxAmount',
-        title: '逾期利息',
-        // amount: true,
-        formatter:moneyFormat,
         readonly:view,
     }, {
         field: 'fwAmount',
@@ -69,6 +45,40 @@ $(function() {
         field: 'xsAmount',
         title: '快速信审费',
         amount: true,
+        readonly:view,
+    }, {
+        field: 'yhAmount',
+        title: '优惠金额',
+        formatter:moneyFormat,
+        readonly:view,
+    }, {
+        field: 'Amount',
+        title: '实际应打款金额',
+        formatter:function(v,data){
+          return  moneyFormat(data.amount-(data.lxAmount+data.fwAmount+data.glAmount+data.xsAmount)+data.yhAmount)
+
+        },
+        readonly:view,
+    }, {
+        field: 'bank',
+        title: '签约银行',
+        formatter:function(v,data){
+            return Dict.getNameForList1('bank','623907',data.infoBankcard.bank)
+        },
+        readonly:view,
+    }, {
+        field: 'cardNo',
+        title: '签约银行卡号',
+        formatter:function(v,data){
+            return data.infoBankcard.cardNo
+        },
+        readonly:view,
+    }, {
+        field: 'privinceCity',
+        title: '签约银行所在地',
+        formatter:function(v,data){
+            return data.infoBankcard.privinceCity
+        },
         readonly:view,
     }, {
         field: 'signDatetime',
@@ -91,17 +101,72 @@ $(function() {
     }, {
         field: 'remark',
         title: '备注',
+        readonly:view,
+    },{
+        field: 'approveNote',
+        title: '审核意见',        
+        maxlength: 250
     }];
 	
-	buildDetail({
-		fields: fields,
-		code: code,
-		detailCode: '623086',
-		editCode: '623071',
-		beforeSubmit:function(data){
-			data.updater = getUserName();
-			return data;
-		}
-	});
+	// buildDetail({
+	// 	fields: fields,
+	// 	code: code,
+	// 	detailCode: '623086',
+	// 	editCode: '623071',
+	// 	beforeSubmit:function(data){
+	// 		data.updater = getUserName();
+	// 		return data;
+	// 	}
+	// });
+
+    var options = {
+        fields: fields,
+        code:code,
+        detailCode: '623086',
+
+    };
+
+    options.buttons = [{
+        title: '通过',
+        handler: function() {
+            if ($('#jsForm').valid()) {
+                var data = {};
+                data['code'] = code;
+                data['approver'] = getUserName();
+                data["approveResult"] = "1";
+                data["approveNote"] = $("#approveNote").val();             
+                reqApi({
+                    code: "623075",
+                    json: data
+                }).done(function() {
+                    sucDetail();
+                });
+            }
+        }
+    }, {
+        title: '不通过',
+        handler: function() {
+            if ($('#jsForm').valid()) {
+                var data = {};
+                data['code'] = code;
+                data['approver'] = getUserName();
+                data["approveResult"] = "0";
+                data["approveNote"] = $("#approveNote").val();
+                reqApi({
+                    code: "623075",
+                    json: data
+                }).done(function() {
+                    sucDetail();
+                });
+            }
+        }
+    }, {
+        title: '返回',
+        handler: function() {
+            goBack();
+        }
+    }];
+
+    buildDetail(options);    
 
 });

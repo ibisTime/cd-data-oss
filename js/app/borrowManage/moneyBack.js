@@ -6,7 +6,8 @@ $(function () {
         checkbox: true
     }, {
         field: 'code',
-        title: '借款编号'
+        title: '借款编号',
+        search: true
     }, {
         field: 'applyUser',
         title: '申请人',
@@ -22,22 +23,11 @@ $(function () {
         title: '借款金额',
         amount: true,
     }, {
-        field: 'yhAmount',
-        title: '优惠金额',
-        amount: true,
-    }, {
         field: 'duration',
         title: '借款时长(天)',
     }, {
-        field: 'yqDays',
-        title: '逾期天数',
-    }, {
         field: 'lxAmount',
         title: '正常利息',
-        amount: true,
-    }, {
-        field: 'yqlxAmount',
-        title: '逾期利息',
         amount: true,
     }, {
         field: 'fwAmount',
@@ -50,6 +40,10 @@ $(function () {
     }, {
         field: 'xsAmount',
         title: '快速信审费',
+        amount: true,
+    }, {
+        field: 'yhAmount',
+        title: '优惠金额',
         amount: true,
     }, {
         field: 'signDatetime',
@@ -71,7 +65,8 @@ $(function () {
         columns: columns,
         searchParams:{
             companyCode: OSS.companyCode,
-            status: 1
+            status: 3,
+            isArchive: 0
         },
         pageCode: '623085'
     });

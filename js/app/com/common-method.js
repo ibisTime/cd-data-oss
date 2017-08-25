@@ -673,6 +673,8 @@ function buildList(options) {
       } else if (item.type == 'date' || item.type == "datetime") {
 				dateTimeList1.push(item);
         html += '<li  class="search-form-li" style="width: 50%;"><label>' + item.title + '</label><input id="' + item.field + '" name="' + item.field + '" class="lay-input lay-input1"/></li>';
+      } else if (item.type1 == 'normalRange') {
+        html += '<li style="width: 50%;"><label>' + item.title1 + '</label><input id="' + item.field1 + '" name="' + item.field1 + '" class="lay-input"/><label style="float:none;padding-left: 10px;">至</label><input id="' + item.field2 + '" name="' + item.field2 + '" class="lay-input"/></li>';
       } else if (item.type == "citySelect") {
         html += '<li class="clearfix" style="width:56%;"><label>' + item.title + '</label><div id="city-group"><select id="province" name="province" class="control-def prov"></select>' + '<select id="city" name="city" class="control-def city"></select>' + '<select id="area" name="area" class="control-def dist"></select></div></li>';
       } else {

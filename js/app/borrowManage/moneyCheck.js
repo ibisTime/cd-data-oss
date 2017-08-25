@@ -7,7 +7,8 @@ $(function () {
         checkbox: true
     }, {
         field: 'code',
-        title: '借款编号'
+        title: '借款编号',
+        search: true
     }, {
         field: 'applyUser',
         title: '申请人',
@@ -30,15 +31,8 @@ $(function () {
         field: 'duration',
         title: '借款时长(天)',
     }, {
-        field: 'yqDays',
-        title: '逾期天数',
-    }, {
         field: 'lxAmount',
         title: '正常利息',
-        amount: true,
-    }, {
-        field: 'yqlxAmount',
-        title: '逾期利息',
         amount: true,
     }, {
         field: 'fwAmount',
@@ -52,6 +46,12 @@ $(function () {
         field: 'xsAmount',
         title: '快速信审费',
         amount: true,
+    }, {
+        field: 'cardNo',
+        title: '签约银行卡号',
+        formatter:function(v,data){
+            return data.infoBankcard.cardNo
+        }
     }, {
         field: 'signDatetime',
         title: '签约时间',
@@ -72,7 +72,8 @@ $(function () {
         columns: columns,
         searchParams:{
             companyCode: OSS.companyCode,
-            status: 0
+            status: 0,
+            isArchive: 0
         },
         pageCode: '623085'
     });
@@ -86,6 +87,18 @@ $(function () {
         
         
         window.location.href = "./moneyCheck_check.html?Code=" + selRecords[0].code+"&v=1";
+    });    
+
+    $('#cancelBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+
+        window.location.href = "./moneyCheck_cancel.html?Code=" + selRecords[0].code+"&v=1";
+        
+
     });    
     
     

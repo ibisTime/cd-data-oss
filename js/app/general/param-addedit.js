@@ -1,40 +1,17 @@
 $(function() {
     var code = getQueryString('code');
-    var noteConfig = {
-        title: '参数值',
-        type: "textarea",
-        field: 'note',
-        required: true
-    };
-    reqApi({
-        code: '805916',
-        json: {
-            id: code
-        },
-        sync: true
-    }).then(function(data) {
-        if (data.ckey == "aboutus") {
-            noteConfig.type = "textarea";
-        } else if (data.ckey == "jfPic") {
-            noteConfig.type = "img";
-        }
-    })
 
     var fields = [{
-        title: '参数键',
+        title: '参数说明',
         field: 'ckey',
         required: true,
         maxlength: 20,
-        type: 'hidden',
+        readonly: true
     },  {
-        title: '参数说明',
+        title: '参数值',
         field: 'cvalue',
+        type: "textarea",
         required: true,
-        maxlength: 255
-    },noteConfig, {
-        title: '备注',
-        field: 'remark',
-        maxlength: 250
     }];
 
     buildDetail({
@@ -42,6 +19,10 @@ $(function() {
         code: code,
         addCode: "805910",
         detailCode: '805916',
-        editCode: '805911'
+        editCode: '805911',
+        beforeSubmit:function(data){
+            data.remark = $('#ckey').text();
+            return data
+        }
     });
 });

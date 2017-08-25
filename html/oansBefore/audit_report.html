@@ -1,5 +1,34 @@
 <link rel="import" href="../head.html?__inline">
 <script src="../../js/app/oansBefore/audit-report.js"></script>
+<style type="text/css">
+    .opean{
+        font-size: 0;
+        line-height: 0;
+        border-width: 10px;
+        border-color: #d6d6d6;
+        border-bottom-width: 0;
+        border-style: dashed;
+        border-top-style: solid;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        position: relative;
+        top: 0px;
+    }
+    .close{
+        font-size: 0;
+        line-height: 0;
+        border-width: 10px;
+        border-color: #333;
+        border-top-width: 0;
+        border-style: dashed;
+        border-bottom-style: solid;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        display: inline-block;
+        float: left;
+        margin-top: 10px;        
+    }
+</style>
 <div class="place">
     <span>位置：</span>
     <ul>
@@ -7,29 +36,69 @@
 </div>
 <form id="jsForm">
     <div class="form-body">
-        <div class="form-title"><span id="page-title">用户基本信息</span></div>
         <ul class="form-info" id="form-info">
-			<table id="tableList" data-show-export="true" style="width: 100%" data-type='pdf'></table>
-            <table id="tableList1" data-show-export="true" style="width: 100%" data-type='pdf' ></table>
-            <table id="tableList2" data-show-export="true" style="width: 100%" data-type='pdf'></table>
-            <table id="tableList3" data-show-export="true" style="width: 100%" data-type='pdf'></table>
-            <table id="tableList11" data-show-export="true" style="width: 100%" data-type='pdf'></table>
-            <div class="form-title"><span id="page-title2">身份认证</span></div>
-            <table id="tableList4" data-show-export="true" style="width: 100%" data-type='pdf'></table>
-            <div class="form-title"><span id="page-title3">芝麻分认证</span></div>
-            <table id="tableList5" data-show-export="true" style="width: 100%" data-type='pdf'></table>
-            <div class="form-title"><span id="page-title3">运营商认证</span></div>
-            <table id="tableList6" data-show-export="true" style="width: 100%" data-type='pdf'></table>
-            <table id="tableList12" data-show-export="true" style="width: 100%" data-type='pdf'></table>
-            <table id="tableList7" data-show-export="true" style="width: 100%"></table>
-            <table id="tableList13" data-show-export="true" style="width: 100%"></table>
-            <table id="tableList14" data-show-export="true" style="width: 100%"></table>
-            <table id="tableList15" data-show-export="true" style="width: 100%"></table>
-            <table id="tableList16" data-show-export="true" style="width: 100%"></table>
-            <table id="tableList8" data-show-export="true" style="width: 100%"></table>
-            <table id="tableList9" data-show-export="true" style="width: 100%"></table>
-            <table id="tableList10" data-show-export="true" style="width: 100%"></table>
-
+            <div class="form-title">
+                <span id="page-title" class="pageTitle">用户基本信息</span><i class="opean" style="margin-left: 150px;"> </i>
+                <div class="tools" style="float: right;margin-left: 20px;">
+                    <ul class="toolbar">
+                        <li style="display:block;line-height: 33px;display: table;white-space: normal;padding-right: 0;" id="backBtn"><span style="width: 75px;position: relative;margin: 0;margin-bottom: -4px;"><img src="/static/images/t01.png">&nbsp;&nbsp;返回&nbsp;&nbsp;</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pannel">
+    			<table id="tableList" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList1" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList2" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList3" data-show-export="true" style="width: 100%"></table>
+            </div>
+            <div class="form-title"><span id="page-title2" class="pageTitle2">身份认证</span><i class="opean" style="margin-left: 120px;"> </i></div>
+            <div class="pannel1">
+                <table id="tableList4" data-show-export="true" style="width: 100%" data-type='pdf'></table>
+            </div>
+            <div class="form-title"><span id="page-title3" class="pageTitle3">芝麻分认证</span><i class="opean" style="margin-left: 134px;"> </i></div>
+            <div class="pannel2">
+                <table id="tableList5" data-show-export="true" style="width: 100%" data-type='pdf'></table>
+            </div>
+            <div class="form-title"><span id="page-title6" class="pageTitle6">欺诈识别</span><i class="opean" style="margin-left: 120px;"> </i></div>
+            <div class="pannel5">
+                <table id="tableList11" data-show-export=" true" style="width: 100%"></table>
+            </div>            
+            <div class="form-title"><span id="page-title4" class="pageTitle4">运营商认证</span><i class="opean" style="margin-left: 134px;"> </i></div>
+            <div class="pannel3">
+                <table id="tableList6" data-show-export="true" style="width: 100%" data-type='pdf'></table>
+                <table id="tableList17" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList12" data-show-export="true" style="width: 100%" data-type='pdf'></table>
+                <table id="tableList7" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList13" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList14" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList15" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList16" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList18" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList8" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList19" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList9" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList10" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList20" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList21" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList22" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList23" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList24" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList25" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList26" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList27" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList28" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList29" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList30" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList31" data-show-export="true" style="width: 100%"></table>
+                <table id="tableList32" data-show-export="true" style="width: 100%"></table>
+            </div>                                   
+            <div class="form-title"><span id="page-title5" class="pageTitle5">通讯录</span><i class="opean" style="margin-left: 106px;"> </i></div>
+            <div class="pannel4">
+                <table id="tableList33" data-show-export="true" style="width: 100%"></table>
+            </div>
+            
+            
+            
         </ul>
     </div>
 </form>

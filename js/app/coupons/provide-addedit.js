@@ -24,12 +24,13 @@ $(function() {
         var data1 = {},data2 = {},data3 = {amount,startAmount,validDays,condition};
 
         res1.forEach(function(v,i){
-            data1[v.type] = v.dvalue
+            data1[v.dkey] = v.dvalue
         })  
 
         res2.list.forEach(function(v,i){
             data2[v.code] = data1[v.type];
         })    
+
 
         var fields = [{
             title: "登录名",

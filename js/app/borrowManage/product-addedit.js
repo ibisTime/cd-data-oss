@@ -72,10 +72,6 @@ $(function() {
         keyName:"dkey",
         valueName:"dvalue",
     }, {
-        field: 'uiOrder',
-        title: 'UI顺序',
-        required: true,
-    }, {
         field: 'remark',
         title: '备注',
     }];

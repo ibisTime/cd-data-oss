@@ -9,10 +9,12 @@ var columns =[{
             field: 'mobile',
             title: '手机号',
             search: true
-        },{
-            title: "用户编号",
-            field: "userId",
-        },{
+        }
+        // ,{
+        //     title: "用户编号",
+        //     field: "userId",
+        // }
+        ,{
             title: "任务ID",
             field: "taskId",
         },{

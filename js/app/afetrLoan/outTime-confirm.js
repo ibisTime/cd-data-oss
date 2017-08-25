@@ -11,13 +11,8 @@ $(function() {
         },
         readonly:view,
     }, {
-        field: 'applyUser',
-        title: '申请人编号',       
-        search: true,
-        readonly:view,
-    }, {
         field: 'mobile',
-        title: '申请人手机号',
+        title: '申请人',
         formatter:function(v,data){
             return data.user.mobile
         },
@@ -26,12 +21,6 @@ $(function() {
         field: 'amount',
         title: '借款金额',
         amount: true,
-        readonly:view,
-    }, {
-        field: 'yhAmount',
-        title: '优惠金额',
-        // amount: true,
-        formatter:moneyFormat,
         readonly:view,
     }, {
         field: 'duration',
@@ -69,6 +58,20 @@ $(function() {
         field: 'xsAmount',
         title: '快速信审费',
         amount: true,
+        readonly:view,
+    }, {
+        field: 'yhAmount',
+        title: '优惠金额',
+        // amount: true,
+        formatter:moneyFormat,
+        readonly:view,
+    }, {
+        field: 'Amount',
+        title: '实际打款金额',
+        formatter:function(v,data){
+          return  moneyFormat(data.amount-(data.lxAmount+data.fwAmount+data.glAmount+data.xsAmount)+data.yhAmount)
+
+        },
         readonly:view,
     }, {
         field: 'signDatetime',

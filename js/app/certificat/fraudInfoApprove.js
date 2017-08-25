@@ -85,7 +85,8 @@ $(function() {
             title1: '创建时间',
             type1: 'date',
             field2: 'dateEnd',
-            type2: 'date',            
+            type2: 'date',
+            twoDate: true,            
             search: true                      
         }
     ];

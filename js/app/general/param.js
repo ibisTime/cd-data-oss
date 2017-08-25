@@ -12,10 +12,6 @@ $(function() {
         },{
             field: 'cvalue',
             title: '参数值',
-            search: true
-        }, {
-            field: 'remark',
-            title: '备注'
         }
     ];
     buildList({

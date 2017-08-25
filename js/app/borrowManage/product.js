@@ -69,7 +69,9 @@ $(function () {
     buildList({
         columns: columns,
         searchParams:{
-            companyCode: OSS.companyCode
+            companyCode: OSS.companyCode,
+            orderColumn : 'ui_order',
+            orderDir : 'asc'
         },
         pageCode: '623010',
         deleteCode:'808011',

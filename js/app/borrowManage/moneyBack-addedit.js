@@ -10,12 +10,8 @@ $(function() {
             return data.code
         }
     }, {
-        field: 'applyUser',
-        title: '申请人编号',       
-        search: true
-    }, {
         field: 'mobile',
-        title: '申请人手机号',
+        title: '申请人',
         formatter:function(v,data){
             return data.user.mobile
         }
@@ -24,32 +20,12 @@ $(function() {
         title: '借款金额',
         amount: true,
     }, {
-        field: 'yhAmount',
-        title: '优惠金额',
-        // amount: true,
-        formatter:moneyFormat
-    }, {
-        field: 'realHkAmount',
-        title: '实际还款金额',
-        formatter:moneyFormat
-    }, {
         field: 'duration',
         title: '借款时长(天)',
-    }, {
-        field: 'yqDays',
-        title: '逾期天数',
-        formatter:function(v,data){
-            return data.yqDays
-        }
     }, {
         field: 'lxAmount',
         title: '正常利息',
         amount: true,
-    }, {
-        field: 'yqlxAmount',
-        title: '逾期利息',
-        // amount: true,
-        formatter:moneyFormat
     }, {
         field: 'fwAmount',
         title: '服务费',
@@ -63,8 +39,18 @@ $(function() {
         title: '快速信审费',
         amount: true,
     }, {
-        field: 'payType',
-        title: '支付类型'
+        field: 'yhAmount',
+        title: '优惠金额',
+        // amount: true,
+        formatter:moneyFormat
+    }, {
+        field: 'Amount',
+        title: '实际打款金额',
+        formatter:function(v,data){
+          return  moneyFormat(data.amount-(data.lxAmount+data.fwAmount+data.glAmount+data.xsAmount)+data.yhAmount)
+
+        },
+        readonly:view,
     }, {
         field: 'signDatetime',
         title: '签约时间',
@@ -81,11 +67,13 @@ $(function() {
         field: 'jxDatetime',
         title: '计息时间',
         formatter: dateTimeFormat
-    }, {
-        field: 'realHkDatetime',
-        title: '实际还款时间',
-        formatter: dateTimeFormat
-    }, {
+    }
+    // , {
+    //     field: 'realHkDatetime',
+    //     title: '实际还款时间',
+    //     formatter: dateTimeFormat
+    // }
+    , {
         field: 'updateDatetime',
         title: '最后更新时间',
         formatter: dateTimeFormat

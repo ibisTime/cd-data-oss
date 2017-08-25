@@ -14,14 +14,13 @@ $(function() {
             type: 'select',
             key: 'user_kind',
             formatter: Dict.getNameForList('user_kind'),
-            search: true
         }, {
             field: 'status',
             title: '状态',
             type: 'select',
-            formatter: Dict.getNameForList('msg_status'),
+            key: 'notice_status',
+            formatter: Dict.getNameForList('notice_status'),
             search: true,
-            key: 'msg_status'
         },
         {
             field: 'updater',

@@ -1,14 +1,17 @@
-$(function() {
+ $(function() {
     var userId = getQueryString('userId');
     var html,html1,html2,html3,html4,html5,html6,html7,html8,html9,html10,html12,
+        html13,html14,html15,html16,html17,html18,html19,
         infoBasic,infoContact,infoOccupation,infoBankcard,infoCarrier,
-        infoAntifraud,infoIdentifyPic,infoZMCredit,verifyInfo;
+        infoAntifraud,infoIdentifyPic,infoZMCredit,infoIdentifyFace;
     var userInfo={};
     var phoneInfo={};
     var report = {};
     var basicCheck = {};  
-    var activeDegree1 = [];      
-
+    var activeDegree1 = []; 
+    var activeDegree2 = [];
+    var infoAddressBook ;      
+    var verifyInfo = "",riskInfoList="";
     
     // $.getJSON('/static/js/app/certificat/operator.json').
     
@@ -24,10 +27,53 @@ reqApi({
         infoAntifraud = data.infoAntifraud;
         infoIdentifyPic = data.infoIdentifyPic;
         infoZMCredit = data.infoZMCredit;
+        infoIdentifyFace = data.infoIdentifyFace
         
-        
-        
-        if(data.infoBasicFlag == "1" && data.infoIdentifyFlag == "1" ){
+        if(data.infoAntifraudFlag == "0"){
+            $('#page-title').append('<p style="float:right;color: red;">(未认证)</p>');
+            $('#page-title6').append('<p style="float:right;color: red;">(未认证)</p>')
+        }else if(data.infoAntifraudFlag == "1"){
+            $('#page-title').append('<p style="float:right;color: green;">(已认证)</p>'); 
+            $('#page-title6').append('<p style="float:right;color: green;">(已认证)</p>');
+        }else{
+            $('#page-title').append('<p style="float:right;color: orange;">(已过期)</p>');
+            $('#page-title6').append('<p style="float:right;color: orange;">(已过期)</p>');
+        } 
+
+        if(data.infoAddressBookFlag == "0"){
+            $('#page-title5').append('<p style="float:right;color: red;">(未认证)</p>')  
+        }else if(data.infoAddressBookFlag == "1"){
+            $('#page-title5').append('<p style="float:right;color: green;">(已认证)</p>')  
+        }else{
+             $('#page-title5').append('<p style="float:right;color: orange;">(已过期)</p>')
+        }
+
+        if(data.infoIdentifyPicFlag == "0" && data.infoIdentifyFaceFlag == "0"){
+            $('#page-title2').append('<p style="float:right;color: red;">(未认证)</p>')  
+        }else if(data.infoIdentifyPicFlag == "1" && data.infoIdentifyFaceFlag == "1"){
+            $('#page-title2').append('<p style="float:right;color: green;">(已认证)</p>')  
+        }else{
+             $('#page-title2').append('<p style="float:right;color: orange;">(已过期)</p>')
+        }        
+
+        if(data.infoZMCreditFlag == "0"){
+            $('#page-title3').append('<p style="float:right;color: red;">(未认证)</p>')  
+        }else if(data.infoZMCreditFlag == "1"){
+            $('#page-title3').append('<p style="float:right;color: green;">(已认证)</p>')  
+        }else{
+             $('#page-title3').append('<p style="float:right;color: orange;">(已过期)</p>')
+        }        
+
+        if(data.infoCarrierFlag == "0"){
+            $('#page-title4').append('<p style="float:right;color: red;">(未认证)</p>')  
+        }else if(data.infoCarrierFlag == "1"){
+            $('#page-title4').append('<p style="float:right;color: green;">(已认证)</p>')  
+        }else{
+             $('#page-title4').append('<p style="float:right;color: orange;">(已过期)</p>')
+        }        
+
+             
+        if(data.infoBasicFlag !== "0" && data.infoIdentifyFlag !== "0" ){
             html ='<div class="bootstrap-table" style="width: 80%;">'+
                 '<div class="fixed-table-container" style="padding-bottom: 0px;">'+
                     '<div class="fixed-table-header" style="display: none;">'+
@@ -72,7 +118,7 @@ reqApi({
                                 '</tr>'+                                
                                 '<tr data-index="3">'+
                                     '<td style=""  colspan="2" data-field="" tabindex="0">'+
-                                        '<div class="th-inner ">居住地址：'+ infoBasic.address +'</div>'+
+                                        '<div class="th-inner ">居住地址：'+ infoBasic.provinceCity +infoBasic.address +'</div>'+
                                         '<div class="fht-cell"></div>'+
                                     '</td>'+
                                     '<td style=""  colspan="2" data-field="" tabindex="0">'+
@@ -100,10 +146,12 @@ reqApi({
                         '</table>'+
                     '</div>'+
                 '</div>'+
-            '</div>';             
+            '</div>';        
+            $('#tableList').append(html);                   
         }
+       
         
-        if(data.infoOccupationFlag == "1" ){
+        if(data.infoOccupationFlag !== "0" ){
             html1 = '<div class="bootstrap-table" style="width: 80%;">'+
                 '<div class="fixed-table-container" style="padding-bottom: 0px;">'+
                     '<div class="fixed-table-header" style="display: none;">'+
@@ -157,10 +205,13 @@ reqApi({
                         '</table>'+
                     '</div>'+
                 '</div>'+
-            '</div>';            
+            '</div>';   
+
+            $('#tableList1').append(html1);   
+
         }
         
-        if (data.infoContactFlag == "1" ) {
+        if (data.infoContactFlag  !== "0" ) {
             html2 = '<div class="bootstrap-table" style="width: 80%;">'+
                 '<div class="fixed-table-container" style="padding-bottom: 0px;">'+
                     '<div class="fixed-table-header" style="display: none;">'+
@@ -209,9 +260,11 @@ reqApi({
                     '</div>'+
                 '</div>'+
             '</div>';
+            $('#tableList2').append(html2);
+                      
         }
 
-        if (data.infoBankcardFlag == "1" ) {
+        if (data.infoBankcardFlag  !== "0" ) {
                html3 = '<div class="bootstrap-table" style="width: 80%;">'+
                 '<div class="fixed-table-container" style="padding-bottom: 0px;">'+
                     '<div class="fixed-table-header" style="display: none;">'+
@@ -260,9 +313,57 @@ reqApi({
                     '</div>'+
                 '</div>'+
             '</div>';
-           }   
+            $('#tableList3').append(html3);  
+           } 
+           if(data.infoAntifraudFlag  !== "0" ){
+                if(infoAntifraud.verifyInfoList){
+                    infoAntifraud.verifyInfoList.each(function(i, index) {
+                        verifyInfo += i+"</br>"
+                    });            
+                }
+
+                if(infoAntifraud.riskInfoList){
+                    infoAntifraud.riskInfoList.each(function(i, index) {
+                        riskInfoList += i+"</br>"
+                    });            
+                }  
+
+            html10='<div class="bootstrap-table" style="width: 80%;">'+
+                '<div class="fixed-table-container" style="padding-bottom: 0px;">'+
+                    '<div class="fixed-table-header" style="display: none;">'+
+                        '<table></table>'+
+                    '</div>'+
+                    '<div class="fixed-table-body">'+
+                        '<div class="fixed-table-loading" style="top: 294px; display: none;">正在努力地加载数据中，请稍候……</div>'+
+                        '<table id="" data-show-export="true" class="table table-hover table-striped"  >'+
+                            '<thead>'+
+                                '<tr>'+
+                                    '<th style="" colspan="4" tabindex="0">'+
+                                        '<div class="th-inner ">欺诈识别</div>'+
+                                        '<div class="fht-cell"></div>'+
+                                   '</th>'+
+                                '</tr>'+
+                            '</thead>'+
+                            '<tbody>'+
+                                '<tr data-index="0"><td style="">欺诈评分</td><td style="">'+ infoAntifraud.score +'</td></tr>'+
+                                '<tr data-index="1"><td style="">欺诈信息验证</td><td style="">'+ verifyInfo +'</td></tr>'+
+                                '<tr data-index="2"><td style="">欺诈关注清单</td><td style="">'+ (infoAntifraud.hit == 'yes'? riskInfoList:'否') +'</td></tr>'+
+                            '</div>'+
+                            '<div class="fixed-table-footer" style="display: none;">'+
+                                '<table>'+
+                                    '<tbody>'+
+                                '<tr></tr>'+
+                            '</tbody>'+
+                        '</table>'+
+                    '</div>'+
+                '</div>'+
+            '</div>';  
+            $('#tableList11').append(html10);                            
+           }
+
+                     
            
-        if(data.infoIdentifyFaceFlag == "1" ){
+        if(data.infoIdentifyFaceFlag !== "0" && data.infoIdentifyPicFlag !== "0"){
             html4 = '<div class="bootstrap-table" style="width: 80%;">'+
                 '<div class="fixed-table-container" style="padding-bottom: 0px;">'+
                     '<div class="fixed-table-header" style="display: none;">'+
@@ -282,11 +383,11 @@ reqApi({
                             '<tbody>'+
                                 '<tr data-index="0">'+
                                     '<td style="" colspan="2" tabindex="0">'+
-                                        '<div class="th-inner ">姓名：'+ infoIdentify.realName  +'</div>'+
+                                        '<div class="th-inner ">姓名：'+ infoIdentifyFace.realName  +'</div>'+
                                          '<div class="fht-cell"></div>'+
                                     '</td>'+                                    
                                     '<td style="" colspan="2" tabindex="0">'+
-                                        '<div class="th-inner ">身份证号：'+ infoIdentify.idNo  +'</div>'+
+                                        '<div class="th-inner ">身份证号：'+ infoIdentifyFace.idNo  +'</div>'+
                                         '<div class="fht-cell"></div>'+
                                     '</td>'+                                    
                                 '</tr>'+
@@ -310,10 +411,11 @@ reqApi({
                         '</table>'+
                     '</div>'+
                 '</div>'+
-            '</div>';            
+            '</div>';
+            $('#tableList4').append(html4);            
         }
             
-        if(data.infoZMCreditFlag == "1" ){
+        if(data.infoZMCreditFlag  !== "0" ){
             html5 = '<div class="bootstrap-table" style="width: 80%;">'+
                 '<div class="fixed-table-container" style="padding-bottom: 0px;">'+
                     '<div class="fixed-table-header" style="display: none;">'+
@@ -339,7 +441,7 @@ reqApi({
                                 '</tr>'+
                                 '<tr data-index="1">'+                                    
                                     '<td style="" colspan="4" tabindex="0">'+
-                                        '<div class="th-inner ">是否被关注：'+ (infoZMCredit.isMatched?'是':'否') +'</div>'+
+                                        '<div class="th-inner ">是否被关注：'+ (infoZMCredit.isMatched?infoZMCredit.details:'否') +'</div>'+
                                         '<div class="fht-cell"></div>'+
                                     '</td>'+
                                 '</tr>'+                                                          
@@ -353,10 +455,11 @@ reqApi({
                         '</table>'+
                     '</div>'+
                 '</div>'+
-            '</div>';            
+            '</div>';    
+            $('#tableList5').append(html5);         
         }
             
-        if(data.infoCarrierFlag == "1" ){
+        if(data.infoCarrierFlag  !== "0" ){
 
             infoCarrier = JSON.parse(data.infoCarrier);
             infoCarrier.user_basic.each(function(i, index) {
@@ -381,6 +484,9 @@ reqApi({
                 if(i.app_point == "call_day" || i.app_point == "dial_cnt"|| i.app_point == "dialed_cnt"|| i.app_point == "dial_time"|| i.app_point == "dialed_time"){
                     activeDegree1.push(i)
                 }
+                if(i.app_point !== "call_day" && i.app_point !== "dial_cnt"&& i.app_point !== "dialed_cnt"&& i.app_point !== "dial_time"&& i.app_point !== "dialed_time"){
+                activeDegree2.push(i)
+            }                
                
             });    
 
@@ -388,7 +494,8 @@ reqApi({
         var peerNumList = infoCarrier.friend_circle.peer_num_top_list;
         var summary = infoCarrier.friend_circle.summary;
 
-        verifyInfo = infoAntifraud.verifyInfoList[0]+infoAntifraud.verifyInfoList[1]+infoAntifraud.verifyInfoList[2]+infoAntifraud.verifyInfoList[3]+infoAntifraud.verifyInfoList[4]+infoAntifraud.verifyInfoList[5];            
+        
+                
 
             html6 ='<div class="bootstrap-table" style="width: 80%;">'+
                 '<div class="fixed-table-container" style="padding-bottom: 0px;">'+
@@ -397,7 +504,7 @@ reqApi({
                     '</div>'+
                     '<div class="fixed-table-body">'+
                         '<div class="fixed-table-loading" style="top: 294px; display: none;">正在努力地加载数据中，请稍候……</div>'+
-                        '<table id="tableList" data-show-export="true" class="table table-hover table-striped"  >'+
+                        '<table id="tableList6" data-show-export="true" class="table table-hover table-striped"  >'+
                             '<thead>'+
                                 '<tr>'+
                                     '<th style="" colspan="4" tabindex="0">'+
@@ -480,66 +587,6 @@ reqApi({
                     '</div>'+
                 '</div>'+
             '</div>';            
-            // html6 = '<div class="bootstrap-table" style="width: 80%;">'+
-            //     '<div class="fixed-table-container" style="padding-bottom: 0px;">'+
-            //         '<div class="fixed-table-header" style="display: none;">'+
-            //             '<table></table>'+
-            //         '</div>'+
-            //         '<div class="fixed-table-body">'+
-            //             '<div class="fixed-table-loading" style="top: 294px; display: none;">正在努力地加载数据中，请稍候……</div>'+
-            //             '<table id="tableList6" data-show-export="true" class="table table-hover table-striped"  >'+
-            //                 '<thead>'+
-            //                     '<tr>'+
-            //                         '<th style="" colspan="4" tabindex="0">'+
-            //                             '<div class="th-inner ">认证信息</div>'+
-            //                             '<div class="fht-cell"></div>'+
-            //                        '</th>'+
-            //                     '</tr>'+
-            //                 '</thead>'+
-            //                 '<tbody>'+
-            //                     '<tr data-index="0">'+
-            //                         '<td style="" colspan="4" tabindex="0">'+
-            //                             '<div class="th-inner ">手机号：'+ phoneInfo.mobile +'</div>'+
-            //                              '<div class="fht-cell"></div>'+
-            //                         '</td>'+                                   
-            //                     '</tr>'+
-            //                     '<tr data-index="1">'+
-            //                         '<td style="" colspan="2" tabindex="0">'+
-            //                             '<div class="th-inner ">归属运营商：'+ report.source_name_zh +'</div>'+
-            //                             '<div class="fht-cell"></div>'+
-            //                         '</td>'+                                    
-            //                         '<td style="" colspan="2" tabindex="0">'+
-            //                             '<div class="th-inner ">套餐：'+ phoneInfo.package_name +'</div>'+
-            //                             '<div class="fht-cell"></div>'+
-            //                         '</td>'+
-            //                     '</tr>'+  
-            //                     '<tr data-index="2">'+
-            //                         '<td style="" colspan="2" tabindex="0">'+
-            //                             '<div class="th-inner ">注册时间：'+ phoneInfo.reg_time +'</div>'+
-            //                             '<div class="fht-cell"></div>'+
-            //                         '</td>'+                                    
-            //                         '<td style="" colspan="2" tabindex="0">'+
-            //                             '<div class="th-inner ">开户时长：'+ phoneInfo.in_time +'</div>'+
-            //                             '<div class="fht-cell"></div>'+
-            //                         '</td>'+
-            //                     '</tr>'+                                
-            //                     '<tr data-index="3">'+
-            //                         '<td style="" colspan="4" tabindex="0">'+
-            //                             '<div class="th-inner ">账户余额：'+ (phoneInfo.available_balance*0.01).toFixed(2) +'</div>'+
-            //                             '<div class="fht-cell"></div>'+
-            //                         '</td>'+                                    
-            //                     '</tr>'+                                                                                        
-            //                 '</tbody>'+
-            //         '</div>'+
-            //         '<div class="fixed-table-footer" style="display: none;">'+
-            //             '<table>'+
-            //                 '<tbody>'+
-            //                     '<tr></tr>'+
-            //                 '</tbody>'+
-            //             '</table>'+
-            //         '</div>'+
-            //     '</div>'+
-            // '</div>';
 
             html7='<div class="bootstrap-table" style="width: 80%;">'+
                 '<div class="fixed-table-container" style="padding-bottom: 0px;">'+
@@ -572,8 +619,38 @@ reqApi({
                         '</table>'+
                     '</div>'+
                 '</div>'+
-            '</div>';                          
+            '</div>';   
 
+            html13='<div class="bootstrap-table" style="width: 80%;">'+
+                '<div class="fixed-table-container" style="padding-bottom: 0px;">'+
+                    '<div class="fixed-table-header" style="display: none;">'+
+                        '<table></table>'+
+                    '</div>'+
+                    '<div class="fixed-table-body">'+
+                        '<div class="fixed-table-loading" style="top: 294px; display: none;">正在努力地加载数据中，请稍候……</div>'+
+                        '<table id="" data-show-export="true" class="table table-hover table-striped"  >'+
+                            '<thead>'+
+                                '<tr>'+
+                                    '<th style="" colspan="4" tabindex="0">'+
+                                        '<div class="th-inner ">风险识别(I)</div>'+
+                                        '<div class="fht-cell"></div>'+
+                                   '</th>'+
+                                '</tr>'+
+                            '</thead>'+
+                            '<tbody>'+
+                                '<tr data-index="0"><td style="">号码沉默度</td><td style="">'+ basicCheck.mobile_silence_3m +'</td><td style="">'+ basicCheck.mobile_silence_6m +'</td><td style="">满分10分</td></tr>'+
+                                '<tr data-index="1"><td style="">欠费风险度</td><td style="">'+ basicCheck.arrearage_risk_3m +'</td><td style="">'+ basicCheck.arrearage_risk_6m +'</td><td style="">满分10分</td></tr>'+
+                                '<tr data-index="2"><td style="">亲情网风险度</td><td style="">'+ basicCheck.binding_risk +'</td><td style="">--</td><td style="">满分10分</td></tr>'+                      
+                            '</div>'+
+                            '<div class="fixed-table-footer" style="display: none;">'+
+                                '<table>'+
+                                    '<tbody>'+
+                                '<tr></tr>'+
+                            '</tbody>'+
+                        '</table>'+
+                    '</div>'+
+                '</div>'+
+            '</div>';
             html8 = '<div class="bootstrap-table" style="width: 80%;">'+
                 '<div class="fixed-table-container" style="padding-bottom: 0px;">'+
                     '<div class="fixed-table-header" style="display: none;">'+
@@ -585,7 +662,7 @@ reqApi({
                             '<thead>'+
                                 '<tr>'+
                                     '<th style="" colspan="4" tabindex="0">'+
-                                        '<div class="th-inner ">风险识别</div>'+
+                                        '<div class="th-inner ">风险识别(II)</div>'+
                                         '<div class="fht-cell"></div>'+
                                    '</th>'+
                                 '</tr>'+
@@ -612,11 +689,11 @@ reqApi({
                     '</div>'+
                     '<div class="fixed-table-body">'+
                         '<div class="fixed-table-loading" style="top: 294px; display: none;">正在努力地加载数据中，请稍候……</div>'+
-                        '<table id="tableList8" data-show-export="true" class="table table-hover table-striped"  >'+
+                        '<table id="" data-show-export="true" class="table table-hover table-striped"  >'+
                             '<thead>'+
                                 '<tr>'+
                                     '<th style="" colspan="4" tabindex="0">'+
-                                        '<div class="th-inner ">风险识别</div>'+
+                                        '<div class="th-inner ">消费识别</div>'+
                                         '<div class="fht-cell"></div>'+
                                    '</th>'+
                                 '</tr>'+
@@ -634,37 +711,7 @@ reqApi({
                     '</div>'+
                 '</div>'+
             '</div>';
-
-            html10='<div class="bootstrap-table" style="width: 80%;">'+
-                '<div class="fixed-table-container" style="padding-bottom: 0px;">'+
-                    '<div class="fixed-table-header" style="display: none;">'+
-                        '<table></table>'+
-                    '</div>'+
-                    '<div class="fixed-table-body">'+
-                        '<div class="fixed-table-loading" style="top: 294px; display: none;">正在努力地加载数据中，请稍候……</div>'+
-                        '<table id="tableList8" data-show-export="true" class="table table-hover table-striped"  >'+
-                            '<thead>'+
-                                '<tr>'+
-                                    '<th style="" colspan="4" tabindex="0">'+
-                                        '<div class="th-inner ">欺诈识别</div>'+
-                                        '<div class="fht-cell"></div>'+
-                                   '</th>'+
-                                '</tr>'+
-                            '</thead>'+
-                            '<tbody>'+
-                                '<tr data-index="0"><td style="">欺诈评分</td><td style="">'+ infoAntifraud.score +'</td></tr>'+
-                                '<tr data-index="1"><td style="">欺诈信息验证</td><td style="">'+ verifyInfo +'</td></tr>'+
-                                '<tr data-index="2"><td style="">欺诈关注清单</td><td style="">'+ (infoAntifraud.hit? '是':'否') +'</td></tr>'+
-                            '</div>'+
-                            '<div class="fixed-table-footer" style="display: none;">'+
-                                '<table>'+
-                                    '<tbody>'+
-                                '<tr></tr>'+
-                            '</tbody>'+
-                        '</table>'+
-                    '</div>'+
-                '</div>'+
-            '</div>';  
+  
 
             html12 = '<div class="bootstrap-table" style="width: 80%;">'+
                     '<div class="fixed-table-container" style="padding-bottom: 0px;">'+
@@ -673,7 +720,7 @@ reqApi({
                         '</div>'+
                         '<div class="fixed-table-body">'+
                             '<div class="fixed-table-loading" style="top: 294px; display: none;">正在努力地加载数据中，请稍候……</div>'+
-                            '<table id="tableList6" data-show-export="true" class="table table-hover table-striped"  >'+
+                            '<table id="tableList12" data-show-export="true" class="table table-hover table-striped"  >'+
                                 '<thead>'+
                                     '<tr>'+
                                         '<th style="" colspan="4" tabindex="0">'+
@@ -701,23 +748,30 @@ reqApi({
                     '</div>'+
                 '</div>';  
 
-        }
-                        
-
-
-            $('#tableList').append(html);   
-            $('#tableList1').append(html1);   
-            $('#tableList2').append(html2);
-            $('#tableList3').append(html3); 
-            $('#tableList4').append(html4);     
-            $('#tableList5').append(html5);   
+                    
             $('#tableList6').append(html6);
+            $('#tableList17').bootstrapTable('append',report ); 
             $('#tableList7').append(html7);   
-            $('#tableList8').append(html8);  
+            $('#tableList18').append(html13);
+            $('#tableList8').append(html8); 
+            $('#tableList19').bootstrapTable('append',infoCarrier.call_risk_analysis);
             $('#tableList9').bootstrapTable('append', activeDegree1);  
-            $('#tableList10').append(html9);
-            $('#tableList11').append(html10);  
+            $('#tableList10').append(html9);  
             $('#tableList12').append(html12);
+            $('#tableList20').bootstrapTable('append',infoCarrier.consumption_detail);
+            $('#tableList21').bootstrapTable('append',infoCarrier.roam_analysis);
+            $('#tableList22').bootstrapTable('append', activeDegree2);
+            $('#tableList23').bootstrapTable('append', infoCarrier.call_contact_detail);
+            $('#tableList24').bootstrapTable('append', infoCarrier.call_duration_detail[0].duration_list); 
+            $('#tableList25').bootstrapTable('append', infoCarrier.call_duration_detail[1].duration_list);  
+            $('#tableList26').bootstrapTable('append', infoCarrier.contact_region[0].region_list);
+            $('#tableList27').bootstrapTable('append', infoCarrier.contact_region[1].region_list);
+            $('#tableList28').bootstrapTable('append', infoCarrier.call_time_detail);
+            $('#tableList29').bootstrapTable('append', infoCarrier.call_family_detail);
+            $('#tableList30').bootstrapTable('append', infoCarrier.call_service_analysis);
+            $('#tableList31').bootstrapTable('append', infoCarrier.main_service); 
+            $('#tableList32').bootstrapTable('append', infoCarrier.roam_detail);
+
 
             if(peerNumList){
                 peerNumList[0].top_item.each(function(i, index) {
@@ -735,7 +789,16 @@ reqApi({
                 locationList[1].top_item.each(function(i, index) {
                     $('#tableList16').bootstrapTable('append',locationList[1].top_item[index]);
                 });                
-            }
+            }            
+
+    }
+
+            if(data.infoAddressBookFlag  !== "0"){
+                infoAddressBook = JSON.parse(data.infoAddressBook);
+                $('#tableList33').bootstrapTable('append', infoAddressBook);
+            }    
+
+
             
                         
 
@@ -760,7 +823,8 @@ reqApi({
             })
 
  
-    });  
+    });
+
 
     $('#tableList9').bootstrapTable({
             columns: [{
@@ -867,11 +931,567 @@ reqApi({
                 field: 'dialed_cnt',
                 title: '被叫次数',
             }
+    ] });   
+
+    $('#tableList17').bootstrapTable({
+        columns: [{
+            field: 'source_name_zh',
+            title: '数据来源',
+        },{
+            field: 'data_type',
+            title: '数据类别',
+            search: true
+        },{
+            title: "获取时间",
+            field: "data_gain_time",
+        }
+    ]});    
+
+    $('#tableList19').bootstrapTable({
+            columns: [{
+                field: 'analysis_desc',
+                title: '号码类别(风险联系)',
+            },{
+                field: 'call_cnt_3m',
+                title: '近3月通话次数',
+                formatter:function(v,data){
+                    return data.analysis_point.call_cnt_3m
+                }
+            },{
+                field: 'call_cnt_6m',
+                title: '近6月通话次数',
+                formatter:function(v,data){
+                    return data.analysis_point.call_cnt_6m
+                }                
+            },{
+                field: 'call_time_3m',
+                title: '近3月通话时长（秒）',
+                formatter:function(v,data){
+                    return data.analysis_point.call_time_3m
+                }                
+            },{
+                field: 'call_time_6m',
+                title: '近6月通话时长（秒）',
+                formatter:function(v,data){
+                    return data.analysis_point.call_time_6m
+                }                
+            }
     ] });    
+        
+
+    $('#tableList20').bootstrapTable({
+            columns: [{
+                field: 'app_point_zh',
+                title: '消费细类统计',
+            },{
+                field: 'item_1m',
+                title: '近1月消费金额（分）',
+                formatter:function(v,data){
+                    return data.item.item_1m
+                }                
+            },{
+                field: 'item_3m',
+                title: '近3月消费金额（分）',
+                formatter:function(v,data){
+                    return data.item.item_3m
+                }                
+            },{
+                field: 'item_6m',
+                title: '近6月消费金额（分）',
+                formatter:function(v,data){
+                    return data.item.item_6m
+                }                
+            },{
+                field: 'avg_item_3m',
+                title: '近3月月均消费金额（分）',
+                formatter:function(v,data){
+                    return data.item.avg_item_3m
+                }                
+            },{
+                field: 'avg_item_6m',
+                title: '近6月月均消费金额（分）',
+                formatter:function(v,data){
+                    return data.item.avg_item_6m
+                }                
+            }
+    ] }); 
+
+    $('#tableList21').bootstrapTable({
+            columns: [{
+                field: 'roam_location',
+                title: '漫游地',
+            },{
+                field: 'roam_day_cnt_3m',
+                title: '近3月漫游天数',                
+            },{
+                field: 'roam_day_cnt_6m',
+                title: '近6月漫游天数',                
+            },{
+                field: 'continue_roam_cnt_3m',
+                title: '近3月最大连续漫游天数',                
+            },{
+                field: 'continue_roam_cnt_6m',
+                title: '近6月最大连续漫游天数'                
+            },{
+                field: 'max_roam_day_cnt_3m',
+                title: '近3月连续漫游1天以上的次数'                
+            },{
+                field: 'max_roam_day_cnt_6m',
+                title: '近6月连续漫游1天以上的次数'                
+            }
+    ] }); 
+
+    $('#tableList22').bootstrapTable({
+            columns: [{
+                field: 'app_point_zh',
+                title: '通话社交总体统计',
+            },{
+                field: 'item_1m',
+                title: '近1月',
+                formatter:function(v,data){
+                    return data.item.item_1m
+                }                
+            },{
+                field: 'item_3m',
+                title: '近3月',
+                formatter:function(v,data){
+                    return data.item.item_3m
+                }                
+            },{
+                field: 'item_6m',
+                title: '近6月 ',
+                formatter:function(v,data){
+                    return data.item.item_6m
+                }                
+            },{
+                field: 'avg_item_3m',
+                title: '近3月月均',
+                formatter:function(v,data){
+                    return data.item.avg_item_3m
+                }                
+            },{
+                field: 'avg_item_6m',
+                title: '近6月月均',
+                formatter:function(v,data){
+                    return data.item.avg_item_6m
+                }                
+            }
+    ] });     
+
+
+    $('#tableList23').bootstrapTable({
+            columns: [{
+                field: 'peer_num',
+                title: '联系人号码（通话社交详细统计）',
+            },{
+                field: 'company_name',
+                title: '号码标识',                
+            },{
+                field: 'group_name',
+                title: '号码类型',                
+            },{
+                field: 'city',
+                title: '归属地',                
+            },{
+                field: 'call_cnt_1w',
+                title: '近一周通话次数'                
+            },{
+                field: 'call_cnt_1m',
+                title: '近一月通话次数'                
+            },{
+                field: 'call_cnt_3m',
+                title: '近三月通话次数'                
+            },{
+                field: 'call_cnt_6m',
+                title: '近六月通话次数'                
+            },{
+                field: 'call_time_3m',
+                title: '近三月通话时长（秒）'                
+            },{
+                field: 'call_time_6m',
+                title: '近六月通话时长（秒）'                
+            }
+    ] });    
+
+    $('#tableList24').bootstrapTable({
+            columns: [{
+                field: 'time_step_zh',
+                title: '通话时段（近三月）',
+            },{
+                field: 'total_cnt',
+                title: '通话次数',
+                formatter:function(v,data){
+                    return data.item.total_cnt
+                }                                
+            },{
+                field: 'uniq_num_cnt',
+                title: '通话号码数',
+                formatter:function(v,data){
+                    return data.item.uniq_num_cnt
+                }                                
+            },{
+                field: 'total_time',
+                title: '通话时长（秒）',
+                formatter:function(v,data){
+                    return data.item.total_time
+                }                                
+            },{
+                field: 'dial_cnt',
+                title: '主叫次数',
+                formatter:function(v,data){
+                    return data.item.dial_cnt
+                }                                
+            },{
+                field: 'dialed_cnt',
+                title: '被叫次数',
+                formatter:function(v,data){
+                    return data.item.dialed_cnt
+                }                                
+            },{
+                field: 'farthest_call_time',
+                title: '最后一次通话时间',
+                formatter:function(v,data){
+                    return data.item.farthest_call_time
+                }                                
+            },{
+                field: 'latest_call_time',
+                title: '最后一次通话时间',
+                formatter:function(v,data){
+                    return data.item.latest_call_time
+                }                                
+            }
+    ] });  
+
+    $('#tableList25').bootstrapTable({
+            columns: [{
+                field: 'time_step_zh',
+                title: '通话时段（近六月）',
+            },{
+                field: 'total_cnt',
+                title: '通话次数',
+                formatter:function(v,data){
+                    return data.item.total_cnt
+                }                                
+            },{
+                field: 'uniq_num_cnt',
+                title: '通话号码数',
+                formatter:function(v,data){
+                    return data.item.uniq_num_cnt
+                }                                
+            },{
+                field: 'total_time',
+                title: '通话时长（秒）',
+                formatter:function(v,data){
+                    return data.item.total_time
+                }                                
+            },{
+                field: 'dial_cnt',
+                title: '主叫次数',
+                formatter:function(v,data){
+                    return data.item.dial_cnt
+                }                                
+            },{
+                field: 'dialed_cnt',
+                title: '被叫次数',
+                formatter:function(v,data){
+                    return data.item.dialed_cnt
+                }                                
+            },{
+                field: 'farthest_call_time',
+                title: '最后一次通话时间',
+                formatter:function(v,data){
+                    return data.item.farthest_call_time
+                }                                
+            },{
+                field: 'latest_call_time',
+                title: '最后一次通话时间',
+                formatter:function(v,data){
+                    return data.item.latest_call_time
+                }                                
+            }
+    ] });
+
+    $('#tableList26').bootstrapTable({
+            columns: [{
+                field: 'region_loc',
+                title: '联系人手机号码归属地 (近3月联系次数降序)',                
+            },{
+                field: 'region_call_cnt',
+                title: '通话次数',                                
+            },{
+                field: 'region_uniq_num_cnt',
+                title: '通话号码数'                                
+            },{
+                field: 'region_call_time',
+                title: '通话时长（秒）'                                
+            },{
+                field: 'region_dial_cnt',
+                title: '主叫次数'                                
+            },{
+                field: 'region_dialed_cnt',
+                title: '被叫次数'                                
+            },{
+                field: 'region_dial_time',
+                title: '主叫时长（秒）'                                
+            },{
+                field: 'region_dialed_time',
+                title: '被叫时长（秒）'                                
+            },{
+                field: 'region_avg_dial_time',
+                title: '平均主叫时长（秒）'                                
+            },{
+                field: 'region_avg_dialed_time',
+                title: '平均被叫时长（秒）'                                
+            },{
+                field: 'region_dial_cnt_pct',
+                title: '主叫次数比重'                                
+            },{
+                field: 'region_dialed_cnt_pct',
+                title: '被叫次数比重'                                
+            },{
+                field: 'region_dial_time_pct',
+                title: '主叫时长比重'                                
+            },{
+                field: 'region_dialed_time_pct',
+                title: '被叫时长比重'                                
+            }
+    ] });  
+
+    $('#tableList27').bootstrapTable({
+            columns: [{
+                field: 'region_loc',
+                title: '联系人手机号码归属地 (近6月联系次数降序)',                
+            },{
+                field: 'region_call_cnt',
+                title: '通话次数',                                
+            },{
+                field: 'region_uniq_num_cnt',
+                title: '通话号码数'                                
+            },{
+                field: 'region_call_time',
+                title: '通话时长（秒）'                                
+            },{
+                field: 'region_dial_cnt',
+                title: '主叫次数'                                
+            },{
+                field: 'region_dialed_cnt',
+                title: '被叫次数'                                
+            },{
+                field: 'region_dial_time',
+                title: '主叫时长（秒）'                                
+            },{
+                field: 'region_dialed_time',
+                title: '被叫时长（秒）'                                
+            },{
+                field: 'region_avg_dial_time',
+                title: '平均主叫时长（秒）'                                
+            },{
+                field: 'region_avg_dialed_time',
+                title: '平均被叫时长（秒）'                                
+            },{
+                field: 'region_dial_cnt_pct',
+                title: '主叫次数比重'                                
+            },{
+                field: 'region_dialed_cnt_pct',
+                title: '被叫次数比重'                                
+            },{
+                field: 'region_dial_time_pct',
+                title: '主叫时长比重'                                
+            },{
+                field: 'region_dialed_time_pct',
+                title: '被叫时长比重'                                
+            }
+    ] });    
+
+    $('#tableList28').bootstrapTable({
+            columns: [{
+                field: 'app_point_zh',
+                title: '通话时间详细统计',
+            },{
+                field: 'item_1m',
+                title: '近1月 ',
+                formatter:function(v,data){
+                    return data.item.item_1m
+                }                                
+            },{
+                field: 'item_3m',
+                title: '近3月 ',
+                formatter:function(v,data){
+                    return data.item.item_3m
+                }                                
+            },{
+                field: 'item_6m',
+                title: '近6月 ',
+                formatter:function(v,data){
+                    return data.item.item_6m
+                }                                
+            },{
+                field: 'avg_item_3m',
+                title: '近3月月均   ',
+                formatter:function(v,data){
+                    return data.item.avg_item_3m
+                }                                
+            },{
+                field: 'avg_item_6m',
+                title: '近6月月均',
+                formatter:function(v,data){
+                    return data.item.avg_item_6m
+                }                                
+            }
+    ] });    
+
+    $('#tableList29').bootstrapTable({
+            columns: [{
+                field: 'app_point_zh',
+                title: '稳定性检查',
+            },{
+                field: 'item_1m',
+                title: '近1月 ',
+                formatter:function(v,data){
+                    return data.item.item_1m
+                }                                
+            },{
+                field: 'item_3m',
+                title: '近3月 ',
+                formatter:function(v,data){
+                    return data.item.item_3m
+                }                                
+            },{
+                field: 'item_6m',
+                title: '近6月 ',
+                formatter:function(v,data){
+                    return data.item.item_6m
+                }                                
+            }
+    ] }); 
+
+    $('#tableList30').bootstrapTable({
+            columns: [{
+                field: 'analysis_desc',
+                title: '常用服务类型(与该项通话次数和时长)',
+            },{
+                field: 'call_cnt_1m',
+                title: '近1月 ',
+                formatter:function(v,data){
+                    return data.analysis_point.call_time_1m+'/'+data.analysis_point.call_cnt_1m
+                }                                
+            },{
+                field: 'call_cnt_3m',
+                title: '近3月 ',
+                formatter:function(v,data){
+                    return data.analysis_point.call_time_3m+'/'+data.analysis_point.call_cnt_3m
+                }                                
+            },{
+                field: 'call_cnt_6m',
+                title: '近6月 ',
+                formatter:function(v,data){
+                    return data.analysis_point.call_time_6m+'/'+data.analysis_point.call_cnt_6m
+                }                                
+            }
+    ] });   
+
+
+
+
+
+    $('#tableList31').bootstrapTable({
+            columns: [{
+                field: 'service_num',
+                title: '服务号码 (与服务号通话详情,按月统计)',
+                               
+            },{
+                field: 'interact_mth',
+                title: '月份 ',    
+                formatter:function(v,data){
+                    return data.service_details[0].interact_mth
+                }                                            
+            },{
+                field: 'interact_cnt',
+                title: '通话次数',
+                formatter:function(v,data){
+                    return data.service_details[0].interact_cnt
+                }                                                
+            },{
+                field: 'interact_time',
+                title: '通话时长（秒）',
+                formatter:function(v,data){
+                    return data.service_details[0].interact_time
+                }                                              
+            },{
+                field: 'dial_cnt',
+                title: '主叫次数',
+                formatter:function(v,data){
+                    return data.service_details[0].dial_cnt
+                }                                              
+            },{
+                field: 'dialed_cnt',
+                title: '被叫次数',
+                formatter:function(v,data){
+                    return data.service_details[0].dialed_cnt
+                }                                              
+            },{
+                field: 'dial_time',
+                title: '主叫时长（秒）',
+                formatter:function(v,data){
+                    return data.service_details[0].dial_time
+                }                                              
+            },{
+                field: 'dialed_time',
+                title: '被叫时长（秒）',
+                formatter:function(v,data){
+                    return data.service_details[0].dialed_time
+                }                                              
+            }
+    ] });    
+
+    $('#tableList32').bootstrapTable({
+            columns: [{
+                field: 'roam_day',
+                title: '漫游日期（详细统计） ',
+            },{
+                field: 'roam_location',
+                title: '漫游城市 ',
+                                                
+            }
+    ] });   
+
+    $('#tableList33').bootstrapTable({
+            columns: [{
+                field: 'name',
+                title: '通讯录姓名',
+            },{
+                field: 'mobile',
+                title: '手机号'
+            }
+        ]});     
+
 
     $('.bootstrap-table').css("width","80%");
 
-    
+// var pageTitle,pannel
 
+    function togglePanel(title,panel,left){
+        $("."+title).on('click', function() {
+        if($(this).siblings('i').hasClass('opean')){
+            $(this).siblings('i').removeClass('opean').addClass('close').css("margin-left",left)
+            $("."+panel).hide()            
+        }else{
+            $(this).siblings('i').removeClass('close').addClass('opean').css("margin-left",left)
+            $("."+panel).show()                
+        }
+         
+    });        
+    }
     
+    togglePanel("pageTitle","pannel")
+    togglePanel("pageTitle2","pannel1")
+    togglePanel("pageTitle3","pannel2")
+    togglePanel("pageTitle4","pannel3")
+    togglePanel("pageTitle5","pannel4")
+    togglePanel("pageTitle6","pannel5")
+
+    $('#backBtn').click(function() {
+        goBack();
+    });    
+                
 });
