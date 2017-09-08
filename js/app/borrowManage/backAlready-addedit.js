@@ -26,29 +26,18 @@ $(function() {
                             '<span style="float: left;margin-left: 20px;">续期次数: '+  renewalCount +' </span>'+             
                      '</div>';            
             $('#mobile').append(html);            
-        }    
+        },        
     }, {
         field: 'amount',
         title: '借款金额',
-        formatter:moneyFormat
+        amount: true,
     }, {
         field: 'duration',
         title: '借款时长(天)',
     }, {
-        field: 'yqDays',
-        title: '逾期天数',
-        formatter:function(v,data){
-            return data.yqDays
-        }
-    }, {
         field: 'lxAmount',
         title: '正常利息',
         amount: true,
-    }, {
-        field: 'yqlxAmount',
-        title: '逾期利息',
-        // amount: true,
-        formatter:moneyFormat
     }, {
         field: 'fwAmount',
         title: '服务费',
@@ -75,6 +64,17 @@ $(function() {
         },
         readonly:view,
     }, {
+        field: 'realHkAmount',
+        title: '实际还款金额',
+        formatter:moneyFormat
+    }, {
+        field: 'payType',
+        title: '支付类型',
+        formatter:Dict.getNameForList('pay_type','623907')
+    }, {
+        field: 'renewalCount',
+        title: '订单续期(次)',
+    }, {
         field: 'signDatetime',
         title: '签约时间',
         formatter: dateTimeFormat
@@ -89,6 +89,10 @@ $(function() {
     }, {
         field: 'jxDatetime',
         title: '计息时间',
+        formatter: dateTimeFormat
+    }, {
+        field: 'realHkDatetime',
+        title: '实际还款时间',
         formatter: dateTimeFormat
     }, {
         field: 'updateDatetime',

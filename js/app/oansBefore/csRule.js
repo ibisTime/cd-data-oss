@@ -5,9 +5,8 @@ $(function() {
             title: '',
             checkbox: true
         }, {
-            title: '参数名',
-            field: 'ckey',
-            search: true
+            field: 'remark',
+            title: '参数名'
         }, {
             title: '参数值',
             field: 'cvalue',
@@ -15,17 +14,13 @@ $(function() {
             field: 'updateDatetime',
             title: '最近修改时间',
             formatter: dateTimeFormat
-        }, {
-            field: 'remark',
-            title: '备注'
         }
     ];
     buildList({
         columns: columns,
-        pageCode: "805915",
+        pageCode: "623915",
         searchParams: {
-            // type: "1",
-            companyCode:OSS.company 
+            companyCode:OSS.companyCode
         }
     });
 });

@@ -30,16 +30,10 @@ $(function() {
     }, {
         field: 'amount',
         title: '借款金额',
-        formatter:moneyFormat
+        amount: true,
     }, {
         field: 'duration',
         title: '借款时长(天)',
-    }, {
-        field: 'yqDays',
-        title: '逾期天数',
-        formatter:function(v,data){
-            return data.yqDays
-        }
     }, {
         field: 'lxAmount',
         title: '正常利息',
@@ -47,8 +41,7 @@ $(function() {
     }, {
         field: 'yqlxAmount',
         title: '逾期利息',
-        // amount: true,
-        formatter:moneyFormat
+        amount: true,
     }, {
         field: 'fwAmount',
         title: '服务费',
@@ -75,6 +68,9 @@ $(function() {
         },
         readonly:view,
     }, {
+        field: 'renewalCount',
+        title: '订单续期(次)',
+    }, {
         field: 'signDatetime',
         title: '签约时间',
         formatter: dateTimeFormat
@@ -90,7 +86,13 @@ $(function() {
         field: 'jxDatetime',
         title: '计息时间',
         formatter: dateTimeFormat
-    }, {
+    }
+    // , {
+    //     field: 'realHkDatetime',
+    //     title: '实际还款时间',
+    //     formatter: dateTimeFormat
+    // }
+    , {
         field: 'updateDatetime',
         title: '最后更新时间',
         formatter: dateTimeFormat

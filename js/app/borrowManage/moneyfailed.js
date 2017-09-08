@@ -85,7 +85,7 @@ $(function () {
         columns: columns,
         searchParams:{
             companyCode: OSS.companyCode,
-            status: 1,
+            status: 7,
             isArchive: 0
         },
         pageCode: '623085'
@@ -137,25 +137,21 @@ $(function () {
             buttons: [ {
                 title: '不通过',
                 handler: function() {
-                    if($('#popForm').valid()){
-                        var data = [];
-                        data.code = selRecords[0].code;
-                        data.result = "0";
-                        data.updater = getUserName();
-                        data.remark = $("#remark").val();
-                        reqApi({
-                            code: '623071',
-                            json: data
-                        }).done(function(data) {
-                            toastr.info("操作成功");
-                            $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
-                            setTimeout(function() {
-                                dw.close().remove();
-                            }, 500)
-                        });                        
-
-                    }
-                    
+                    var data = [];
+                    data.code = selRecords[0].code;
+                    data.result = "0";
+                    data.updater = getUserName();
+                    data.remark = $("#remark").val();
+                    reqApi({
+                        code: '623071',
+                        json: data
+                    }).done(function(data) {
+                        toastr.info("操作成功");
+                        $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                        setTimeout(function() {
+                            dw.close().remove();
+                        }, 500)
+                    });
                 }
             }, {
                 title: '取消',

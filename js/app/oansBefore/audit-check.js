@@ -3,24 +3,32 @@ $(function() {
 	var code = getQueryString('code');
     var userId = getQueryString('userId');
     var view = getQueryString('v');
-	var html='<div class="tools" style="float: right;margin-left: 20px;">'+
-                '<ul class="toolbar">'+
-                    '<li style="display:block;" id="reportBtn"><span><img src="/static/images/t01.png"></span>查看资信报告</li>'+
-                '</ul>'+
-            '</div>';
-
-	var fields = [{
+	var borrowCount,overdueCode,renewalCount;
+    var fields = [{
         field: 'mobile',
         title: '申请人',
-        formatter: function(v,data){          
+        formatter: function(v,data){  
+            borrowCount = data.user.borrowCount;
+            overdueCode = data.user.overdueCode;
+            renewalCount = data.user.renewalCount;
             return data.user.mobile
         },
         afterSet:function(data){
+            var html='<div class="tools" style="float: right;margin-left: 20px;">'+
+                        '<div>'+
+                            '<span style="float: left;margin-left: 20px;">借款次数:'+ borrowCount+' </span>'+
+                            '<span style="float: left;margin-left: 20px;">逾期代码: '+ overdueCode +' </span>'+
+                            '<span style="float: left;margin-left: 20px;">续期次数: '+  renewalCount +' </span>'+
+                        '</div>'+               
+                        '<ul class="toolbar"  style="float: left;">'+
+                            '<li style="display:block;" id="reportBtn"><span><img src="/static/images/t01.png"></span>查看资信报告</li>'+
+                        '</ul>'+
+                     '</div>';            
             $('#mobile').append(html);
             $('#reportBtn').click(function() {
                 window.location.href = "audit_report.html?userId=" + userId;
             });            
-        },
+        },        
         readonly: view
     },{
         field: 'name',
@@ -59,7 +67,7 @@ $(function() {
         field: 'remark',
         title: '备注',
         readonly: view,
-    },{
+    },{ 
         field: 'sxAmount',
         title: '授信金额',
         required: true,
@@ -90,7 +98,7 @@ $(function() {
                 data['approver'] = getUserName();
                 data["approveResult"] = "1";
                 data["approveNote"] = $("#approveNote").val();
-                data["sxAmount"] = moneyParse($("#sxAmount").val());               
+                data["sxAmount"] =  moneyParse($("#sxAmount").val());               
                 reqApi({
                     code: "623023",
                     json: data
@@ -108,7 +116,7 @@ $(function() {
                 data['approver'] = getUserName();
                 data["approveResult"] = "0";
                 data["approveNote"] = $("#approveNote").val();
-                data["sxAmount"] = moneyParse($("#sxAmount").val());
+                data["sxAmount"] =  moneyParse($("#sxAmount").val());    
                 reqApi({
                     code: "623023",
                     json: data
@@ -120,7 +128,7 @@ $(function() {
     }, {
         title: '返回',
         handler: function() {
-            goBack();
+            window.location.href = "./audit.html"
         }
     }];
 

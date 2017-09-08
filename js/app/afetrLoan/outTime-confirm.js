@@ -2,6 +2,7 @@ $(function() {
     
     var code = getQueryString('code');
     var view = getQueryString('v');
+    var borrowCount,overdueCode,renewalCount;
     
     var fields = [ {
         field: 'code1',
@@ -14,9 +15,20 @@ $(function() {
         field: 'mobile',
         title: '申请人',
         formatter:function(v,data){
+            borrowCount = data.user.borrowCount;
+            overdueCode = data.user.overdueCode;
+            renewalCount = data.user.renewalCount;            
             return data.user.mobile
         },
-        readonly:view,
+        afterSet:function(data){
+            var html='<div class="tools" style="float: right;margin-left: 20px;">'+
+                            '<span style="float: left;margin-left: 20px;">借款次数:'+ borrowCount+' </span>'+
+                            '<span style="float: left;margin-left: 20px;">逾期代码: '+ overdueCode +' </span>'+
+                            '<span style="float: left;margin-left: 20px;">续期次数: '+  renewalCount +' </span>'+             
+                     '</div>';            
+            $('#mobile').append(html);            
+        },
+        readonly:view    
     }, {
         field: 'amount',
         title: '借款金额',
@@ -72,6 +84,10 @@ $(function() {
           return  moneyFormat(data.amount-(data.lxAmount+data.fwAmount+data.glAmount+data.xsAmount)+data.yhAmount)
 
         },
+        readonly:view,
+    }, {
+        field: 'renewalCount',
+        title: '订单续期(次)',
         readonly:view,
     }, {
         field: 'signDatetime',

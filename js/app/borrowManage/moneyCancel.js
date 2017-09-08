@@ -47,10 +47,10 @@ $(function () {
         title: '快速信审费',
         amount: true,
     }, {
-        field: 'cardNo',
+        field: 'bankcardNumber',
         title: '签约银行卡号',
         formatter:function(v,data){
-            return data.infoBankcard.cardNo
+            // return data.bankcard.bankcardNumber
         }
     }, {
         field: 'signDatetime',
@@ -63,6 +63,9 @@ $(function () {
         key: "borrow_status",
         keyCode:"623907",
         formatter: Dict.getNameForList("borrow_status","623907")
+    }, {
+        field: 'approveNote',
+        title: '审核意见',
     }, {
         field: 'remark',
         title: '备注',

@@ -65,8 +65,7 @@ $(function() {
         // keyName:"dkey",
         // valueName:"dvalue",
         formatter: function(v,data){
-            // return data.status
-            return "审核不通过"
+            return "审核通过"
         },
         // search: true
     },{
@@ -79,7 +78,7 @@ $(function() {
         pageCode: '623030',
         searchParams: {
             // companyCode:OSS.companyCode
-            statusList:[3]
+            statusList:[4,5,6,7,8,10]
         }
     });
 

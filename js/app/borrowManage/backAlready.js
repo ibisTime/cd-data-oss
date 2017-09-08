@@ -1,6 +1,5 @@
 $(function () {
     var data1 = {};
-
     var columns = [{
         field: '',
         title: '',
@@ -14,18 +13,14 @@ $(function () {
         title: '申请人',
         type: 'select',
         formatter:function(v,data){
-            data1[v] = data.user.mobile;
-            $('#applyUser').renderDropdown2(data1);
+            data1[v] = data.user.mobile
+            $('#applyUser').renderDropdown2(data1)
              return data.user.mobile
-        } ,     
+        } ,      
         search: true
     }, {
         field: 'amount',
         title: '借款金额',
-        amount: true,
-    }, {
-        field: 'yhAmount',
-        title: '优惠金额',
         amount: true,
     }, {
         field: 'duration',
@@ -47,14 +42,12 @@ $(function () {
         title: '快速信审费',
         amount: true,
     }, {
-        field: 'bankcardNumber',
-        title: '签约银行卡号',
-        formatter:function(v,data){
-            if(data.bankcard){
-                return data.bankcard.bankcardNumber
-            }
-            
-        }
+        field: 'yhAmount',
+        title: '优惠金额',
+        amount: true,
+    }, {
+        field: 'renewalCount',
+        title: '订单续期(次)',
     }, {
         field: 'signDatetime',
         title: '签约时间',
@@ -75,35 +68,37 @@ $(function () {
         columns: columns,
         searchParams:{
             companyCode: OSS.companyCode,
-            status: 0,
-            isArchive: 0
+            status: 4,
+            isArchive: 0,
+            isOverdue: 0
         },
         pageCode: '623085'
     });
-
-    $('#checkBtn').off('click').click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        
-        
-        window.location.href = "./moneyCheck_check.html?Code=" + selRecords[0].code+"&v=1";
-    });    
-
-    $('#cancelBtn').click(function() {
+ 
+     $('#filedBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
             toastr.info("请选择记录");
             return;
         }
 
-        window.location.href = "./moneyCheck_cancel.html?Code=" + selRecords[0].code+"&v=1";
-        
+
+        confirm("确定归档该笔订单？").then(function() {
+            reqApi({
+                code: '623074',
+                json: {
+                    code: selRecords[0].code,
+                    updater: getUserName()
+                }
+            }).then(function() {
+                toastr.info("操作成功");
+                $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+            });
+
+        },function(){});
 
     });    
     
-    
+
     
 });

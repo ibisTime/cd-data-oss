@@ -55,6 +55,16 @@ $(function() {
             formatter: Dict.getNameForList("user_status"),
             search: true
         }, {
+            title: "注册地址",
+            field: "province",
+            formatter: function(v,data){
+                if(data.province == data.city){
+                    return data.city + data.area
+                }else {
+                    return data.province + data.city + data.area
+                }
+            }
+        }, {
             title: "注册时间",
             field: "createDatetime",
             formatter: dateTimeFormat

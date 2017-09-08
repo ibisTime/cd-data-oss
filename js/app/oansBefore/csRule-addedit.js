@@ -4,27 +4,15 @@ $(function() {
     var view = getQueryString('v');
 
     var fields = [{
-            field: "kind",
-            value: "1",
-            type: "hidden",
-            required: true
-        }, {
-            title: '参数键',
-            field: 'ckey',
-            required: true,
+            title: '参数名',
+            field: 'remark',
+            maxlength: 250,
             readonly: true,
         }, {
             title: '参数值',
             field: 'cvalue',
             required: true,
-            maxlength: 30,
-            readonly: view,
-        },
-        {
-            title: '备注',
-            field: 'remark',
-            maxlength: 250,
-            readonly: view,
+            maxlength: 30
         }
     ];
 
@@ -32,7 +20,11 @@ $(function() {
         fields: fields,
         code: code,
         view: view,
-        detailCode: '802026',
-        editCode: '802020'
+        detailCode: '623916',
+        editCode: '623910',
+        beforeSubmit:function(data){
+            data.remark = $('#remark').text();
+            return data;
+        }
     });
 });

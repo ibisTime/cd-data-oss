@@ -38,22 +38,22 @@ $(function() {
         required: true,
     }, {
         field: 'lxRate',
-        title: '利息利率',
+        title: '日利息利率',
         required: true,
         // amount: true,
     }, {
         field: 'fwRate',
-        title: '服务费利率',
+        title: '日服务费利率',
         required: true,
         // amount: true,
     }, {
         field: 'glRate',
-        title: '账户管理费利率',
+        title: '日账户管理费利率',
         required: true,
         // amount: true,
     }, {
         field: 'xsRate',
-        title: '快速信审费利率',
+        title: '日快速信审费利率',
         required: true,
         // amount: true,
     }, {

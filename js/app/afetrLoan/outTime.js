@@ -22,12 +22,18 @@ $(function () {
         field: 'amount',
         title: '借款金额',
         amount: true,
+        search: true
     }, {
         field: 'duration',
         title: '借款时长(天)',
     }, {
         field: 'yqDays',
         title: '逾期天数',
+        field1: 'yqDaysStart',
+        title1: '逾期天数',
+        type1: 'normalRange',
+        field2: 'yqDaysEnd',           
+        search: true        
     }, {
         field: 'lxAmount',
         title: '正常利息',
@@ -53,6 +59,9 @@ $(function () {
         title: '优惠金额',
         amount: true,
     }, {
+        field: 'renewalCount',
+        title: '订单续期(次)',
+    }, {
         field: 'signDatetime',
         title: '签约时间',
         formatter: dateTimeFormat
@@ -72,7 +81,8 @@ $(function () {
         columns: columns,
         searchParams:{
             companyCode: OSS.companyCode,
-            status: 5
+            status: 5,
+            isOverdue: 1
         },
         pageCode: '623085'
     });
@@ -87,5 +97,35 @@ $(function () {
         
         window.location.href = "./outTime_confirm.html?Code=" + selRecords[0].code+"&v=1";
     });    
+
+    $('#reportBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "../oansBefore/audit_report.html?userId=" + selRecords[0].userId;
+
+    });     
     
+
+    $('#pressBtn').off('click').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        
+        var data = { code: selRecords[0].code};
+        confirm("确认发短信对该用户进行催缴？").then(function() {
+            reqApi({
+                code: '623080',
+                json: data
+            }).then(function() {
+                toastr.info("操作成功");
+                $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+            });
+        },function(){});        
+       
+    });    
 });

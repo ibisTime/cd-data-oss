@@ -230,20 +230,28 @@ reqApi({
                             '</thead>'+
                             '<tbody>'+
                                 '<tr data-index="0">'+
-                                    '<td style="" colspan="2" tabindex="0">'+
+                                    '<td style="" colspan="1" tabindex="0">'+
                                         '<div class="th-inner ">家庭关系：'+  Dict.getNameForList1('family_relation','623907',infoContact.familyRelation) +'</div>'+
                                          '<div class="fht-cell"></div>'+
                                     '</td>'+
+                                    '<td style="" colspan="1" tabindex="0">'+
+                                        '<div class="th-inner ">姓名：'+ (infoContact.familyName?infoContact.familyName:"") +'</div>'+
+                                        '<div class="fht-cell"></div>'+
+                                    '</td>'+                                    
                                     '<td style="" colspan="2" tabindex="0">'+
                                         '<div class="th-inner ">联系方式：'+ infoContact.familyMobile +'</div>'+
                                         '<div class="fht-cell"></div>'+
                                     '</td>'+                                    
                                 '</tr>'+
                                 '<tr data-index="1">'+
-                                    '<td style="" colspan="2" tabindex="0">'+
+                                    '<td style="" colspan="1" tabindex="0">'+
                                         '<div class="th-inner ">社会关系：'+ Dict.getNameForList1('society_relation','623907',infoContact.societyRelation) +'</div>'+
                                         '<div class="fht-cell"></div>'+
-                                    '</td>'+                                    
+                                    '</td>'+  
+                                    '<td style="" colspan="1" tabindex="0">'+
+                                        '<div class="th-inner ">姓名：'+ (infoContact.societyName?infoContact.societyName:"") +'</div>'+
+                                        '<div class="fht-cell"></div>'+
+                                    '</td>'+                                                                      
                                     '<td style="" colspan="2" tabindex="0">'+
                                         '<div class="th-inner ">联系方式：'+ infoContact.societyMobile +'</div>'+
                                         '<div class="fht-cell"></div>'+
@@ -264,7 +272,7 @@ reqApi({
                       
         }
 
-        if (data.infoBankcardFlag  !== "0" ) {
+        if (data.infoBankcardFlag && data.infoBankcardFlag  !== "0" ) {
                html3 = '<div class="bootstrap-table" style="width: 80%;">'+
                 '<div class="fixed-table-container" style="padding-bottom: 0px;">'+
                     '<div class="fixed-table-header" style="display: none;">'+
@@ -397,7 +405,11 @@ reqApi({
                                          '<div class="fht-cell"></div>'+                                        
                                     '</td>'+
                                     '<td style=""  colspan="2" data-field="" tabindex="0">'+
-                                        '<div class="th-inner ">'+'<img src="'+OSS.picBaseUrl+'/'+infoIdentifyPic.identifyPic+'" style="max-width:100px;height:100px;" class="personal">'+'</div>'+
+                                        '<div class="th-inner ">'+
+                                            '<img src="'+OSS.picBaseUrl+'/'+infoIdentifyPic.identifyPic+'" style="max-width:100px;height:100px;" class="personal">'+
+                                            '<img src="'+OSS.picBaseUrl+'/'+infoIdentifyPic.identifyPicReverse+'" style="max-width:100px;height:100px;" class="personal1">'+
+                                            '<img src="'+OSS.picBaseUrl+'/'+infoIdentifyPic.identifyPicHand+'" style="max-width:100px;height:100px;" class="personal2">'+
+                                        '</div>'+
                                          '<div class="fht-cell"></div>'+                                         
                                     '</td>'+ 
                                 '</tr>'+                                               
@@ -801,26 +813,35 @@ reqApi({
 
             
                         
+            function personImg(imgClass,imgPic,closeClass){
+                $('.'+imgClass).on('click',function(){
 
-            $('.personal').on('click',function(){
+                    var dw = dialog({
+                        content: '<img src="'+OSS.picBaseUrl+'/'+imgPic+'" style="min-width:100%;width:400px;heiht:400px;" class="'+closeClass+'">'
+                    });                
 
-                var dw = dialog({
-                    content: '<img src="'+OSS.picBaseUrl+'/'+infoIdentifyPic.identifyPic+'" style="max-width:100%;" class="closepic">'
-                });                
+                    dw.showModal(); 
 
-                dw.showModal(); 
+                    dw.__center();
 
-                dw.__center();
+                    $('.ui-popup-backdrop').on('click', function() {
+                        dw.close().remove();
+                    }); 
+                     
+                    $('.ui-popup').on('click', function() {
+                        dw.close().remove();
+                    });                          
+                  
+                })                
+            }
 
-                $('.ui-popup-backdrop').on('click', function() {
-                    dw.close().remove();
-                }); 
-                 
-                $('.ui-popup').on('click', function() {
-                    dw.close().remove();
-                });                          
-              
-            })
+            if(data.infoIdentifyPicFlag !== "0"){
+                personImg('personal' ,infoIdentifyPic.identifyPic,"closepic")
+                personImg('personal1' ,infoIdentifyPic.identifyPicReverse ,"closepic1")
+                personImg('personal2' ,infoIdentifyPic.identifyPicHand ,"closepic2")                
+            }
+
+                        
 
  
     });

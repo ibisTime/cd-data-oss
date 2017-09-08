@@ -51,15 +51,21 @@ $(function() {
     }, {
         field: 'status',
         title: '状态',
-        type: "select",
-        listCode: "623907",
-        params:{
-            parentKey:"apply_status",
-        },
-        keyName:"dkey",
-        valueName:"dvalue",
+        // type: "select",
+        // listCode: "623907",
+        // params:{
+        //     parentKey:"apply_status",
+        // },
+        // keyName:"dkey",
+        // valueName:"dvalue",
         formatter: function(v,data){
-            return data.status
+            // return data.status
+            if(data.status == "2"){
+                return "待审核"
+            }else{
+                return "认证中"
+            }
+            
         }
     },{
         field: 'remark',
@@ -70,7 +76,7 @@ $(function() {
         columns: columns,
         pageCode: '623030',
         searchParams: {
-            status: 2
+            statusList:[1,2]
         }
     });
 
@@ -92,10 +98,10 @@ $(function() {
         }
 
         if (selRecords[0].status != 2) {
-                    toastr.info(selRecords[0].user.mobile + "不是待审核状态!");
-                    return;
-                }        
-
+            toastr.info(selRecords[0].user.mobile + "不是待审核状态!");
+            return;
+        }        
+        
         var dataCode = selRecords[0].code;
         window.location.href = "audit_check.html?userId=" + selRecords[0].user.userId+"&code="+selRecords[0].code+"&v=1";
 
@@ -111,7 +117,7 @@ $(function() {
 
          
             
-        window.location.href = "./audit_addedit.html?userId=" + selRecords[0].userId+"&code="+selRecords[0].code+"&v=1";
+        window.location.href = "./audit_addedit.html?userId=" + selRecords[0].user.userId+"&code="+selRecords[0].code+"&v=1";
     });    
        
 });

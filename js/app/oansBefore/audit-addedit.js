@@ -1,14 +1,33 @@
 $(function() {
     var code = getQueryString('code');
     var userId = getQueryString('userId');
-    var view = getQueryString('v');
-    
+    var view = getQueryString('v');    
+    var borrowCount,overdueCode,renewalCount;
     var fields = [{
         field: 'mobile',
         title: '申请人',
-        formatter: function(v,data){          
+        formatter: function(v,data){  
+            borrowCount = data.user.borrowCount;
+            overdueCode = data.user.overdueCode;
+            renewalCount = data.user.renewalCount;
             return data.user.mobile
         },
+        afterSet:function(data){
+            var html='<div class="tools" style="float: right;margin-left: 20px;">'+
+                        '<div>'+
+                            '<span style="float: left;margin-left: 20px;">借款次数:'+ borrowCount+' </span>'+
+                            '<span style="float: left;margin-left: 20px;">逾期代码: '+ overdueCode +' </span>'+
+                            '<span style="float: left;margin-left: 20px;">续期次数: '+  renewalCount +' </span>'+
+                        '</div>'+               
+                        '<ul class="toolbar"  style="float: left;">'+
+                            '<li style="display:block;" id="reportBtn"><span><img src="/static/images/t01.png"></span>查看资信报告</li>'+
+                        '</ul>'+
+                     '</div>';            
+            $('#mobile').append(html);
+            $('#reportBtn').click(function() {
+                window.location.href = "audit_report.html?userId=" + userId;
+            });            
+        },        
         readonly: view
     },{
         field: 'name',

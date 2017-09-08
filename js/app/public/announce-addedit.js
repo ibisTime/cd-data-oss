@@ -48,8 +48,9 @@ $(function() {
             title: '内容',
             field: 'smsContent',
             required: true,
+            type: "textarea",
+            normalArea: true,
             readonly: view,
-            maxlength: 522,
         }, {
             title: "拟发送时间",
             field: "topushDatetime",

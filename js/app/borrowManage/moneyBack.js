@@ -46,6 +46,9 @@ $(function () {
         title: '优惠金额',
         amount: true,
     }, {
+        field: 'renewalCount',
+        title: '订单续期(次)',
+    }, {
         field: 'signDatetime',
         title: '签约时间',
         formatter: dateTimeFormat
@@ -66,12 +69,22 @@ $(function () {
         searchParams:{
             companyCode: OSS.companyCode,
             status: 3,
-            isArchive: 0
+            isArchive: 0,
+            isOverdue: 0
         },
         pageCode: '623085'
     });
  
- 
+    $('#renewalBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        
+        
+        window.location.href = "../afetrLoan/renewalRecords.html?Code=" + selRecords[0].code+"&v=1";
+    });    
 
     
 });
