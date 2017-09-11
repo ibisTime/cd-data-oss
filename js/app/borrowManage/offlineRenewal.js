@@ -9,9 +9,11 @@ $(function () {
         field: 'code',
         title: '打款编号',        
     }, {
-        field: 'refNo',
+        field: 'borrowCode',
         title: '借款编号',
-        search: true
+        formatter:function(v,data){ 
+             return data.renewal.borrowCode
+        } 
     }, {
         field: 'type',
         title: '打款类型',
@@ -65,7 +67,7 @@ $(function () {
         }
         
         if (selRecords[0].status !== "0") {
-            toastr.info("该用户不是待审核状态");
+            toastr.info("该记录不是待审核状态");
             return;
         }        
         

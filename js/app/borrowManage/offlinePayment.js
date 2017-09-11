@@ -64,7 +64,7 @@ $(function () {
         }
 
         if (selRecords[0].status !== "0") {
-            toastr.info("该用户不是待审核状态");
+            toastr.info("该记录不是待审核状态");
             return;
         }        
         

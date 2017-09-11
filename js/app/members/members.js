@@ -59,9 +59,9 @@ $(function() {
             field: "province",
             formatter: function(v,data){
                 if(data.province == data.city){
-                    return data.city + data.area
+                    return data.city + data.area + data.address
                 }else {
-                    return data.province + data.city + data.area
+                    return data.province + data.city + data.area + data.address
                 }
             }
         }, {

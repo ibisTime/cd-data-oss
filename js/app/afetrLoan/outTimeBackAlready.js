@@ -26,6 +26,9 @@ $(function () {
         field: 'duration',
         title: '借款时长(天)',
     }, {
+        field: 'yqDays',
+        title: '逾期天数',
+    }, {
         field: 'lxAmount',
         title: '正常利息',
         amount: true,

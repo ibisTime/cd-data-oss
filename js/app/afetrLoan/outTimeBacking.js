@@ -26,6 +26,9 @@ $(function () {
         field: 'duration',
         title: '借款时长(天)',
     }, {
+        field: 'yqDays',
+        title: '逾期天数',
+    }, {
         field: 'lxAmount',
         title: '正常利息',
         amount: true,
@@ -72,9 +75,9 @@ $(function () {
         columns: columns,
         searchParams:{
             companyCode: OSS.companyCode,
-            status: 3,
-            isArchive: 0,
-            isOverdue: 1
+            status: 5,
+            isOverdue: 1,
+            isArchive: 0
         },
         pageCode: '623085'
     });
@@ -90,6 +93,47 @@ $(function () {
         window.location.href = "./renewalRecords.html?Code=" + selRecords[0].code+"&v=1";
     });  
  
+    $('#confirmBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        
+        
+        window.location.href = "./outTime_confirm.html?Code=" + selRecords[0].code+"&v=1";
+    });    
+
+    $('#reportBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "../oansBefore/audit_report.html?userId=" + selRecords[0].user.userId;
+
+    });     
+    
+
+    $('#pressBtn').off('click').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        
+        var data = { code: selRecords[0].code};
+        confirm("确认发短信对该用户进行催缴？").then(function() {
+            reqApi({
+                code: '623080',
+                json: data
+            }).then(function() {
+                toastr.info("操作成功");
+                $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+            });
+        },function(){});        
+       
+    });     
 
     
 });

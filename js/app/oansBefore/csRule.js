@@ -20,7 +20,8 @@ $(function() {
         columns: columns,
         pageCode: "623915",
         searchParams: {
-            companyCode:OSS.companyCode
+            companyCode:OSS.companyCode,
+            type: 1
         }
     });
 });

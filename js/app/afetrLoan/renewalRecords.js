@@ -5,33 +5,35 @@ $(function () {
         title: '',
         checkbox: true
     }, {
-        field: 'code',
-        title: '续期编号'
-    }, {
-        field: 'cycle',
-        title: '续期周期',
-    }, {
         field: 'curNo',
         title: '第几次续期',
     }, {
+        field: 'startDate',
+        title: '开始时间',
+        formatter: dateTimeFormat
+    }, {
+        field: 'endDate',
+        title: '结束时间',
+        formatter: dateTimeFormat
+    }, {
         field: 'fwAmount',
-        title: '续期服务费',
+        title: '服务费',
         amount: true
     }, {
         field: 'xsAmount',
-        title: '续期信审费',
+        title: '信审费',
         amount: true
     }, {
         field: 'glAmount',
-        title: '续期管理费',
+        title: '管理费',
         amount: true
     }, {
         field: 'yqAmount',
-        title: '需支付的逾期费用',
+        title: '逾期费用',
         amount: true
     }, {
         field: 'lxAmount',
-        title: '续期正常利息',
+        title: '正常利息',
         amount: true
     }, {
         field: 'lxAmount',
@@ -41,37 +43,16 @@ $(function () {
         field: 'payCode',
         title: '三方支付编号',
     }, {
+        field: 'payType',
+        title: '支付方式',
+        formatter:Dict.getNameForList('pay_type','623907')
+    }, {
         field: 'payDatetime',
         title: '支付时间',
         formatter: dateTimeFormat
     }, {
-        field: 'payType',
-        title: '支付方式'
-    }, {
-        field: 'renewalCount',
-        title: '订单续期(次)',
-    }, {
         field: 'createDatetime',
-        title: '续期时间',
-        formatter: dateTimeFormat
-    }, {
-        field: 'startDate',
-        title: '续期开始时间',
-        formatter: dateTimeFormat
-    }, {
-        field: 'endDate',
-        title: '续期结束时间',
-        formatter: dateTimeFormat
-    }, {
-        field: 'step',
-        title: '续期步长'
-    }, {
-        field: 'createDatetime',
-        title: '续期时间',
-        formatter: dateTimeFormat
-    }, {
-        field: 'createDatetime',
-        title: '续期时间',
+        title: '续期申请时间',
         formatter: dateTimeFormat
     }];
 
@@ -82,5 +63,17 @@ $(function () {
         },        
         pageCode: '623090'
     });
-       
+
+    $('#renewalBtn').hide();
+    $('#detailBtn').hide();
+    $('#exportBtn').hide();
+    $('#pressBtn').hide();
+    $('#confirmBtn').hide();
+    $('#reportBtn').hide();
+
+    $('.tools .toolbar').html('<li style="display:block;" id="backBtn"><span><img src="/static/images/t01.png"></span>返回</li>');
+    $('#backBtn').on('click', function() {
+        goBack();
+    });    
+    
 });

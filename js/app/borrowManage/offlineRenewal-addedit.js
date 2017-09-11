@@ -10,8 +10,11 @@ $(function() {
             return data.code;
         }        
     }, {
-        field: 'refNo',
+        field: 'borrowCode',
         title: '借款编号',
+        formatter:function(v,data){ 
+             return data.renewal.borrowCode
+        } 
     }, {
         field: 'type',
         title: '打款类型',
