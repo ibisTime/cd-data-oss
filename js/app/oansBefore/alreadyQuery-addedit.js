@@ -32,7 +32,7 @@ $(function() {
                     window.location.href = "audit_report.html?userId=" + userId;
                 }else{
                     sessionStorage.setItem('jdtReport', jdtReport);
-                    window.location.href = "audit_netReport.html?";
+                    window.location.href = "audit_netReport.html?userId=" + userId;
                 }
             });            
         },
@@ -109,6 +109,6 @@ $(function() {
     });
 
     $('#backBtn').off('click').click(function() {
-        window.location.href = "./alreadyQuery.html?"
+        window.location.href = "./alreadyQuery.html"
     });    
 });

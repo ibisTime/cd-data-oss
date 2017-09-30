@@ -31,7 +31,7 @@ $(function() {
                     window.location.href = "audit_report.html?userId=" + userId;
                 }else{
                     sessionStorage.setItem('jdtReport', jdtReport);
-                    window.location.href = "audit_netReport.html?";
+                    window.location.href = "audit_netReport.html?userId=" + userId;
                 }
                 
             });            

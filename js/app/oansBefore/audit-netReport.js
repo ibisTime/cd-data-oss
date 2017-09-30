@@ -6,6 +6,8 @@
         contact_list, contact_region, deliver_address, ebusiness_expense,
         main_service, summary, trip_info, user_info_check;
     var application_check = [];
+    var td_data = {},
+        person_info = {};
     loading.createLoading();
     
     
@@ -538,12 +540,21 @@
     togglePanel("pageTitle7","pannel7");
     togglePanel("pageTitle8","pannel8");
     togglePanel("pageTitle9","pannel9");
+    togglePanel("pageTitle10","pannel10");
 
     // $('#num').text(data.uid);
     // $('#time').text(data.report.update_time)
     $('#backBtn').click(function() {
         goBack()
     });
+    
+    $('#preLoanReviewBtn').on('click',function(){
+        getTDReport()                
+    })           
+
+    $('#updatePreLoanReviewBtn').on('click',function(){
+        updateTDReport()                
+    })  
 
     $(window).bind('beforeunload',function(){ 
         sessionStorage.setItem('jdtReport', '');
@@ -570,5 +581,64 @@
     function isEmpty (value1, value2){
         !value1? "" : value2;
     }
-                
+    
+    (function(){
+        if(typeof jQuery == "undefined"){
+            var  jq_script = document.createElement('script');
+            jq_script.type = "text/javascript";
+            jq_script.src =  "http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js";
+            jq_script.onload = loadPreloanLib;
+            document.getElementsByTagName('head')[0].appendChild(jq_script);
+        } else {
+            loadPreloanLib();
+        }
+     
+        function loadPreloanLib(){
+            var td_script = document.createElement('script');
+            td_script.type = "text/javascript";
+            td_script.charset = "utf-8";
+            td_script.src = "http://cdnjs.tongdun.cn/preloan/tdreport.1.4.min.js?r=" + (new Date()).getTime();
+//                td_script.src = "./../tdreporttest.js?r=" + (new Date()).getTime();
+            document.getElementsByTagName('head')[0].appendChild(td_script);
+        }
+    })();
+    
+    function getTDReport(){
+        loading.createLoading(); 
+        reqApi1({
+            code:'623054',
+            json:{userId:userId}
+        }).then(function(res){
+            loading.hideLoading();
+            if (res.errorCode != '0') {
+                toastr.warning(res.errorInfo);
+                return $.Deferred().reject(res, 'Not YES').promise();
+            } else {
+                td_data = JSON.parse(res.data.tdData); 
+                person_info = JSON.parse(res.data.personInfo); 
+            }                                 
+        }).then(function(){ 
+            $.showTDReport(td_data,person_info);
+            $('.label-span').css({
+                display: 'inline-block'
+            });            
+        });        
+    } 
+
+    function updateTDReport(){
+        loading.createLoading();
+        reqApi1({
+            code:'623055',
+            json:{userId:userId}
+        }).then(function(res){
+            loading.hideLoading();
+            if (res.errorCode != '0') {
+                toastr.warning(res.errorInfo);
+                return $.Deferred().reject(res, 'Not YES').promise()
+            } else {
+                toastr.success("操作成功");
+            }                                             
+        })        
+    }       
+    
 });
