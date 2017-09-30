@@ -5,7 +5,7 @@ $(function() {
     
     var fields = [{
         field: 'name',
-        title: '商品名',
+        title: '产品名',
         required: true,
         search: true,
     }, {

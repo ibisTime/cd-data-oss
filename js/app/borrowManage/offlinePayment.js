@@ -7,24 +7,30 @@ $(function () {
         checkbox: true
     }, {
         field: 'code',
-        title: '打款编号',        
+        title: '还款编号',        
     }, {
         field: 'refNo',
         title: '借款编号',
         search: true
     }, {
+        field: 'loanType',
+        title: '放款方式',       
+        formatter: function(v,data){
+          return  Dict.getNameForList1('loan_type','623907',data.borrow.loanType)
+        }
+    }, {
         field: 'type',
-        title: '打款类型',
+        title: '还款方式',
         key: "repay_apply_type",
         keyCode:"623907",
         formatter: Dict.getNameForList("repay_apply_type","623907"),         
     }, {
         field: 'amount',
-        title: '打款金额',
+        title: '还款金额',
         amount: true,
     }, {
         field: 'applyUser',
-        title: '打款人',
+        title: '还款人',
         type: "select",
         formatter:function(v,data){
             data1[v] = data.user.mobile;
@@ -34,11 +40,11 @@ $(function () {
         search: true
     },{
         field: 'applyDatetime',
-        title: '打款时间',
+        title: '还款时间',
         formatter: dateTimeFormat,
     }, {
         field: 'applyNote',
-        title: '打款说明',
+        title: '还款说明',
     }, {
         field: 'status',
         title: '状态',

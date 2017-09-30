@@ -58,11 +58,24 @@ $(function() {
             title: "注册地址",
             field: "province",
             formatter: function(v,data){
-                if(data.province == data.city){
-                    return data.city + data.area + data.address
-                }else {
-                    return data.province + data.city + data.area + data.address
+                if(data.province){
+                    if(data.address){
+                        if(data.province == data.city ){
+                            return data.city + data.area + data.address;
+                        }else{
+                            return data.province + data.city + data.area + data.address;
+                        }                        
+                    }else{
+                        if(data.province == data.city ){
+                            return data.city + data.area;
+                        }else {
+                            return data.province + data.city + data.area;
+                        }                        
+                    }                    
+                }else{
+                    return '-'
                 }
+                
             }
         }, {
             title: "注册时间",
@@ -111,7 +124,17 @@ $(function() {
         }
         window.location.href = "../oansBefore/audit_report.html?userId=" + selRecords[0].userId;
 
-    });    
+    });  
+
+    $('#netReportBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "../oansBefore/audit_netReport.html?userId=" + selRecords[0].userId;
+
+    });      
     
 
     $('#activeBtn').click(function() {

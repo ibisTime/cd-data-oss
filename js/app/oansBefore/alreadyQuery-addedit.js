@@ -2,7 +2,7 @@ $(function() {
     var code = getQueryString('code');
     var userId = getQueryString('userId');
     var view = getQueryString('v');
-    var borrowCount,overdueCode,renewalCount;
+    var borrowCount,overdueCode,renewalCount,type,jdtReport;
 
     var fields = [{
         field: 'mobile',
@@ -11,15 +11,30 @@ $(function() {
             borrowCount = data.user.borrowCount;
             overdueCode = data.user.overdueCode;
             renewalCount = data.user.renewalCount;
+            type = data.type;
+            jdtReport = data.jdtReport;            
             return data.user.mobile
         },
         afterSet:function(data){
             var html='<div class="tools" style="float: right;margin-left: 20px;">'+
+                        '<div>'+
                             '<span style="float: left;margin-left: 20px;">借款次数:'+ borrowCount+' </span>'+
                             '<span style="float: left;margin-left: 20px;">逾期代码: '+ overdueCode +' </span>'+
-                            '<span style="float: left;margin-left: 20px;">续期次数: '+  renewalCount +' </span>'+             
+                            '<span style="float: left;margin-left: 20px;">续期次数: '+  renewalCount +' </span>'+
+                        '</div>'+               
+                        '<ul class="toolbar"  style="float: left;">'+
+                            '<li style="display:block;" id="reportBtn"><span><img src="/static/images/t01.png"></span>查看资信报告</li>'+
+                        '</ul>'+
                      '</div>';            
-            $('#mobile').append(html);            
+            $('#mobile').append(html);
+            $('#reportBtn').click(function() {
+                if(type == 1){
+                    window.location.href = "audit_report.html?userId=" + userId;
+                }else{
+                    sessionStorage.setItem('jdtReport', jdtReport);
+                    window.location.href = "audit_netReport.html?";
+                }
+            });            
         },
         readonly: view
     },{
@@ -63,7 +78,10 @@ $(function() {
     }, {
         field: 'status',
         title: '状态',
-        formatter: Dict.getNameForList("apply_status","623907"),
+        // formatter: Dict.getNameForList("apply_status","623907"),
+        formatter: function(v,data){
+            return "审核通过"
+        },        
         readonly: view,
     }, {
         field: 'remark',
@@ -89,4 +107,8 @@ $(function() {
         code:code,
         detailCode: "623031",
     });
+
+    $('#backBtn').off('click').click(function() {
+        window.location.href = "./alreadyQuery.html?"
+    });    
 });

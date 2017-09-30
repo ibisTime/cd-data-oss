@@ -26,11 +26,7 @@ $(function() {
                             '<span style="float: left;margin-left: 20px;">续期次数: '+  renewalCount +' </span>'+             
                      '</div>';            
             $('#mobile').append(html);            
-        },        
-    }, {
-        field: 'loanType',
-        title: '放款方式',
-        formatter:Dict.getNameForList('loan_type','623907')
+        }    
     }, {
         field: 'amount',
         title: '借款金额',
@@ -38,9 +34,6 @@ $(function() {
     }, {
         field: 'duration',
         title: '借款时长(天)',
-    }, {
-        field: 'remainDays',
-        title: '还款剩余天数',
     }, {
         field: 'lxAmount',
         title: '正常利息',
@@ -58,44 +51,58 @@ $(function() {
         title: '快速信审费',
         amount: true,
     }, {
+        field: 'lxAmount1',
+        title: '综合费用',
+        formatter:function(v,data){
+          return  moneyFormat(data.lxAmount+data.fwAmount+data.glAmount+data.xsAmount)
+        },
+        readonly:view,
+    }, {
         field: 'yhAmount',
         title: '优惠金额',
         // amount: true,
         formatter:moneyFormat
     }, {
         field: 'Amount',
-        title: '实际打款金额',
+        title: '实际应打款金额',
         formatter:function(v,data){
           return  moneyFormat(data.amount-(data.lxAmount+data.fwAmount+data.glAmount+data.xsAmount)+data.yhAmount)
 
         },
         readonly:view,
     }, {
-        field: 'renewalCount',
-        title: '订单续期(次)',
+        field: 'realName',
+        title: '户名',
+        formatter:function(v,data){
+            if(data.bankcard){
+                return data.bankcard.realName
+            }            
+        },
+        readonly:view,
+    }, {
+        field: 'bankName',
+        title: '签约银行',
+        formatter:function(v,data){
+            // return Dict.getNameForList1('bank','623907',data.bankcard.bankName)
+            if(data.bankcard){
+                return data.bankcard.bankName
+            }            
+        },
+        readonly:view,
+    }, {
+        field: 'cardNo',
+        title: '签约银行卡号',
+        formatter:function(v,data){
+            if(data.bankcard){
+                return data.bankcard.bankcardNumber
+            }             
+        },
+        readonly:view,
     }, {
         field: 'signDatetime',
         title: '签约时间',
         formatter: dateTimeFormat
     }, {
-        field: 'fkDatetime',
-        title: '放款时间',
-        formatter: dateTimeFormat
-    }, {
-        field: 'hkDatetime',
-        title: '约定还款时间',
-        formatter: dateTimeFormat
-    }, {
-        field: 'jxDatetime',
-        title: '计息时间',
-        formatter: dateTimeFormat
-    }
-    // , {
-    //     field: 'realHkDatetime',
-    //     title: '实际还款时间',
-    //     formatter: dateTimeFormat
-    // }
-    , {
         field: 'updateDatetime',
         title: '最后更新时间',
         formatter: dateTimeFormat
@@ -116,8 +123,8 @@ $(function() {
         code: code,
         view:view,
         detailCode: '623086',
-        addCode: '623000',
-        editCode: '623001',
+        addCode: '623083',
+        editCode: '623083',
         beforeSubmit:function(data){
             data.updater = getUserId();
             return data;

@@ -6,7 +6,7 @@ $(function () {
         checkbox: true
     }, {
         field: 'name',
-        title: '商品名',
+        title: '产品名',
         search: true,
     }, {
         field: 'level',

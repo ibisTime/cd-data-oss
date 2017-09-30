@@ -88,7 +88,7 @@ $(function() {
         }
         window.location.href = "audit_report.html?userId=" + selRecords[0].user.userId;
 
-    }); 
+    });     
 
     $('#checkBtn').off('click').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');

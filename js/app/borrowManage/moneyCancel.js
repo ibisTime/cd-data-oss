@@ -50,7 +50,9 @@ $(function () {
         field: 'bankcardNumber',
         title: '签约银行卡号',
         formatter:function(v,data){
-            return data.bankcard.bankcardNumber
+            if(data.bankcard){
+                return data.bankcard.bankcardNumber
+            }
         }
     }, {
         field: 'signDatetime',

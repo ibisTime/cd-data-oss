@@ -6,7 +6,7 @@ $(function() {
 	
 	var fields = [ {
         field: 'code1',
-        title: '打款编号',
+        title: '还款编号',
         readonly: view,
         formatter:function(v,data){
             return data.code;
@@ -16,32 +16,39 @@ $(function() {
         title: '借款编号',
         readonly: view
     }, {
+        field: 'loanType',
+        title: '放款方式',
+        formatter: function(v,data){
+          return  Dict.getNameForList1('loan_type','623907',data.borrow.loanType)
+        },
+        readonly: view
+    }, {
         field: 'type',
-        title: '打款类型',
+        title: '还款类型',
         key: "repay_apply_type",
         keyCode:"623907",
         formatter: Dict.getNameForList("repay_apply_type","623907"),        
         readonly: view
     }, {
         field: 'amount',
-        title: '打款金额',
+        title: '还款金额',
         amount: true,
         readonly: view
     }, {
         field: 'applyUser',
-        title: '打款人',
+        title: '还款人',
         readonly: view,
         formatter:function(v,data){
             return data.user.mobile;
         }
     },{
         field: 'applyDatetime',
-        title: '打款时间',
+        title: '还款时间',
         formatter: dateTimeFormat,
         readonly: view
     }, {
         field: 'applyNote',
-        title: '打款说明',
+        title: '还款说明',
         readonly: view
     }, {
         field: 'status',

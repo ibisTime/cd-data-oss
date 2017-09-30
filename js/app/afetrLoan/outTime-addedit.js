@@ -28,6 +28,10 @@ $(function() {
             $('#mobile').append(html);            
         }    
     }, {
+        field: 'loanType',
+        title: '放款方式',
+        formatter:Dict.getNameForList('loan_type','623907')
+    }, {
         field: 'amount',
         title: '借款金额',
         amount: true,

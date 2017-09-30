@@ -55,7 +55,6 @@ $(function() {
         title: '综合费用',
         formatter:function(v,data){
           return  moneyFormat(data.lxAmount+data.fwAmount+data.glAmount+data.xsAmount)
-
         },
         readonly:view,
     }, {

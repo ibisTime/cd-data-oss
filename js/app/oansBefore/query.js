@@ -79,7 +79,7 @@ $(function() {
         pageCode: '623030',
         searchParams: {
             // companyCode:OSS.companyCode
-            statusList:[3]
+            statusList: [3]
         }
     });
 
@@ -120,7 +120,7 @@ $(function() {
 
          
             
-        window.location.href = "./audit_addedit.html?userId=" + selRecords[0].user.userId+"&code="+selRecords[0].code+"&v=1";
+        window.location.href = "./query_addedit.html?userId=" + selRecords[0].user.userId+"&code="+selRecords[0].code+"&v=1";
     });    
        
 });

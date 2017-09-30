@@ -3,7 +3,7 @@ $(function() {
 	var code = getQueryString('code');
     var userId = getQueryString('userId');
     var view = getQueryString('v');
-	var borrowCount,overdueCode,renewalCount;
+	var borrowCount,overdueCode,renewalCount,type,jdtReport;
     var fields = [{
         field: 'mobile',
         title: '申请人',
@@ -11,6 +11,8 @@ $(function() {
             borrowCount = data.user.borrowCount;
             overdueCode = data.user.overdueCode;
             renewalCount = data.user.renewalCount;
+            type = data.type;
+            jdtReport = data.jdtReport;            
             return data.user.mobile
         },
         afterSet:function(data){
@@ -26,7 +28,12 @@ $(function() {
                      '</div>';            
             $('#mobile').append(html);
             $('#reportBtn').click(function() {
-                window.location.href = "audit_report.html?userId=" + userId;
+                if(type == 1){
+                    window.location.href = "audit_report.html?userId=" + userId;
+                }else{
+                    sessionStorage.setItem('jdtReport', jdtReport);
+                    window.location.href = "audit_netReport.html?";
+                }                
             });            
         },        
         readonly: view
@@ -61,7 +68,16 @@ $(function() {
     }, {
         field: 'status',
         title: '状态',
-        formatter: Dict.getNameForList("apply_status","623907"),
+        // formatter: Dict.getNameForList("apply_status","623907"),
+        formatter: function(v,data){
+            // return data.status
+            if(data.status == "2"){
+                return "待审核"
+            }else{
+                return "认证中"
+            }
+            
+        },        
         readonly: view,
     }, {
         field: 'remark',

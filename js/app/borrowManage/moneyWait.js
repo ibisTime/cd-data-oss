@@ -85,7 +85,7 @@ $(function () {
         columns: columns,
         searchParams:{
             companyCode: OSS.companyCode,
-            status: 1,
+            statusList: [1,8],
             isArchive: 0
         },
         pageCode: '623085'
@@ -169,6 +169,45 @@ $(function () {
 
         $('#formContainer').find('li:last-child').css({'text-align':'center','margin-left':'40px;'})      
 
-    });   
+    });  
+
+    $('#paidBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        
+        var data = { code: selRecords[0].code,  updater: getUserName(),remark:"申请宝付代付" };
+        confirm("确认申请宝付代付？").then(function() {
+            reqApi({
+                code: '623082',
+                json: data
+            }).then(function() {
+                toastr.info("操作成功");
+                $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+            });
+        },function(){});        
+       
+    });     
     
+    $('#queryBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        
+      var data = { code: selRecords[0].code};
+        confirm("确认查询代付结果？").then(function() {
+            reqApi({
+                code: '623083',
+                json: data
+            }).then(function() {
+                toastr.info("操作成功");
+                $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+            });
+        },function(){});       
+       
+    });    
 });

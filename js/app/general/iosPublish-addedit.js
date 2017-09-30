@@ -11,6 +11,7 @@ $(function() {
         title: '参数值',
         field: 'cvalue',
         type: "textarea",
+        normalArea: true,
         required: true
     }];
 
