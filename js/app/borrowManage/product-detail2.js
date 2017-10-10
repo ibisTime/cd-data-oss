@@ -1,8 +1,8 @@
 $(function() {
-    
+
     var code = getQueryString('code');
     var view = getQueryString('v');
-    
+
     var fields = [{
         field: 'name',
         title: '产品名',
@@ -13,8 +13,8 @@ $(function() {
         title: '商品等级',
         type: "select",
         key: "product_level",
-        keyCode:"623907",
-        formatter: Dict.getNameForList("product_level","623907"),
+        keyCode: "623907",
+        formatter: Dict.getNameForList("product_level", "623907"),
         required: true,
     }, {
         field: 'amount',
@@ -35,14 +35,17 @@ $(function() {
         field: 'lxRate',
         title: '日利息利率',
     }, {
-        field: 'fwRate',
-        title: '日服务费利率',
+        field: 'fwAmount',
+        title: '服务费(元)',
+        formatter: moneyFormat
     }, {
-        field: 'glRate',
-        title: '日账户管理费利率',
+        field: 'glAmount',
+        title: '账户管理费(元)',
+        formatter: moneyFormat
     }, {
-        field: 'xsRate',
-        title: '日快速信审费利率',
+        field: 'xsAmount',
+        title: '快速信审费(元)',
+        formatter: moneyFormat
     }, {
         field: 'updateDatetime',
         title: '最后更新时间',
@@ -53,8 +56,8 @@ $(function() {
         title: '状态',
         type: "select",
         key: "product_status",
-        keyCode:"623907",
-        formatter: Dict.getNameForList("product_status","623907"),
+        keyCode: "623907",
+        formatter: Dict.getNameForList("product_status", "623907"),
         search: true,
         required: true,
     }, {
@@ -67,8 +70,8 @@ $(function() {
         type: 'select',
         key: 'product_location',
         required: true,
-        keyCode:'623907',
-        formatter: Dict.getNameForList("product_location",'623907'),
+        keyCode: '623907',
+        formatter: Dict.getNameForList("product_location", '623907'),
     }, {
         field: 'uiOrder',
         title: 'UI顺序',
@@ -77,15 +80,15 @@ $(function() {
         field: 'remark',
         title: '备注',
     }];
-    
+
     buildDetail({
         fields: fields,
         code: code,
-        view:view,
+        view: view,
         detailCode: '623011',
         addCode: '623000',
         editCode: '623001',
-        beforeSubmit:function(data){
+        beforeSubmit: function(data) {
             data.updater = getUserId();
             return data;
         }
