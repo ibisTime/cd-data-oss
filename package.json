@@ -5,8 +5,8 @@
   "main": "fis-conf.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "fis3 release -d ../../xn-cd_data-oss/dist -w",
-    "prod": "fis3 release -d ../dist prod"
+    "dev": "fis3 release -d D:/chengdai_dabao/zxzx -w",
+    "build": "fis3 release -d D:/chengdai_dabao/zxzx prod"
   },
   "author": "",
   "license": "ISC",

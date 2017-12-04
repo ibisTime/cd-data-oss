@@ -1,7 +1,7 @@
 $(function() {
 	
 	var code = getQueryString('code');
-	var view = getQueryString('v');
+    var view = getQueryString('v');
     var borrowCount,overdueCode,renewalCount;
 	
 	var fields = [ {
@@ -151,8 +151,7 @@ $(function() {
     var options = {
         fields: fields,
         code:code,
-        detailCode: '623086',
-
+        detailCode: '623086'
     };
 
     options.buttons = [{
