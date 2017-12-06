@@ -20,7 +20,7 @@ $(function() {
 		pageCode: '802025',
 		searchParams: {
 			type: '3',
-			companyCode: OSS.company
+			companyCode: OSS.companyCode
 		},
 		beforeEdit: function(r) {
 			location.href = 'rule2_addedit.html?code=' + r.id +"&t="+ r.type;

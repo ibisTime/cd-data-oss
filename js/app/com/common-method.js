@@ -1019,7 +1019,8 @@ function buildList(options) {
       }
       $.extend(json, options.searchParams, searchFormParams, {
         token: sessionStorage.getItem('token'),
-        systemCode: sessionStorage.getItem('systemCode')
+        systemCode: sessionStorage.getItem('systemCode'),
+        // companyCode: OSS.companyCode
       });
       params.order && (json.orderDir = params.order);
       params.sort && (json.orderColumn = params.sort.replace(/[A-Z]/g, function(word) {

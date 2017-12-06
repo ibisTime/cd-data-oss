@@ -63,8 +63,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = "./ywyManage_addRemark.html?mobile=" + selRecords[0].mobile;
-
+        window.location.href = "./ywyManage_addRemark.html?userId=" + selRecords[0].userId;
     });
 
     $("#borrowBtn").click(function() {

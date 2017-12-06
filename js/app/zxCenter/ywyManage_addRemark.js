@@ -1,4 +1,6 @@
 $(function() {
+    var userId = getQueryString('userId');
+    console.log(userId);
     var userKind = {
         "C": "C端用户",
         // "P": "平台用户"
@@ -45,17 +47,17 @@ $(function() {
         field: 'remark'
     }
     ];
-    // buildList({
-    //     router: 'zxCenter',
-    //     columns: columns,
-    //     pageCode: '805120',
-    //     searchParams: {
-    //         kind: "C",
-    //         companyCode:OSS.companyCode
-    //     }
-    // });
+    buildList({
+        router: 'zxCenter',
+        columns: columns,
+        pageCode: '805120',
+        searchParams: {
+            kind: "C",
+            companyCode:OSS.companyCode
+        }
+    });
 
-    buildDetail(options);
+    // buildDetail(columns);
 
     // $('#addRemarkBtn').click(function() {
     //     var selRecords = $('#tableList').bootstrapTable('getSelections');

@@ -88,7 +88,7 @@ $(function() {
         singleSelect: false,
         searchParams: {
             channelType: '90',
-            companyCode: OSS.company
+            companyCode: OSS.companyCode
         },
         beforeDetail: function(data) {
             location.href = "offlineCash_check.html?code=" + data.code + "&detail=1";

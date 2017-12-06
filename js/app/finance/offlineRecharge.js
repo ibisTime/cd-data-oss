@@ -84,7 +84,7 @@ $(function() {
         singleSelect: false,
         searchParams: {
             channelType: '90',
-            companyCode: OSS.company
+            companyCode: OSS.companyCode
         },
         beforeDetail: function(data) {
             location.href = "offlineRecharge_check.html?code=" + data.code + "&detail=1";
