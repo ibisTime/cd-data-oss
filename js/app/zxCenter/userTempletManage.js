@@ -16,33 +16,20 @@ $(function() {
         title: '',
         checkbox: true
     }, {
-        title: '手机号',
-        field: 'mobile',
+        title: '模板编号',
+        field: 'code',
         search: true
     },{
-        title: '昵称',
-        field: 'nickName'
+        title: '模板名称',
+        field: 'name'
     },{
-        field: 'userReferee',
-        title: '推荐人',
-        search: true
+        title: '模板价格',
+        field: 'totalPrice'
     }, {
-        title: '累计消费',
-        field: 'allConsume'
-    }, {
-        title: '账户余额',
-        field: 'balance'
-    }, {
-        title: "注册时间",
-        field: "createDatetime",
+        title: "修改时间",
+        field: "updateDatetime",
         formatter: dateTimeFormat
     },{
-        title: "状态",
-        field: "status",
-        type: "select",
-        key: "user_status",
-        formatter: Dict.getNameForList("user_status")
-    }, {
         title: '备注',
         field: 'remark'
     }
@@ -50,20 +37,20 @@ $(function() {
     buildList({
         router: 'zxCenter',
         columns: columns,
-        pageCode: '805120',
+        pageCode: '805235',
         searchParams: {
             kind: "C",
             companyCode:OSS.companyCode
         }
     });
 
-    $('#addRemarkBtn').click(function() {
+    $('#editBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = "./ywyManage_addRemark.html?userId=" + selRecords[0].userId;
+        window.location.href = "./userTempletManage_edit.html?Code=" + selRecords[0].code+"&portList="+selRecords[0].portList;
     });
 
 });
