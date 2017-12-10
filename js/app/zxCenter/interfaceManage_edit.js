@@ -6,7 +6,8 @@ $(function() {
     var columns = [{
         field: 'description',
         title: '详情描述',
-        search: true
+        search: true,
+        type: 'textarea'
     }, {
         field: 'name',
         title: '名称',
@@ -19,10 +20,6 @@ $(function() {
         title: '价格',
         amount:true,
         formatter: moneyFormat
-    },{
-        field: 'updateDatetime',
-        title: '修改时间',
-        formatter: dateTimeFormat
     }];
 
     buildDetail({

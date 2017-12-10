@@ -25,9 +25,29 @@ $(function() {
         search: true
     }, {
         title: '籍贯',
-        field: 'jiGuan'
+        field: 'jiGuan',
+        formatter: function(v,data){
+                    if(data.province){
+                        if(data.address){
+                            if(data.province == data.city ){
+                                return data.city ;
+                            }else{
+                                return data.province + data.city ;
+                            }
+                        }else{
+                            if(data.province == data.city ){
+                                return data.city + data.area;
+                            }else {
+                                return data.province + data.city ;
+                            }
+                        }
+                    }else{
+                        return '-'
+                    }
+
+                }
     },{
-        field: 'identityNo',
+        field: 'idNo',
         title: '身份证号'
     },{
         field: 'userReferee',
@@ -48,7 +68,7 @@ $(function() {
         field: 'platformCode',
         title: '平台代码'
     }, {
-        field: 'writtenTime',
+        field: 'createDatetime',
         title: '填写时间',
         formatter: dateTimeFormat
     },  {

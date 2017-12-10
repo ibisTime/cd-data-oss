@@ -18,14 +18,48 @@ $(function() {
         field: 'name'
     },{
         title: '接口列表',
-        field: 'portList'
-    },{
-        title: '模板价格',
-        field: 'totalPrice'
-    }, {
-        title: "修改时间",
-        field: "updateDatetime",
-        formatter: dateTimeFormat
+        field: 'portList',
+        type: "checkbox",
+        items: [
+            {
+                key: 'F1',
+                value: '手机认证',
+                disabled: true
+            },{
+                key: 'F2',
+                value: '芝麻认证',
+                disabled: true
+            },{
+                key: 'F3',
+                value: '基本信息认证',
+                disabled: true
+            },{
+                key: 'PID1',
+                value: '身份证正反面'
+            },{
+                key: 'PDW2',
+                value: '强制定位'
+            },{
+                key: 'PTXL3',
+                value: '通讯录认证'
+            },{
+                key: 'PYYS4',
+                value: '运营商认证'
+            },{
+                key: 'PZM5',
+                value: '芝麻信用认证'
+            },{
+                key: 'PZM6',
+                value: '行业关注清单认证'
+            },{
+                key: 'PZM7',
+                value: '欺诈三接口认证'
+            },{
+                key: 'PTD8',
+                value: '同盾认证'
+            }
+        ],
+        // nochange:true
     }
     ];
     buildDetail({
@@ -35,6 +69,12 @@ $(function() {
         editCode: '805242',
         beforeSubmit: function(data) {
             data.updater = getUserId();
+            if(data.portList!=undefined){
+                data.portList = 'F1,'+'F2,'+'F3,'+data.portList;
+            }else{
+                data.portList = 'F1,F2,F3'
+            }
+
             return data;
         }
     });

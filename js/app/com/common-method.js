@@ -1196,7 +1196,7 @@ function buildDetail(options) {
       } else if (item.type == "checkbox") {
         for (var k = 0, len1 = item.items.length; k < len1; k++) {
           var rd = item.items[k];
-          html += '<input type="checkbox" id="' + item.field + '_checkbox' + k + '" name="' + item.field + '" value="' + rd.key + '"><label for="radio' + k + '" class="radio-text">' + (rd.value || '') + '<i class="zmdi ' + (rd.icon || '') + ' zmdi-hc-5x"></i></label>';
+          html += '<input type="checkbox" '+(rd.disabled?'disabled':'')+' id="' + item.field + '_checkbox' + k + '" name="' + item.field + '" value="' + rd.key + '"><label for="radio' + k + '" class="radio-text">' + (rd.value || '') + '<i class="zmdi ' + (rd.icon || '') + ' zmdi-hc-5x"></i></label>';
         }
         html += '</li>';
       } else if (item.type == 'password') {
@@ -2430,7 +2430,7 @@ function buildDetail1(options) {
         html += '<li class="clearfix" style="display:inline-block;"><label>' + item.title + ':</label>';
         for (var k = 0, len1 = item.items.length; k < len1; k++) {
           var rd = item.items[k];
-          html += '<input type="checkbox" disabled id="' + item.field + '_checkbox-model' + k + '" name="' + item.field + '" value="' + rd.key + '"><label for="radio' + k + '" class="radio-text">' + (rd.value || '') + '<i class="zmdi ' + (rd.icon || '') + ' zmdi-hc-5x"></i></label>';
+          html += '<input type="checkbox" disabled onclick="return false;" id="' + item.field + '_checkbox-model' + k + '" name="' + item.field + '" value="' + rd.key + '"><label for="radio' + k + '" class="radio-text">' + (rd.value || '') + '<i class="zmdi ' + (rd.icon || '') + ' zmdi-hc-5x"></i></label>';
         }
         html += '</li>';
       } else {

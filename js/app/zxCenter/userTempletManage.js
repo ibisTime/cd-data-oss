@@ -53,4 +53,28 @@ $(function() {
         window.location.href = "./userTempletManage_edit.html?Code=" + selRecords[0].code+"&portList="+selRecords[0].portList;
     });
 
+    //新增模板
+
+
+    //删除模板
+    $('#deleteBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+
+
+            reqApi({
+                code: '805231',
+                json: {
+                    code: selRecords[0].code
+                }
+            }).then(function() {
+                toastr.info("操作成功");
+                $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+            });
+
+
+    });
 });
