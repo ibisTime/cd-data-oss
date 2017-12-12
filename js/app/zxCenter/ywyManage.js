@@ -20,18 +20,12 @@ $(function() {
         field: 'mobile',
         search: true
     },{
-        title: '昵称',
-        field: 'nickName'
-    },{
         field: 'userReferee',
         title: '推荐人',
         search: true
-    }, {
-        title: '累计消费',
-        field: 'allConsume'
-    }, {
+    },  {
         title: '账户余额',
-        field: 'balance'
+        field: 'amount'
     }, {
         title: "注册时间",
         field: "createDatetime",
@@ -48,7 +42,6 @@ $(function() {
     }
     ];
     buildList({
-        router: 'zxCenter',
         columns: columns,
         pageCode: '805120',
         searchParams: {
@@ -63,7 +56,45 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = "./ywyManage_addRemark.html?userId=" + selRecords[0].userId;
+        window.location.href = "./ywyManage_addRemark.html?v=1&userId=" + selRecords[0].userId;
     });
+    $('#reportListBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "./ywyManage_reportList.html?userId=" + selRecords[0].userId;
+    });
+    $('#balanceBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "./ywyManage_balance.html?v=1&userId=" + selRecords[0].userId+'&mobile='+selRecords[0].mobile;
+    });
+    $('#activeBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
 
+
+        confirm("确定注销/激活该用户？").then(function() {
+            reqApi({
+                code: '805091',
+                json: {
+                    userId: selRecords[0].userId,
+                    updater: getUserName()
+                }
+            }).then(function() {
+                toastr.info("操作成功");
+                $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+            });
+
+        },function(){});
+
+    });
 });

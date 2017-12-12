@@ -23,49 +23,22 @@ $(function() {
         title: '手机号',
         field: 'mobile',
         search: true
-    }, {
-        title: '籍贯',
-        field: 'jiGuan',
-        formatter: function(v,data){
-                    if(data.province){
-                        if(data.address){
-                            if(data.province == data.city ){
-                                return data.city ;
-                            }else{
-                                return data.province + data.city ;
-                            }
-                        }else{
-                            if(data.province == data.city ){
-                                return data.city + data.area;
-                            }else {
-                                return data.province + data.city ;
-                            }
-                        }
-                    }else{
-                        return '-'
-                    }
-
-                }
     },{
-        field: 'idNo',
-        title: '身份证号'
-    },{
-        field: 'userReferee',
+        field: 'refereeUser',
         title: '推荐人',
-        search:true
+        search:true,
+        formatter: function (v,data) {
+            if(data.refereeUser){
+                return data.refereeUser.mobile;
+            }
+
+        }
+
     },{
-        field: 'reportScore',
-        title: '最新报告分',
-        field1: 'reportScoreStart',
-        title1: '最新报告分',
-        type1: 'normalRange',
-        field2: 'reportScoreEnd',
-        search:true
-    },{
-        field: 'reportNum',
+        field: 'count',
         title: '报告数量'
     }, {
-        field: 'platformCode',
+        field: 'systemCode',
         title: '平台代码'
     }, {
         field: 'createDatetime',
@@ -90,6 +63,53 @@ $(function() {
             kind: "C",
             companyCode:OSS.companyCode
         }
+    });
+    $('#newestReportBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "userBase_newestReport.html?UserId=" + selRecords[0].userId;
+    });
+    $('#addRemarkBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "./userBase_addRemark.html?v=1&userId=" + selRecords[0].userId;
+    });
+    $('#reportListBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "userBase_reportList.html?UserId=" + selRecords[0].userId;
+    });
+    $('#activeBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+
+
+        confirm("确定注销/激活该用户？").then(function() {
+            reqApi({
+                code: '805091',
+                json: {
+                    userId: selRecords[0].userId,
+                    updater: getUserName()
+                }
+            }).then(function() {
+                toastr.info("操作成功");
+                $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+            });
+
+        },function(){});
+
     });
 
 

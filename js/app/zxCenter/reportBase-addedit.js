@@ -1,4 +1,6 @@
 $(function() {
+    var code = getQueryString('code');
+    var view = getQueryString('v');
     var userKind = {
         "C": "C端用户",
         // "P": "平台用户"
@@ -12,10 +14,6 @@ $(function() {
     };
 
     var columns = [{
-        field: '',
-        title: '',
-        checkbox: true
-    },{
         title: "报告编号",
         field: "code"
     }, {
@@ -38,7 +36,7 @@ $(function() {
             }
         }
     },{
-        field: 'salesUserMobile',
+        field: 'counterMan',
         title: '所属业务员',
         search: true
     }, {
@@ -106,13 +104,16 @@ $(function() {
         formatter: dateTimeFormat
     }
     ];
-    buildList({
-        router: 'reportBase',
-        columns: columns,
-        pageCode: '805330',
-        searchParams: {
+    buildDetail({
+        fields: columns,
+        view: view,
+        code: {
             kind: "C",
-            companyCode:OSS.companyCode
-        }
+            companyCode:OSS.companyCode,
+            reportCode: code
+        },
+        detailCode: '805332'
     });
+
+
 });

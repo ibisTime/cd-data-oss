@@ -2,9 +2,9 @@ var OSS = {};
 // mainUrl
 OSS.mainUrl = '/mainUrl';
 // system
-OSS.system = 'CD-YLQ000014';
+OSS.system = 'CD-ZXZX000018';
 //公司编号
-OSS.companyCode = 'CD-YLQ000014';
+OSS.companyCode = 'CD-ZXZX000018';
 // picUrl
 OSS.picBaseUrl = 'http://oucrrtx1y.bkt.clouddn.com';
 // picShow

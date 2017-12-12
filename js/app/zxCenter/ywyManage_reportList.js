@@ -1,4 +1,5 @@
 $(function() {
+    var userId = getQueryString('userId');
     var userKind = {
         "C": "C端用户",
         // "P": "平台用户"
@@ -8,7 +9,7 @@ $(function() {
         "o2o": "o2o商家",
         "supplier":"供应商",
         "mingsu":"民宿主",
-        "f1":"VIP会员",
+        "f1":"VIP会员"
     };
 
     var columns = [{
@@ -107,12 +108,31 @@ $(function() {
     }
     ];
     buildList({
-        router: 'reportBase',
+        router: 'members',
         columns: columns,
         pageCode: '805330',
         searchParams: {
             kind: "C",
-            companyCode:OSS.companyCode
+            companyCode:OSS.companyCode,
+            loanUser:userId
         }
     });
+    // $('#newestReportBtn').click(function() {
+    //     var selRecords = $('#tableList').bootstrapTable('getSelections');
+    //     if (selRecords.length <= 0) {
+    //         toastr.info("请选择记录");
+    //         return;
+    //     }
+    //     window.location.href = "userBase_newestReport.html?UserId=" + selRecords[0].userId;
+    // });
+    // $('#reportListBtn').click(function() {
+    //     var selRecords = $('#tableList').bootstrapTable('getSelections');
+    //     if (selRecords.length <= 0) {
+    //         toastr.info("请选择记录");
+    //         return;
+    //     }
+    //     window.location.href = "userBase_reportList.html?UserId=" + selRecords[0].userId;
+    // });
+
+
 });

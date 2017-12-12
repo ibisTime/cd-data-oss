@@ -1,5 +1,7 @@
 $(function() {
+    var code = getQueryString('code');
     var userId = getQueryString('userId');
+    var view = getQueryString('v');
     console.log(userId);
     var userKind = {
         "C": "C端用户",
@@ -13,23 +15,13 @@ $(function() {
         "f1":"VIP会员",
     };
 
-    var columns = [{
-        field: '',
-        title: '',
-        checkbox: true
-    }, {
+    var columns = [ {
         title: '手机号',
         field: 'mobile'
     },{
-        title: '昵称',
-        field: 'nickName'
-    },{
         field: 'userReferee',
         title: '推荐人'
-    }, {
-        title: '累计消费',
-        field: 'allConsume'
-    }, {
+    },  {
         title: '账户余额',
         field: 'balance'
     }, {
@@ -47,100 +39,22 @@ $(function() {
         field: 'remark'
     }
     ];
-    buildList({
-        router: 'zxCenter',
-        columns: columns,
-        pageCode: '805120',
-        searchParams: {
-            kind: "C",
-            companyCode:OSS.companyCode
+    buildDetail({
+        fields: columns,
+        code: code,
+        view: view,
+        detailCode: '805246',
+        editCode: '805242',
+        beforeSubmit: function(data) {
+            data.updater = getUserId();
+            if(data.portList!=undefined){
+                data.portList = 'F1,'+'F2,'+'F3,'+data.portList;
+            }else{
+                data.portList = 'F1,F2,F3'
+            }
+
+            return data;
         }
     });
-
-    // buildDetail(columns);
-
-    // $('#addRemarkBtn').click(function() {
-    //     var selRecords = $('#tableList').bootstrapTable('getSelections');
-    //     if (selRecords.length <= 0) {
-    //         toastr.info("请选择记录");
-    //         return;
-    //     }
-    //     window.location.href = "./discount.html?userId=" + selRecords[0].userId;
-    //
-    // });
-    //
-    // $("#borrowBtn").click(function() {
-    //     var selRecords = $('#tableList').bootstrapTable('getSelections');
-    //     if (selRecords.length <= 0) {
-    //         toastr.info("请选择记录");
-    //         return;
-    //     }
-    //     window.location.href = "./borrow.html?userId=" + selRecords[0].userId;
-    //
-    // });
-    //
-    // $('#reportBtn').click(function() {
-    //     var selRecords = $('#tableList').bootstrapTable('getSelections');
-    //     if (selRecords.length <= 0) {
-    //         toastr.info("请选择记录");
-    //         return;
-    //     }
-    //     window.location.href = "../oansBefore/audit_report.html?userId=" + selRecords[0].userId;
-    //
-    // });
-    //
-    // $('#netReportBtn').click(function() {
-    //     var selRecords = $('#tableList').bootstrapTable('getSelections');
-    //     if (selRecords.length <= 0) {
-    //         toastr.info("请选择记录");
-    //         return;
-    //     }
-    //     window.location.href = "../oansBefore/audit_netReport.html?userId=" + selRecords[0].userId;
-    //
-    // });
-    //
-    //
-    // $('#activeBtn').click(function() {
-    //     var selRecords = $('#tableList').bootstrapTable('getSelections');
-    //     if (selRecords.length <= 0) {
-    //         toastr.info("请选择记录");
-    //         return;
-    //     }
-    //
-    //
-    //     confirm("确定注销/激活该用户？").then(function() {
-    //         reqApi({
-    //             code: '805091',
-    //             json: {
-    //                 userId: selRecords[0].userId,
-    //                 updater: getUserName()
-    //             }
-    //         }).then(function() {
-    //             toastr.info("操作成功");
-    //             $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
-    //         });
-    //
-    //     },function(){});
-    //
-    // });
-    //
-    //
-    //
-    // $('#editBtn').off("click").click(function() {
-    //     var selRecords = $('#tableList').bootstrapTable('getSelections');
-    //     if (selRecords.length <= 0) {
-    //         toastr.info("请选择记录");
-    //         return;
-    //     }
-    //     window.location.href = "./custom_addedit.html?Code=" + selRecords[0].code+'&userId='+selRecords[0].userId;
-    // });
-    // $('#detailBtn').off("click").click(function() {
-    //     var selRecords = $('#tableList').bootstrapTable('getSelections');
-    //     if (selRecords.length <= 0) {
-    //         toastr.info("请选择记录");
-    //         return;
-    //     }
-    //     window.location.href = "./custom_detail.html?Code=" + selRecords[0].code+'&userId='+selRecords[0].userId;
-    // });
 
 });
