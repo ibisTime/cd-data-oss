@@ -77,12 +77,20 @@ $(function() {
         }
     });
 
-    $("#addeditBtn").click(function() {
+    $("#detailBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
             toastr.info("请选择记录");
             return;
         }
         window.location.href = "unfairOutAccount-addedit.html?Code=" + selRecords[0].code;
+    })
+    $("#checkBtn").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "unfairOutAccount_check.html?v=1&Code=" + selRecords[0].code;
     })
 });

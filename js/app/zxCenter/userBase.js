@@ -24,16 +24,22 @@ $(function() {
         field: 'mobile',
         search: true
     },{
-        field: 'refereeUser',
+        field: 'userReferee',
         title: '推荐人',
+        pageCode: '805120',
+        type: 'select',
+        keyName: 'userId',
+        valueName: 'mobile',
+        params: {
+            updater: '',
+            kind: 'B'
+        },
         search:true,
         formatter: function (v,data) {
             if(data.refereeUser){
                 return data.refereeUser.mobile;
             }
-
         }
-
     },{
         field: 'count',
         title: '报告数量'
@@ -56,13 +62,13 @@ $(function() {
     }
     ];
     buildList({
-        router: 'members',
         columns: columns,
         pageCode: '805120',
         searchParams: {
             kind: "C",
             companyCode:OSS.companyCode
         }
+
     });
     $('#newestReportBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');

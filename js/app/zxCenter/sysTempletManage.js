@@ -63,7 +63,10 @@ $(function() {
         }
     },{
         title: '模板价格',
-        field: 'totalPrice'
+        field: 'totalPrice',
+        formatter:function (v,data) {
+            return data.totalPrice/1000;
+        }
     }, {
         title: "修改时间",
         field: "updateDatetime",

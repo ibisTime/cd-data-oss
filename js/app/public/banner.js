@@ -25,12 +25,12 @@ $(function() {
     buildList({
         router: 'banner',
         columns: columns,
-        pageCode: '806050',
+        pageCode: '805805',
         deleteCode: '806041',
         searchParams: {
-            companyCode: 0,
+            companyCode: OSS.companyCode,
             type: 2,
-            systemCode: "CD-CLW000005",
+            systemCode: OSS.system,
         }
     });
 

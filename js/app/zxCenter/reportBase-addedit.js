@@ -1,5 +1,6 @@
 $(function() {
     var code = getQueryString('code');
+    console.log(code);
     var view = getQueryString('v');
     var userKind = {
         "C": "C端用户",
@@ -13,10 +14,7 @@ $(function() {
         "f1":"VIP会员",
     };
 
-    var columns = [{
-        title: "报告编号",
-        field: "code"
-    }, {
+    var columns = [ {
         title: '报告主人',
         field: 'reportUser',
         search: true,
@@ -36,7 +34,7 @@ $(function() {
             }
         }
     },{
-        field: 'counterMan',
+        field: 'salesUserMobile',
         title: '所属业务员',
         search: true
     }, {

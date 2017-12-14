@@ -13,8 +13,8 @@ $(function() {
     };
 
     var columns = [{
-        field: '',
-        title: '',
+        title: "",
+        field: "",
         checkbox: true
     },{
         title: "报告编号",
@@ -22,7 +22,6 @@ $(function() {
     }, {
         title: '报告主人',
         field: 'reportUser',
-        search: true,
         formatter: function(v,data) {
             if(data.F2){
                 return JSON.parse(data.F2).realName;
@@ -32,7 +31,6 @@ $(function() {
     },{
         title: '手机号',
         field: 'mobile',
-        search: true,
         formatter: function(v,data) {
             if(data.F1){
                 return JSON.parse(data.F1).mobile;
@@ -40,8 +38,7 @@ $(function() {
         }
     },{
         field: 'salesUserMobile',
-        title: '所属业务员',
-        search: true
+        title: '所属业务员'
     }, {
         title: "类型",
         field: "type",
@@ -56,7 +53,6 @@ $(function() {
     }, {
         title: "报告规格",
         field: "portList",
-        search: true,
         formatter: function (v,data) {
             if(data.portList.indexOf('F1')!=-1){
                 data.portList=data.portList.replace(/F1/, "手机认证")
@@ -117,22 +113,18 @@ $(function() {
             loanUser:userId
         }
     });
-    // $('#newestReportBtn').click(function() {
-    //     var selRecords = $('#tableList').bootstrapTable('getSelections');
-    //     if (selRecords.length <= 0) {
-    //         toastr.info("请选择记录");
-    //         return;
-    //     }
-    //     window.location.href = "userBase_newestReport.html?UserId=" + selRecords[0].userId;
-    // });
-    // $('#reportListBtn').click(function() {
-    //     var selRecords = $('#tableList').bootstrapTable('getSelections');
-    //     if (selRecords.length <= 0) {
-    //         toastr.info("请选择记录");
-    //         return;
-    //     }
-    //     window.location.href = "userBase_reportList.html?UserId=" + selRecords[0].userId;
-    // });
+    $('#balanceBtn').css('display','none');
+    $('#addRemarkBtn').css('display','none');
+    $('#activeBtn').css('display','none');
+    $('#reportListBtn').css('display','none');
 
-
+    $('.tools .toolbar').html('<li style="display:block;" id="detailBtn"><span><img src="/static/images/t01.png"></span>详情</li>');
+    $('#detailBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "reportBase_addedit.html?v=1&code=" + selRecords[0].code;
+    });
 });

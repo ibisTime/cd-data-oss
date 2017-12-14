@@ -1,8 +1,6 @@
 $(function() {
-    var code = getQueryString('code');
     var userId = getQueryString('userId');
     var view = getQueryString('v');
-    console.log(userId);
     var userKind = {
         "C": "C端用户",
         // "P": "平台用户"
@@ -13,48 +11,83 @@ $(function() {
         "supplier":"供应商",
         "mingsu":"民宿主",
         "f1":"VIP会员",
+
     };
 
     var columns = [ {
         title: '手机号',
-        field: 'mobile'
+        field: 'mobile',
+        readonly: view
     },{
-        field: 'userReferee',
-        title: '推荐人'
-    },  {
-        title: '账户余额',
-        field: 'balance'
+        field: 'refereeUser',
+        title: '推荐人',
+        search:true,
+        readonly: view,
+        formatter: function (v,data) {
+            if(data.refereeUser){
+                return data.refereeUser.mobile;
+            }
+
+        }
+
+    },{
+        field: 'count',
+        title: '报告数量',
+        readonly: view
     }, {
-        title: "注册时间",
-        field: "createDatetime",
-        formatter: dateTimeFormat
-    },{
+        field: 'systemCode',
+        title: '平台代码',
+        readonly: view
+    }, {
+        field: 'createDatetime',
+        title: '填写时间',
+        formatter: dateTimeFormat,
+        readonly: view
+    },  {
         title: "状态",
         field: "status",
         type: "select",
         key: "user_status",
-        formatter: Dict.getNameForList("user_status")
+        formatter: Dict.getNameForList("user_status"),
+        readonly: view
     }, {
+        field: 'remark',
         title: '备注',
-        field: 'remark'
+        maxlength: 250,
+        required: true,
     }
     ];
-    buildDetail({
+    var options = {
         fields: columns,
-        code: code,
-        view: view,
-        detailCode: '805246',
-        editCode: '805242',
-        beforeSubmit: function(data) {
-            data.updater = getUserId();
-            if(data.portList!=undefined){
-                data.portList = 'F1,'+'F2,'+'F3,'+data.portList;
-            }else{
-                data.portList = 'F1,F2,F3'
-            }
-
-            return data;
+        detailCode: '805121',
+        code: {
+            kind: "C",
+            companyCode:OSS.companyCode,
+            userId: userId
         }
-    });
+    };
+    options.buttons = [{
+        title: '确认',
+        handler: function() {
+            if ($('#jsForm').valid()) {
+                var data = {};
+                data['userId'] = userId;
+                data["remark"] = $("#remark").val();
+                reqApi({
+                    code: "805195",
+                    json: data
+                }).done(function() {
+                    sucDetail();
+                });
+            }
+        }
+    }, {
+        title: '返回',
+        handler: function() {
+            goBack();
+        }
+    }];
+    buildDetail(options);
+
 
 });

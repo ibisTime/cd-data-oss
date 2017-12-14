@@ -55,7 +55,6 @@ $(function() {
     }, {
         title: "报告规格",
         field: "portList",
-        search: true,
         formatter: function (v,data) {
             if(data.portList.indexOf('F1')!=-1){
                 data.portList=data.portList.replace(/F1/, "手机认证")

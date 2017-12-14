@@ -9,7 +9,7 @@ $(function() {
         required: true,
         type: 'select',
         pageCode: userId ? '802503' : '802500',
-        keyCode1: '801907',
+        keyCode1: '805906',
         dict: [
             ['currency', 'currency'],
             ['type', 'account_type']

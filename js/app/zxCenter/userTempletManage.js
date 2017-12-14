@@ -17,8 +17,7 @@ $(function() {
         checkbox: true
     }, {
         title: '模板编号',
-        field: 'code',
-        search: true
+        field: 'code'
     },{
         title: '模板名称',
         field: 'name'
@@ -40,7 +39,9 @@ $(function() {
         pageCode: '805235',
         searchParams: {
             kind: "C",
-            companyCode:OSS.companyCode
+            companyCode:OSS.companyCode,
+            orderColumn: 'update_datetime',
+            orderDir: 'desc'
         }
     });
 

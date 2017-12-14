@@ -19,19 +19,31 @@ $(function() {
         field: 'mobile',
         readonly: view
     },{
-        field: 'userReferee',
+        field: 'refereeUser',
         title: '推荐人',
-        readonly: view
-    },  {
-        title: '账户余额',
-        field: 'balance',
+        search:true,
+        readonly: view,
+        formatter: function (v,data) {
+            if(data.refereeUser){
+                return data.refereeUser.mobile;
+            }
+
+        }
+
+    },{
+        field: 'count',
+        title: '报告数量',
         readonly: view
     }, {
-        title: "注册时间",
-        field: "createDatetime",
+        field: 'systemCode',
+        title: '平台代码',
+        readonly: view
+    }, {
+        field: 'createDatetime',
+        title: '填写时间',
         formatter: dateTimeFormat,
         readonly: view
-    },{
+    },  {
         title: "状态",
         field: "status",
         type: "select",
@@ -59,12 +71,10 @@ $(function() {
         handler: function() {
             if ($('#jsForm').valid()) {
                 var data = {};
-                data['code'] = code;
-                data['approver'] = getUserName();
-                data["approveResult"] = "1";
-                data["approveNote"] = $("#approveNote").val();
+                data['userId'] = userId;
+                data["remark"] = $("#remark").val();
                 reqApi({
-                    code: "623075",
+                    code: "805195",
                     json: data
                 }).done(function() {
                     sucDetail();
@@ -79,21 +89,5 @@ $(function() {
     }];
     buildDetail(options);
 
-    // buildDetail({
-    //     fields: columns,
-    //     code: code,
-    //     detailCode: '805120',
-    //     editCode: '805242',
-    //     beforeSubmit: function(data) {
-    //         data.updater = getUserId();
-    //         if(data.portList!=undefined){
-    //             data.portList = 'F1,'+'F2,'+'F3,'+data.portList;
-    //         }else{
-    //             data.portList = 'F1,F2,F3'
-    //         }
-    //
-    //         return data;
-    //     }
-    // });
 
 });

@@ -19,13 +19,12 @@ $(function() {
         title: '手机号',
         field: 'mobile',
         search: true
-    },{
-        field: 'userReferee',
-        title: '推荐人',
-        search: true
-    },  {
+    }, {
         title: '账户余额',
-        field: 'amount'
+        field: 'amount',
+        formatter: function (v,data) {
+            return data.amount/1000
+        }
     }, {
         title: "注册时间",
         field: "createDatetime",
@@ -45,7 +44,7 @@ $(function() {
         columns: columns,
         pageCode: '805120',
         searchParams: {
-            kind: "C",
+            kind: "B",
             companyCode:OSS.companyCode
         }
     });

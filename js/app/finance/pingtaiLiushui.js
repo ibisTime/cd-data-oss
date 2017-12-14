@@ -32,10 +32,6 @@ $(function() {
         bizTypeDict = Dict.getNameForList('biz_type');
     };
     var columns = [{
-        field: '',
-        title: '',
-        checkbox: true
-    }, {
         field: 'realName',
         title: '户名',
     }, {
@@ -96,8 +92,9 @@ $(function() {
         }
     });
 
-    $('.tools .toolbar').html('<li style="display:block;" id="backBtn"><span><img src="/static/images/t01.png"></span>返回</li>');
-    $('#backBtn').on('click', function() {
-        goBack();
-    });
+    // $('.tools .toolbar').html('<li style="display:block;" id="backBtn"><span><img src="/static/images/t01.png"></span>返回</li>');
+    // $('#backBtn').on('click', function() {
+    //     goBack();
+    // });
+    $('#detailsBtn').css('display','none');
 });

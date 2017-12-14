@@ -12,6 +12,13 @@ $(function() {
         },{
             field: 'cvalue',
             title: '参数值',
+            formatter: function (v,data) {
+                if(data.ckey == 'VALID_TIME') {
+                    return data.cvalue+ '分钟';
+                }else{
+                    return data.cvalue;
+                }
+            }
         }
     ];
     buildList({
