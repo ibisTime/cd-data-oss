@@ -86,7 +86,7 @@ $(function() {
         code: code,
         view: view,
         addCode: "806040",
-        editCode: "806042",
+        editCode: "805802",
         detailCode: '806053'
     });
 

@@ -13,7 +13,7 @@ $(function() {
         required: true,
         type: 'select',
         pageCode: '802500',
-        keyCode1: '801907',
+        keyCode1: '805906',
         dict: [
             ['currency', 'currency'],
             ['type', 'account_type']
@@ -21,7 +21,8 @@ $(function() {
         params: {
             currency: 'CNY',
             // currencyList: ['CNY', "XJK"],
-            userId: userId
+            userId: userId,
+            type: 'B'
         },
         keyName: 'accountNumber',
         valueName: '{{realName.DATA}} - {{currencyName.DATA}} - {{typeName.DATA}}',

@@ -32,10 +32,6 @@ $(function() {
         bizTypeDict = Dict.getNameForList('biz_type');
     };
     var columns = [{
-        field: '',
-        title: '',
-        checkbox: true
-    }, {
         field: 'realName',
         title: '户名',
     }, {
@@ -56,7 +52,7 @@ $(function() {
         title: '业务类型',
         type: 'select',
         search: true,
-        data: bizTypeDict
+        formatter: Dict.getNameForList("biz_type")
     }, {
         field: 'transAmount',
         title: '变动金额',
