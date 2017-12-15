@@ -1,5 +1,51 @@
 <link rel="import" href="../head.html?__inline">
+<script src="../../js/lib/hygzqd.js"></script>
 <script src="../../js/app/zxCenter/reportBase-addedit.js"></script>
+<script src="http://cdnjs.tongdun.cn/preloan/tdreport.1.4.min.js"></script>
+<style>
+    .opean {
+        font-size: 0;
+        line-height: 0;
+        border-width: 10px;
+        border-color: #d6d6d6;
+        border-bottom-width: 0;
+        border-style: dashed;
+        border-top-style: solid;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        position: relative;
+        top: 0px;
+    }
+
+    .close {
+        font-size: 0;
+        line-height: 0;
+        border-width: 10px;
+        border-color: #333;
+        border-top-width: 0;
+        border-style: dashed;
+        border-bottom-style: solid;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        display: inline-block;
+        float: left;
+        margin-top: 10px;
+    }
+    .pageTitle {
+        cursor: pointer;
+    }
+    .pannel .bootstrap-table {
+        width: 80%;
+    }
+    .tc {
+        text-align: center;
+    }
+    .personal {
+        max-width:100px;
+        height:100px;
+        cursor: pointer;
+    }
+</style>
 <div class="place">
     <span>位置：</span>
     <ul>
@@ -7,9 +53,276 @@
 </div>
 <form id="jsForm">
     <div class="form-body">
-        <div class="form-title"><span id="page-title"></span></div>
         <ul class="form-info" id="form-info">
-
+            <div>
+                <div class="form-title">
+                    <span class="pageTitle">手机认证</span><i class="opean" style="margin-left: 70px;"></i>
+                    <div class="tools" style="float: right;margin-left: 20px;">
+                        <ul class="toolbar">
+                            <li style="display:block;line-height: 33px;display: table;white-space: normal;position: absolute;top: -1px;right: -6px;width: 76px;" id="backBtn"><span style="width: 75px;position: absolute;right: 0;margin: 0;margin-bottom: -4px;"><img src="/static/images/t01.png">&nbsp;&nbsp;返回&nbsp;&nbsp;</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pannel">
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container" style="padding-bottom: 0px;">
+                            <div class="fixed-table-body">
+                                <table width="100%" class="table table-hover table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="4">
+                                            <div class="th-inner">手机认证</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="sjTableList">
+                                        <tr><td colspan="4"><div class="tc">正在努力地加载数据中，请稍候……</div></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="form-title">
+                    <span class="pageTitle">芝麻认证</span><i class="opean" style="margin-left: 70px;"></i>
+                </div>
+                <div class="pannel">
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container" style="padding-bottom: 0px;">
+                            <div class="fixed-table-body">
+                                <table width="100%" class="table table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="4">
+                                                <div class="th-inner">芝麻认证</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="zmrzTableList">
+                                        <tr><td colspan="4"><div class="tc">正在努力地加载数据中，请稍候……</div></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="form-title">
+                    <span class="pageTitle">基本信息认证</span><i class="opean" style="margin-left: 100px;"></i>
+                </div>
+                <div class="pannel">
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container" style="padding-bottom: 0px;">
+                            <div class="fixed-table-body">
+                                <table width="100%" class="table table-hover table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="4">
+                                            <div class="th-inner">基本信息</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="jbxxTableList">
+                                    <tr><td colspan="4"><div class="tc">正在努力地加载数据中，请稍候……</div></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container" style="padding-bottom: 0px;">
+                            <div class="fixed-table-body">
+                                <table width="100%" class="table table-hover table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="4">
+                                            <div class="th-inner">职业信息</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="zyxxTableList">
+                                    <tr><td colspan="4"><div class="tc">正在努力地加载数据中，请稍候……</div></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container" style="padding-bottom: 0px;">
+                            <div class="fixed-table-body">
+                                <table width="100%" class="table table-hover table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="4">
+                                            <div class="th-inner">紧急联系人</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="jjlxrTableList">
+                                    <tr><td colspan="4"><div class="tc">正在努力地加载数据中，请稍候……</div></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="form-title">
+                    <span class="pageTitle">身份证照片认证</span><i class="opean" style="margin-left: 110px;"></i>
+                </div>
+                <div class="pannel">
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container" style="padding-bottom: 0px;">
+                            <div class="fixed-table-body">
+                                <table width="100%" class="table table-hover table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="4">
+                                            <div class="th-inner">身份证照片</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="sfzTableList">
+                                    <tr><td colspan="4"><div class="tc">正在努力地加载数据中，请稍候……</div></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="form-title">
+                    <span class="pageTitle">定位认证</span><i class="opean" style="margin-left: 70px;"></i>
+                </div>
+                <div class="pannel">
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container" style="padding-bottom: 0px;">
+                            <div class="fixed-table-body">
+                                <table width="100%" class="table table-hover table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="4">
+                                            <div class="th-inner">定位信息</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="dwTableList">
+                                    <tr><td colspan="4"><div class="tc">正在努力地加载数据中，请稍候……</div></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="form-title">
+                    <span class="pageTitle">通讯录认证</span><i class="opean" style="margin-left: 90px;"></i>
+                </div>
+                <div class="pannel">
+                    <table width="100%" id="txlTableList"></table>
+                </div>
+            </div>
+            <div>
+                <div class="form-title">
+                    <span class="pageTitle">运营商认证</span><i class="opean" style="margin-left: 90px;"></i>
+                </div>
+                <div class="pannel">
+                    <table width="100%" id="yysTableList"></table>
+                </div>
+            </div>
+            <div>
+                <div class="form-title">
+                    <span class="pageTitle">芝麻信用认证</span><i class="opean" style="margin-left: 100px;"></i>
+                </div>
+                <div class="pannel">
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container" style="padding-bottom: 0px;">
+                            <div class="fixed-table-body">
+                                <table width="100%" class="table table-hover table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="4">
+                                            <div class="th-inner">芝麻信用</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="zmfTableList">
+                                    <tr><td colspan="4"><div class="tc">正在努力地加载数据中，请稍候……</div></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="form-title">
+                    <span class="pageTitle">行业关注清单认证</span><i class="opean" style="margin-left: 130px;"></i>
+                </div>
+                <div class="pannel">
+                    <table width="100%" id="hygzqdTableList"></table>
+                </div>
+            </div>
+            <div>
+                <div class="form-title">
+                    <span class="pageTitle">欺诈认证</span><i class="opean" style="margin-left: 70px;"></i>
+                </div>
+                <div class="pannel">
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container" style="padding-bottom: 0px;">
+                            <div class="fixed-table-body">
+                                <table width="100%" class="table table-hover table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="1">
+                                            <div class="th-inner">评分</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th colspan="1">
+                                            <div class="th-inner">欺诈关注清单是否命中</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th colspan="2">
+                                            <div class="th-inner">扩展信息</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="qzTableList">
+                                    <tr><td colspan="4"><div class="tc">正在努力地加载数据中，请稍候……</div></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="form-title">
+                    <span class="pageTitle">同盾认证</span><i class="opean" style="margin-left: 70px;"></i>
+                </div>
+                <div class="pannel">
+                    <div class="tools">
+                        <ul class="toolbar">
+                            <li style="display: block;" id="watchTdBtn"><span><img src="/static/images/t01.png"></span>查看贷前审核报告</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </ul>
     </div>
 </form>
