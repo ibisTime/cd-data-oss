@@ -1,4 +1,4 @@
-$(function() {
+ $(function() {
     var view = !!getQueryString('v');
     var userId = getQueryString('userId') || '';
 
