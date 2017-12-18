@@ -23,7 +23,10 @@ $(function() {
         field: 'name'
     },{
         title: '模板价格',
-        field: 'totalPrice'
+        field: 'totalPrice',
+        formatter: function (v,data) {
+            return data.totalPrice/1000;
+        }
     }, {
         title: "修改时间",
         field: "updateDatetime",
@@ -37,6 +40,7 @@ $(function() {
         router: 'zxCenter',
         columns: columns,
         pageCode: '805235',
+        deleteCode: '805231',
         searchParams: {
             kind: "C",
             companyCode:OSS.companyCode,
@@ -57,24 +61,24 @@ $(function() {
 
 
     //删除模板
-    $('#deleteBtn').click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-
-
-            reqApi({
-                code: '805231',
-                json: {
-                    code: selRecords[0].code
-                }
-            }).then(function() {
-                toastr.info("操作成功");
-                $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
-            });
-
-
-    });
+    // $('#deleteBtn').click(function() {
+    //     var selRecords = $('#tableList').bootstrapTable('getSelections');
+    //     if (selRecords.length <= 0) {
+    //         toastr.info("请选择记录");
+    //         return;
+    //     }
+    //
+    //
+    //         reqApi({
+    //             code: '805231',
+    //             json: {
+    //                 code: selRecords[0].code
+    //             }
+    //         }).then(function() {
+    //             toastr.info("操作成功");
+    //             $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+    //         });
+    //
+    //
+    // });
 });

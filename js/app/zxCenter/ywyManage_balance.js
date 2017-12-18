@@ -1,6 +1,7 @@
 $(function() {
     var userId = getQueryString('userId');
     var mobile = getQueryString('mobile');
+    var accountNumber = getQueryString('accountNumber');
     var view = getQueryString('v');
     var userKind = {
         "C": "C端用户",
@@ -50,7 +51,7 @@ $(function() {
             field: 'bizType',
             type: "select",
             key: "currency",
-            formatter: Dict.getNameForList("currency")
+            formatter: Dict.getNameForList("biz_type")
         },{
             title: '变动金额',
             field: 'transAmount',
@@ -73,9 +74,9 @@ $(function() {
             title: '备注',
             field: 'remark'
         }],
-        pageCode: '802530',
+        pageCode: '802524',
         o2mvalue: {
-            accountNumber: '',
+            accountNumber: accountNumber,
             userId:userId,
             companyCode:OSS.companyCode
         }

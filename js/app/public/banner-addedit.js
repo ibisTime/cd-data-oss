@@ -48,10 +48,10 @@ $(function() {
         field: 'location',
         type: "select",
         key: "banner_location",
-        // data: {
-        //     "index_banner": "首页"
-        // },
-        //value: "index_banner",
+        data: {
+            "index_banner": "首页"
+        },
+        value: "index_banner",
         required: true,
         readonly: view
     }, {
@@ -85,9 +85,9 @@ $(function() {
         fields: fields,
         code: code,
         view: view,
-        addCode: "806040",
+        addCode: "805800",
         editCode: "805802",
-        detailCode: '806053'
+        detailCode: '805807'
     });
 
 });

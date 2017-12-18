@@ -43,10 +43,12 @@ $(function() {
     },{
         field: 'count',
         title: '报告数量'
-    }, {
-        field: 'systemCode',
-        title: '平台代码'
-    }, {
+    },
+    //     {
+    //     field: 'systemCode',
+    //     title: '平台代码'
+    // },
+        {
         field: 'createDatetime',
         title: '填写时间',
         formatter: dateTimeFormat

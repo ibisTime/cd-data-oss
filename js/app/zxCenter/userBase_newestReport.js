@@ -84,15 +84,13 @@ $(function() {
         field: 'remark'
     }
     ];
-    buildList({
-        router: 'zxCenter',
-        columns: columns,
-        pageCode: '805333',
-        searchParams: {
-            kind: "C",
-            companyCode:OSS.companyCode,
+    buildDetail({
+        fields: columns,
+        detailCode: 805333,
+        code:{
             loanUser:userId
         }
+
     });
 
 });

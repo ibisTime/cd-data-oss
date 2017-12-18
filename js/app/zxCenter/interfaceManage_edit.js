@@ -7,7 +7,8 @@ $(function() {
         field: 'description',
         title: '详情描述',
         search: true,
-        type: 'textarea'
+        type: 'textarea',
+        isNotFace: false
     }, {
         field: 'name',
         title: '名称',

@@ -1,11 +1,10 @@
 $(function() {
     var code = getQueryString('code');
     var view = getQueryString('v');
-
     var fields = [{
         title: '流水编号',
         field: 'code1',
-        '[value]': 'code',
+        '_keys': ['code'],
         readonly: view
     }, {
         title: '户名',

@@ -1,6 +1,7 @@
 $(function () {
   var code = getQueryString('code');
-  var userInfoDict = {
+  var userId = getQueryString('userId');
+    var userInfoDict = {
     'education': {},
     'marriage': {},
     'live_time': {},
@@ -122,7 +123,7 @@ $(function () {
         '</li>' +
         '<li class="clearfix">' +
           '<label>单位地址:</label>' +
-          '<span>'+ data.provinceCity + ' ' + data.address +'</span>' +
+          '<span>'+ data.companyProvinceCity + ' ' + data.companyAddress +'</span>' +
         '</li>';
     $('#zyxxTableList').html(html);
   }
@@ -261,7 +262,6 @@ $(function () {
       addCxjlInfo(data);
       addJ3ythtjInfo(data);
       addQblxrmxInfo(data);
-      console.log(data);
     }
   }
   // 添加运营商用户信息数据
@@ -769,7 +769,7 @@ $(function () {
       pageSize: 10,
       pageList: [10, 20, 30, 40, 50]
     });
-  }jmdy15tInfoList
+  }
   // 添加运营商连续无通话静默大于15天纪录数据
   function addJmdy15tInfo (data) {
     var tableData = data.active_silence_stats.continue_silence_day_over15_0call_6month_detail;
@@ -1005,19 +1005,36 @@ $(function () {
   }
   // 获取报告详情和数据字典
   function getReportDict () {
-    return $.when(
-      reqApi({
-        code: 805332,
-        json: {reportCode: code}
-      }),
-      reqApi({
-        code: 805906,
-        json: {}
-      })
-    ).then(function (report, dictList) {
-      analyzeDictInfo(dictList);
-      return report;
-    });
+    if(code){
+        return $.when(
+            reqApi({
+                code: 805332,
+                json: {reportCode: code}
+            }),
+            reqApi({
+                code: 805906,
+                json: {}
+            })
+        ).then(function (report, dictList) {
+            analyzeDictInfo(dictList);
+            return report;
+        });
+    }else{
+        return $.when(
+            reqApi({
+                code: 805333,
+                json: {loanUser: userId}
+            }),
+            reqApi({
+                code: 805906,
+                json: {}
+            })
+        ).then(function (report, dictList) {
+            analyzeDictInfo(dictList);
+            return report;
+        });
+    }
+
   }
   // 解析数据字典
   function analyzeDictInfo (dictList) {

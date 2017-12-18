@@ -71,7 +71,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = "./ywyManage_balance.html?v=1&userId=" + selRecords[0].userId+'&mobile='+selRecords[0].mobile;
+        window.location.href = "./ywyManage_balance.html?v=1&userId=" + selRecords[0].userId+'&mobile='+selRecords[0].mobile+'&accountNumber='+selRecords[0].accountNumber;
     });
     $('#activeBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
@@ -95,5 +95,13 @@ $(function() {
 
         },function(){});
 
+    });
+    $('#detailBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "./ywyManage_addedit.html?v=1&userId=" + selRecords[0].userId;
     });
 });

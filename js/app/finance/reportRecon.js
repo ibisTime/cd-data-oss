@@ -31,7 +31,11 @@ $(function() {
     } else {
         bizTypeDict = Dict.getNameForList('biz_type');
     };
-    var columns = [ {
+    var columns = [{
+        field: '',
+        title: '',
+        checkbox: true
+    }, {
         field: 'realName',
         title: '户名',
     }, {
@@ -52,6 +56,7 @@ $(function() {
         title: '业务类型',
         type: 'select',
         search: true,
+        key: 'biz_type',
         formatter: Dict.getNameForList("biz_type")
     }, {
         field: 'transAmount',
@@ -96,6 +101,6 @@ $(function() {
     // $('#backBtn').on('click', function() {
     //     goBack();
     // });
-    $('#detailBtn').css('display','none');
+    // $('#detailBtn').css('display','none');
 
 });

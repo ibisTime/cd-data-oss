@@ -25,10 +25,7 @@ $(function() {
     }, {
         field: 'bizType',
         title: '业务类型',
-        type: 'select',
-        key: 'biz_type',
-        formatter: Dict.getNameForList('biz_type'),
-        search: true
+        formatter: Dict.getNameForList('biz_type')
     }, {
         field: 'payCardInfo',
         title: '开户行',
@@ -84,7 +81,8 @@ $(function() {
         singleSelect: false,
         searchParams: {
             channelType: '90',
-            companyCode: OSS.companyCode
+            companyCode: OSS.companyCode,
+            type: 'B'
         },
         beforeDetail: function(data) {
             location.href = "offlineRecharge_check.html?code=" + data.code + "&detail=1";

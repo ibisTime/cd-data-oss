@@ -32,6 +32,10 @@ $(function() {
         bizTypeDict = Dict.getNameForList('biz_type');
     };
     var columns = [{
+        field: '',
+        title: '',
+        checkbox: true
+    }, {
         field: 'realName',
         title: '户名',
     }, {
@@ -52,6 +56,7 @@ $(function() {
         title: '业务类型',
         type: 'select',
         search: true,
+        key: 'biz_type',
         formatter: Dict.getNameForList("biz_type")
     }, {
         field: 'transAmount',
@@ -91,7 +96,18 @@ $(function() {
         }
     });
 
-    $('.tools .toolbar').html('<li style="display:block;" id="backBtn"><span><img src="/static/images/t01.png"></span>返回</li>');
+    $('.tools .toolbar').html('<li style="display:block;" id="detailBtn"><span><img src="/static/images/t01.png"></span>详情</li><li style="display:block;" id="exportBtn"><span><img src="/static/images/t01.png"></span>导出</li><li style="display:block;" id="backBtn"><span><img src="/static/images/t01.png"></span>返回</li>');
+    $('#detailBtn').on('click', function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "ledger_addedit.html?&v=1&Code=" + selRecords[0].code;
+    });
+    $('#exportBtn').click(function() {
+        $('.export .btn').click();
+    });
     $('#backBtn').on('click', function() {
         goBack();
     });

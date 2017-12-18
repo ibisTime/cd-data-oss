@@ -13,7 +13,11 @@ $(function() {
         field: 'location',
         type: "select",
         key: "banner_location",
-        formatter: Dict.getNameForList('banner_location'),
+        formatter: function (v, data) {
+            if(data.location === 'index_banner') {
+                return '首页'
+            }
+        },
         search: true
     }, {
         title: '顺序',
@@ -26,7 +30,7 @@ $(function() {
         router: 'banner',
         columns: columns,
         pageCode: '805805',
-        deleteCode: '806041',
+        deleteCode: '805801',
         searchParams: {
             companyCode: OSS.companyCode,
             type: 2,
