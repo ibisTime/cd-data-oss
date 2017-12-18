@@ -119,7 +119,10 @@ $(function() {
     $('#newestReportBtn').css('display','none');
     $('#reportListBtn').css('display','none');
 
-    $('.tools .toolbar').html('<li style="display:block;" id="detailBtn"><span><img src="/static/images/t01.png"></span>详情</li>');
+    $('.tools .toolbar').html('<li style="display:block;" id="detailBtn"><span><img src="/static/images/t01.png"></span>详情</li><li style="display:block;" id="backBtn"><span><img src="/static/images/t01.png"></span>返回</li>');
+    $('#backBtn').on('click', function() {
+        goBack();
+    });
     $('#detailBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {

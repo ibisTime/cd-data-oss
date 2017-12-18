@@ -487,4 +487,7 @@ $(function () {
       dw.close().remove();
     });
   }
+    $('#backBtn').on('click', function() {
+        goBack();
+    });
 });

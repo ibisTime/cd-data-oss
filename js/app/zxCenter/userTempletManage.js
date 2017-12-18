@@ -54,7 +54,6 @@ $(function() {
         window.location.href = "./userTempletManage_edit.html?Code=" + selRecords[0].code+"&portList="+selRecords[0].portList;
     });
 
-    //新增模板
 
 
     //删除模板
