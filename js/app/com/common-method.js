@@ -1606,12 +1606,14 @@ function buildDetail(options) {
         var item = fields[i];
         var value = item.value;
         var displayValue = data[item.field];
-        if (item._keys) {
+        if ($.isArray(item._keys)) {
           var _value = data, emptyObj = {};
           item._keys.forEach(function(key) {
             _value = _value[key] == undefined ? emptyObj : _value[key];
           });
           displayValue = _value === emptyObj ? "" : _value;
+        } else if ($.isFunction(item._keys)) {
+          displayValue = item._keys(data);
         }
 
         if (item.readonly) {

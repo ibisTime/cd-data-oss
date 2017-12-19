@@ -7,6 +7,7 @@ $(function() {
         normalArea:true,
         required: true
     };
+    var wxConfig;
     reqApi({
         code: '805916',
         json: {
@@ -14,10 +15,25 @@ $(function() {
         },
         sync: true
     }).then(function(data) {
-        if (data.type == "text") {
-            noteConfig.normalArea = true;
-        } else if (data.type == "richText") {
+        if (data.type == "richText") {
             noteConfig.normalArea = false;
+        }
+        if (data.ckey === 'weixinID') {
+            noteConfig.type = 'text';
+            noteConfig.title = '微信号';
+            noteConfig.formatter = function (v) {
+                return JSON.parse(v).id;
+            };
+            wxConfig = {
+                title: '微信号二维码',
+                field: 'wximg',
+                type: 'img',
+                required: true,
+                single: true,
+                _keys: function (data) {
+                    return JSON.parse(data.cvalue).pic;
+                }
+            }
         }
     })    
     var fields = [{
@@ -26,7 +42,9 @@ $(function() {
         required: true,
         maxlength: 20,
         readonly: true
-    },noteConfig  ];
+    }, noteConfig];
+
+    wxConfig && fields.push(wxConfig);
 
     buildDetail({
         fields: fields,
@@ -36,7 +54,12 @@ $(function() {
         editCode: '805911',
         beforeSubmit:function(data){
             data.remark = $('#remark').text();
-            return data
+            var cvalue = {
+                id: data.cvalue,
+                pic: data.wximg
+            };
+            data.cvalue = JSON.stringify(cvalue);
+            return data;
         }
     });
 });

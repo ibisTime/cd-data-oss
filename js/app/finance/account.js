@@ -5,7 +5,7 @@ $(function() {
     reqApi({
         code: '802503',
         json: {
-            userId: getUserId()
+            userId: OSS.SYS_USER
         }
     }).done(function(data) {
         $("#amount-CNY").text("￥" + moneyFormat(data[0].amount));

@@ -1,16 +1,4 @@
 $(function() {
-    var userKind = {
-        "C": "C端用户",
-        // "P": "平台用户"
-    };
-    var userRefereeType = {
-        "operator": "市/区运营商",
-        "o2o": "o2o商家",
-        "supplier":"供应商",
-        "mingsu":"民宿主",
-        "f1":"VIP会员"
-    };
-
     var columns = [{
         field: '',
         title: '',
@@ -68,7 +56,7 @@ $(function() {
         pageCode: '805120',
         searchParams: {
             kind: "C",
-            companyCode:OSS.companyCode
+            companyCode: OSS.companyCode
         }
 
     });
@@ -94,7 +82,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = "userBase_reportList.html?UserId=" + selRecords[0].userId;
+        window.location.href = "userBase_reportList.html?userId=" + selRecords[0].userId;
     });
     $('#activeBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
@@ -102,8 +90,6 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-
-
         confirm("确定注销/激活该用户？").then(function() {
             reqApi({
                 code: '805091',
@@ -116,7 +102,7 @@ $(function() {
                 $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
             });
 
-        },function(){});
+        }, function(){});
 
     });
 

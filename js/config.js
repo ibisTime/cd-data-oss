@@ -10,7 +10,7 @@ OSS.picBaseUrl = 'http://ormcdjjs0.bkt.clouddn.com';
 // picShow
 OSS.picShow = '?imageMogr2/auto-orient/thumbnail/!100x100r';
 //系统userid
-OSS.SYS_USER = 'SYS_USER_DATA';
+OSS.SYS_USER = 'SYS_USER_ZXZX';
 
 //用户登录有效时间
 OSS.userValidTime = 30;
