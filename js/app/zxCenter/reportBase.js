@@ -1,15 +1,5 @@
 $(function() {
-    var userKind = {
-        "C": "C端用户",
-        // "P": "平台用户"
-    };
-    var userRefereeType = {
-        "operator": "市/区运营商",
-        "o2o": "o2o商家",
-        "supplier":"供应商",
-        "mingsu":"民宿主",
-        "f1":"VIP会员",
-    };
+    var isPlatform = sessionStorage.getItem('loginKind') === 'P';
 
     var columns = [{
         field: '',
@@ -40,7 +30,15 @@ $(function() {
     },{
         field: 'salesUserMobile',
         title: '所属业务员',
-        search: true
+        search: isPlatform,
+        type: isPlatform ? 'select' : '',
+        pageCode: '805120',
+        keyName: 'userId',
+        valueName: 'mobile',
+        params: {
+            updater: '',
+            kind: 'C'
+        }
     }, {
         title: "类型",
         field: "type",
@@ -103,15 +101,15 @@ $(function() {
         title: "填写时间",
         field: "createDatetime",
         formatter: dateTimeFormat
-    }
-    ];
+    }];
     buildList({
         router: 'reportBase',
         columns: columns,
         pageCode: '805330',
         searchParams: {
             kind: "C",
-            companyCode:OSS.companyCode
+            companyCode:OSS.companyCode,
+            salesUser: !isPlatform ? sessionStorage.getItem('userId') : ''
         }
     });
 });
