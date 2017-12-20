@@ -1,27 +1,15 @@
 $(function() {
-    var userKind = {
-        "C": "C端用户",
-        // "P": "平台用户"
-    };
-    var userRefereeType = {
-        "operator": "市/区运营商",
-        "o2o": "o2o商家",
-        "supplier":"供应商",
-        "mingsu":"民宿主",
-        "f1":"VIP会员",
-    };
-
     var columns = [{
         field: '',
         title: '',
         checkbox: true
     }, {
-        title: '模板编号',
-        field: 'code'
-    },{
+        title: '所属业务员',
+        field: 'salesUserMobile'
+    }, {
         title: '模板名称',
         field: 'name'
-    },{
+    }, {
         title: '模板价格',
         field: 'totalPrice',
         formatter: function (v,data) {

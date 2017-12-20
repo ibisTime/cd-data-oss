@@ -7,20 +7,20 @@ $(function() {
         checkbox: true
     },{
         title: '姓名',
-        field: 'realName',
+        field: 'F2',
         search: true,
         formatter: function (v, data) {
-            if(data['F2']) {
+            if (data['F2']) {
                 return JSON.parse(data['F2']).realName;
             }
         }
 
     }, {
         title: '手机号',
-        field: 'mobile',
+        field: 'F1',
         search: true,
         formatter: function (v, data) {
-            if(data['F1']) {
+            if (data['F1']) {
                 return JSON.parse(data['F1']).mobile;
             }
         }
@@ -29,7 +29,7 @@ $(function() {
             title: '身份证号',
             field: 'realName',
             formatter: function (v, data) {
-                if(data['F2']) {
+                if (data['F2']) {
                     return JSON.parse(data['F2']).idNo;
                 }
             }
@@ -38,7 +38,7 @@ $(function() {
             title: '住址',
             field: 'realName',
             formatter: function (v, data) {
-                if(data['F3']) {
+                if (data['F3']) {
                     return JSON.parse(data['F3']).provinceCity + JSON.parse(data['F3']).address;
                 }
             }
@@ -60,7 +60,16 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = "userBase_newestReport.html?UserId=" + selRecords[0].loanUser;
+        reqApi({
+            code: 805333,
+            json: {loanUser: selRecords[0].loanUser}
+        }).then(function(data){
+            if (data.code) {
+                window.location.href = "reportBase_addedit.html?code=" + data.code;
+            } else {
+                toastr.info("该用户暂无报告");
+            }
+        });
     });
     $('#reportListBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');

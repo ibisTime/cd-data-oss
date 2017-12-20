@@ -1,7 +1,7 @@
 $(function () {
   var code = getQueryString('code');
   var userId = getQueryString('userId');
-    var userInfoDict = {
+  var userInfoDict = {
     'education': {},
     'marriage': {},
     'live_time': {},
@@ -27,6 +27,10 @@ $(function () {
       addHygzqdrz(report['PZM6']);
       addQzrz(report['PZM7']);
       addTdrz(report['PTD8']);
+    }, function (obj, error) {
+      if (error.errorInfo === '报告已过期,不能查看') {
+        setTimeout(goBack, 1000);
+      }
     });
     addListener();
   }
@@ -1005,36 +1009,20 @@ $(function () {
   }
   // 获取报告详情和数据字典
   function getReportDict () {
-    if(code){
-        return $.when(
-            reqApi({
-                code: 805332,
-                json: {reportCode: code}
-            }),
-            reqApi({
-                code: 805906,
-                json: {}
-            })
-        ).then(function (report, dictList) {
-            analyzeDictInfo(dictList);
-            return report;
-        });
-    }else{
-        return $.when(
-            reqApi({
-                code: 805333,
-                json: {loanUser: userId}
-            }),
-            reqApi({
-                code: 805906,
-                json: {}
-            })
-        ).then(function (report, dictList) {
-            analyzeDictInfo(dictList);
-            return report;
-        });
-    }
-
+    var kind = sessionStorage.getItem('loginKind');
+    return $.when(
+      reqApi({
+        code: kind == 'P' ? 805332 : 805331,
+        json: {reportCode: code}
+      }),
+      reqApi({
+        code: 805906,
+        json: {}
+      })
+    ).then(function (report, dictList) {
+      analyzeDictInfo(dictList);
+      return report;
+    });
   }
   // 解析数据字典
   function analyzeDictInfo (dictList) {
@@ -1087,6 +1075,9 @@ $(function () {
       $('.label-span').css({
         display: 'inline-block'
       });
+    });
+    $('#backBtn').on('click', function() {
+      goBack();
     });
   }
   // 解析行业关注清单
@@ -1141,7 +1132,4 @@ $(function () {
       dw.close().remove();
     });
   }
-    $('#backBtn').on('click', function() {
-        goBack();
-    });
 });
