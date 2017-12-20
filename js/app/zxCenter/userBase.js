@@ -9,8 +9,11 @@ $(function() {
         search: true
     }, {
         title: '手机号',
-        field: 'mobile',
-        search: true
+        field: 'mobileForQuery',
+        search: true,
+        formatter: function (v, data) {
+            return data.mobile;
+        }
     },{
         field: 'userReferee',
         title: '推荐人',

@@ -1,4 +1,4 @@
-$(function() {
++$(function() {
     var code = getQueryString('code');
     var view = !!getQueryString('v');
 
@@ -111,7 +111,29 @@ $(function() {
             return true;
         }
     };
-
+    options.buttons = [{
+        title: '确认',
+        handler: function() {
+            if ($('#jsForm').valid()) {
+                var data = {};
+                data['checkAmount'] = $("#checkAmount").val();
+                data['checkUser'] = getUserName();
+                data['code'] = code;
+                data["checkNote"] = $("#checkNote").val();
+                reqApi({
+                    code: "802800",
+                    json: data
+                }).done(function() {
+                    sucDetail();
+                });
+            }
+        }
+    }, {
+        title: '返回',
+        handler: function() {
+            goBack();
+        }
+    }];
     buildDetail(options);
 
     var h = "<p class='huilv' style='padding: 5px 0 0 194px;display: block;color:red;'>0表示平账,负数表示需减钱,正数表示需加钱</p>";

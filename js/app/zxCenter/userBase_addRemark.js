@@ -34,11 +34,13 @@ $(function() {
         field: 'count',
         title: '报告数量',
         readonly: view
-    }, {
-        field: 'systemCode',
-        title: '平台代码',
-        readonly: view
-    }, {
+    },
+    //     {
+    //     field: 'systemCode',
+    //     title: '平台代码',
+    //     readonly: view
+    // },
+        {
         field: 'createDatetime',
         title: '填写时间',
         formatter: dateTimeFormat,

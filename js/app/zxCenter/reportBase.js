@@ -10,8 +10,14 @@ $(function() {
         field: "code"
     }, {
         title: '报告主人',
-        field: 'reportUser',
+        field: 'F2',
         search: true,
+        pageCode: '805120',
+        params: {
+            updater: '',
+            kind: 'C'
+        },
+
         formatter: function(v,data) {
             if(data.F2){
                 return JSON.parse(data.F2).realName;
@@ -20,15 +26,20 @@ $(function() {
 
     },{
         title: '手机号',
-        field: 'mobile',
+        field: 'F1',
         search: true,
+        pageCode: '805120',
+        params: {
+            updater: '',
+            kind: 'C'
+        },
         formatter: function(v,data) {
             if(data.F1){
                 return JSON.parse(data.F1).mobile;
             }
         }
     },{
-        field: 'salesUserMobile',
+        field: 'salesUser',
         title: '所属业务员',
         search: isPlatform,
         type: isPlatform ? 'select' : '',
@@ -37,8 +48,12 @@ $(function() {
         valueName: 'mobile',
         params: {
             updater: '',
-            kind: 'C'
+            kind: 'B'
+        },
+        formatter: function (v,data) {
+            return data.salesUserMobile;
         }
+
     }, {
         title: "类型",
         field: "type",

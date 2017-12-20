@@ -118,12 +118,12 @@ $(function () {
           '<span>'+ data.company +'</span>' +
         '</li>' +
         '<li class="clearfix">' +
-          '<label>单位电话:</label>' +
-          '<span>'+ data.phone +'</span>' +
-        '</li>' +
-        '<li class="clearfix">' +
           '<label>单位地址:</label>' +
           '<span>'+ data.companyProvinceCity + ' ' + data.companyAddress +'</span>' +
+        '</li>'+
+        '<li class="clearfix">' +
+        '<label>单位电话:</label>' +
+        '<span>'+ data.phone +'</span>' +
         '</li>';
     $('#zyxxTableList').html(html);
   }

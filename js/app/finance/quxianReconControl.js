@@ -20,7 +20,7 @@ $(function() {
         title: '渠道',
         // type: 'select',
         key: 'channel_type',
-        formatter: Dict.getNameForList('channel_type'),
+        formatter: Dict.getNameForList('channel_type')
         // search: true
     }, {
         field: 'bizType',
@@ -85,7 +85,7 @@ $(function() {
             "kind":"0",
             "companyCode":OSS.companyCode,
             "systemCode":OSS.companyCode,
-            "bizType": 11,
+            "bizType": -11,
             "channelType": 'out'
         },
         beforeSearch: function(data) {

@@ -25,11 +25,13 @@ $(function() {
         title: '账户余额',
         field: 'amount',
         formatter: moneyFormat
-    }, {
-        title: '冻结金额',
-        field: 'frozenAmount',
-        formatter: moneyFormat
-    }, {
+    },
+    //     {
+    //     title: '冻结金额',
+    //     field: 'frozenAmount',
+    //     formatter: moneyFormat
+    // },
+        {
         title: "注册时间",
         field: "createDatetime",
         formatter: dateTimeFormat

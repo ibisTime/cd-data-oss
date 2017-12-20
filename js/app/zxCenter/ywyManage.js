@@ -17,8 +17,11 @@ $(function() {
         checkbox: true
     }, {
         title: '手机号',
-        field: 'mobile',
-        search: true
+        field: 'mobileForQuery',
+        search: true,
+        formatter: function (v, data) {
+            return data.mobile;
+        }
     }, {
         title: '账户余额',
         field: 'amount',
@@ -96,7 +99,7 @@ $(function() {
         },function(){});
 
     });
-    $('#detailBtn').click(function() {
+    $('#detailBtn').off('click').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
             toastr.info("请选择记录");
@@ -104,4 +107,16 @@ $(function() {
         }
         window.location.href = "./ywyManage_addedit.html?v=1&userId=" + selRecords[0].userId;
     });
+    $('#getClientBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "./ywyManage_getClient.html?v=1&userId=" + selRecords[0].userId;
+    });
+    $('#daizhuceBtn').click(function() {
+        window.location.href = "./ywyManage_daizhuce.html";
+    });
+
 });

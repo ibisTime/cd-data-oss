@@ -54,11 +54,13 @@ $(function() {
         editCode: '805911',
         beforeSubmit:function(data){
             data.remark = $('#remark').text();
-            var cvalue = {
-                id: data.cvalue,
-                pic: data.wximg
-            };
-            data.cvalue = JSON.stringify(cvalue);
+            if(wxConfig) {
+                var cvalue = {
+                    id: data.cvalue,
+                    pic: data.wximg
+                };
+                data.cvalue = JSON.stringify(cvalue);
+            }
             return data;
         }
     });

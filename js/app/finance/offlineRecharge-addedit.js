@@ -16,7 +16,8 @@
         ],
         params: {
             currency: '',
-            userId: userId
+            userId: userId,
+            type: 'B'
         },
         keyName: 'accountNumber',
         valueName: '{{realName.DATA}} - {{currencyName.DATA}} - {{typeName.DATA}}',

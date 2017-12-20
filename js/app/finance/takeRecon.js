@@ -6,8 +6,8 @@ $(function() {
     var columns = [{
         field: '',
         title: '',
-        checkbox:true
-    },{
+        checkbox: true
+    }, {
         field: 'realName',
         title: '户名',
     }, {
@@ -65,13 +65,24 @@ $(function() {
             "type":"P",
             "kind":"0",
             "companyCode":OSS.companyCode,
-            "systemCode":OSS.companyCode
+            "systemCode":OSS.companyCode,
+            "bizType":"ZXZX_DY"
+
         }
     });
 
-    // $('.tools .toolbar').html('<li style="display:block;" id="backBtn"><span><img src="/static/images/t01.png"></span>返回</li>');
-    // $('#backBtn').on('click', function() {
-    //     goBack();
-    // });
-    // $('#detailsBtn').css('display','none');
+
+    $('#examineBtn').on('click', function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        if (selRecords[0].status != '1') {
+            toastr.info('该记录不是待对账状态');
+            return false;
+        }
+        location.href = "autoReconControl_addedit.html?v=1&code=" + selRecords[0].code;
+    });
+
 });
