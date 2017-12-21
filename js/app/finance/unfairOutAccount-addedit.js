@@ -84,19 +84,19 @@ $(function() {
                 field: 'bizType',
                 title: '业务类型',
                 type: 'select',
-                key: 'jour_biz_type',
-                formatter: Dict.getNameForList('jour_biz_type'),
+                key: 'biz_type',
+                formatter: Dict.getNameForList('biz_type'),
                 search: true
             }, {
-                field: 'transAmountString',
+                field: 'transAmount',
                 title: '变动金额',
                 formatter: moneyFormat
             }, {
-                field: 'preAmountString',
+                field: 'preAmount',
                 title: '变动前金额',
                 formatter: moneyFormat
             }, {
-                field: 'postAmountString',
+                field: 'postAmount',
                 title: '变动后金额',
                 formatter: moneyFormat
             }, {

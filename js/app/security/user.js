@@ -22,8 +22,7 @@ $(function() {
         type: 'select',
         listCode: '805021',
         keyName: 'code',
-        valueName: 'name',
-        search: true
+        valueName: 'name'
     }, {
         field: 'remark',
         title: '备注'

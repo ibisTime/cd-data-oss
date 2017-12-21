@@ -6,7 +6,10 @@ function getQueryString(name) {
 	}
 	return '';
 }
-sessionStorage.setItem('loginKind', getQueryString('kind') || 'P');
+if(!sessionStorage.getItem('loginKind')){
+    var kind = document.domain.substr(0, 1)=='w'?'B':'P';
+    sessionStorage.setItem('loginKind', kind);
+}
 $(function(){
 	window.sessionStorage.setItem('systemCode', OSS.system);
     // frameset框架嵌套，跳转到最外层
@@ -24,15 +27,9 @@ $(function(){
 		} else {
 			var data = {};
 			var t = $('#loginForm').serializeArray();
-			var kind = 'kind';
-			var reg = new RegExp('(^|&)' + kind + '=([^&]*)(&|$)', 'i');
-		    var r = window.location.search.substr(1).match(reg);
-		    if (r != null) {
-				data.kind = decodeURIComponent(r[2]);
-			}else{
-				data.kind = 'P';
-			}
-			
+			var kind = sessionStorage.getItem('loginKind');
+				data.kind = kind;
+
 			$.each(t, function() {
 				data[this.name] = this.value;
 			});

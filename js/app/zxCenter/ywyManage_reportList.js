@@ -1,16 +1,5 @@
 $(function() {
     var userId = getQueryString('userId');
-    var userKind = {
-        "C": "C端用户",
-        // "P": "平台用户"
-    };
-    var userRefereeType = {
-        "operator": "市/区运营商",
-        "o2o": "o2o商家",
-        "supplier":"供应商",
-        "mingsu":"民宿主",
-        "f1":"VIP会员"
-    };
 
     var columns = [{
         title: "",
@@ -104,13 +93,12 @@ $(function() {
     }
     ];
     buildList({
-        router: 'members',
         columns: columns,
         pageCode: '805330',
         searchParams: {
             kind: "C",
-            companyCode:OSS.companyCode,
-            salesUserId:userId
+            companyCode: OSS.companyCode,
+            salesUser: userId
         }
     });
     $('#balanceBtn').css('display','none');

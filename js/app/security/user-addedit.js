@@ -29,7 +29,14 @@ $(function() {
 		fields: fields,
 		code: code,
 		detailCode: '805121',
-		addCode: '805042'
+		addCode: '805042',
+		beforeSubmit: function (data) {
+			if (data.roleCode == 'salesman') {
+				data.kind = 'B';
+				data.mobile = data.loginName;
+			}
+			return data;
+        }
 	});
 	
 });

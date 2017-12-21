@@ -1,6 +1,9 @@
 $('title', window.parent.document).html(OSS.systemName);
 $(function(){
 	if (!sessionStorage.getItem('token')) {
+		//判断域名是 hhr开头 合伙人域名 kind为11
+        var kind = document.domain.substr(0, 1)=='w'?'B':'P';
+        sessionStorage.setItem('loginKind', kind);
 		location.href = 'signin.html';
 		return;
 	}
@@ -72,7 +75,7 @@ $(function(){
 				window.sessionStorage.setItem('userId', '');
 				window.sessionStorage.setItem('userName', '');
 				window.sessionStorage.setItem('roleCode', '');
-				location.href = 'signin.html?kind=' + (sessionStorage.getItem('loginKind') || '01')
+				location.href = 'signin.html'
 			}
 		});
 	});

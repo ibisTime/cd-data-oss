@@ -105,7 +105,6 @@ $(function() {
     ];
 
     buildList({
-        router: 'members',
         columns: columns,
         pageCode: '805330',
         searchParams: {

@@ -3,12 +3,7 @@ $(function() {
         title: '手机号',
         field: 'mobile',
         required: true
-    }, {
-        title: "登录名",
-        field: "loginName",
-        required: true
-    }
-    ];
+    }];
 
     buildDetail({
         fields: columns,
@@ -16,6 +11,7 @@ $(function() {
         beforeSubmit:function (data) {
             data.updater = getUserId();
             data.kind = 'B';
+            data.loginName = data.mobile;
             return data;
         }
     });

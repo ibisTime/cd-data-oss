@@ -69,7 +69,16 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = "userBase_newestReport.html?UserId=" + selRecords[0].userId;
+        reqApi({
+            code: 805333,
+            json: {loanUser: selRecords[0].userId}
+        }).then(function(data){
+            if (data.code) {
+                window.location.href = "reportBase_addedit.html?code=" + data.code;
+            } else {
+                toastr.info("该用户暂无报告");
+            }
+        });
     });
     $('#addRemarkBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');

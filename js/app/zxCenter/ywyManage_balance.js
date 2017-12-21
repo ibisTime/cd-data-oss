@@ -3,17 +3,6 @@ $(function() {
     var mobile = getQueryString('mobile');
     var accountNumber = getQueryString('accountNumber');
     var view = getQueryString('v');
-    var userKind = {
-        "C": "C端用户",
-        // "P": "平台用户"
-    };
-    var userRefereeType = {
-        "operator": "市/区运营商",
-        "o2o": "o2o商家",
-        "supplier":"供应商",
-        "mingsu":"民宿主",
-        "f1":"VIP会员",
-    };
 
     var columns = [{
         title: '手机号',

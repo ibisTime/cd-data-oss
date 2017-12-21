@@ -4,9 +4,10 @@ $(function() {
     var view = getQueryString('v');
 
     var fields = [ {
-        field: 'code',
         title: '编号',
-        readonly:view
+        readonly:view,
+        field: 'code1',
+        '_keys': ['code']
     }, {
         field: 'accountName',
         title: '户名',
@@ -16,7 +17,7 @@ $(function() {
         title: '币种',
         type: 'select',
         key: 'coin',
-        formatter: Dict.getNameForList("coin"),
+        formatter: Dict.getNameForList("currency"),
         readonly:view
     }, {
         field: 'direction',
@@ -65,7 +66,7 @@ $(function() {
         title: '状态',
         type: 'select',
         key: 'hl_status',
-        formatter: Dict.getNameForList('hl_status'),
+        formatter: Dict.getNameForList('status'),
         readonly:view
     }, {
         field: 'jourCode',
@@ -81,7 +82,7 @@ $(function() {
     var options = {
         fields: fields,
         code:code,
-        detailCode: '802805'
+        detailCode: '802806'
     };
 
     options.buttons = [{
