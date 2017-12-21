@@ -14,7 +14,6 @@ $(function() {
                 return JSON.parse(data['F2']).realName;
             }
         }
-
     }, {
         title: '手机号',
         field: 'mobile',
@@ -24,8 +23,7 @@ $(function() {
                 return JSON.parse(data['F1']).mobile;
             }
         }
-    },
-        {
+    }, {
             title: '身份证号',
             field: 'realName',
             formatter: function (v, data) {
