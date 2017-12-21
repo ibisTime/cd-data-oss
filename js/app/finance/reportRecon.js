@@ -10,14 +10,16 @@ $(function() {
     }, {
         field: 'realName',
         title: '户名',
-    }, {
-        field: 'channelType',
-        title: '渠道',
-        type: 'select',
-        key: 'channel_type',
-        search: true,
-        formatter: Dict.getNameForList('channel_type'),
-    }, {
+    },
+    //     {
+    //     field: 'channelType',
+    //     title: '渠道',
+    //     type: 'select',
+    //     key: 'channel_type',
+    //     search: true,
+    //     formatter: Dict.getNameForList('channel_type'),
+    // },
+        {
         title: "币种",
         field: "currency",
         type: "select",
@@ -47,6 +49,14 @@ $(function() {
         field: "createDatetime",
         formatter: dateTimeFormat
     }, {
+            field1: 'dateStart',
+            title1: '创建时间',
+            type: 'date',
+            field2: 'dateEnd',
+            twoDate: true,
+            search: true,
+            visible: false
+        },{
         field: 'status',
         title: '状态',
         type: 'select',
