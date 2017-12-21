@@ -14,7 +14,7 @@ $(function() {
         title: '账户余额',
         field: 'amount',
         formatter: function (v,data) {
-            return data.amount/1000
+            return moneyFormat(data.amount);
         }
     }, {
         title: "注册时间",

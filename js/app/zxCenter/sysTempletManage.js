@@ -65,7 +65,7 @@ $(function() {
         title: '模板价格',
         field: 'totalPrice',
         formatter:function (v,data) {
-            return data.totalPrice/1000;
+            return moneyFormat(data.totalPrice);
         }
     }, {
         title: "修改时间",
