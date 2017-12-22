@@ -15,8 +15,8 @@ $(function() {
         field: 'currency',
         title: '币种',
         type: 'select',
-        key: 'coin',
-        formatter: Dict.getNameForList("coin"),
+        key: 'currency',
+        formatter: Dict.getNameForList("currency"),
     }, {
         field: 'direction',
         title: '方向',
@@ -60,9 +60,9 @@ $(function() {
         field: 'status',
         title: '状态',
         type: 'select',
-        key: 'hl_status',
-        formatter: Dict.getNameForList('hl_status'),
-        search: true
+        key: 'jour_status',
+        search: true,
+        formatter: Dict.getNameForList('jour_status'),
     }, {
         field: 'jourCode',
         title: '流水编号'

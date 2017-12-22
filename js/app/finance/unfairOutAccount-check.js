@@ -64,9 +64,8 @@ $(function() {
     }, {
         field: 'status',
         title: '状态',
-        type: 'select',
-        key: 'hl_status',
-        formatter: Dict.getNameForList('status'),
+        key: 'jour_status',
+        formatter: Dict.getNameForList('jour_status'),
         readonly:view
     }, {
         field: 'jourCode',

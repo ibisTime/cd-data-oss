@@ -38,10 +38,9 @@ $(function() {
         }, {
             field: 'status',
             title: '状态',
-            type: 'select',
-            key: 'hl_status',
-            formatter: Dict.getNameForList('hl_status'),
-            readonly: true
+            key: 'jour_status',
+            formatter: Dict.getNameForList('jour_status'),
+            readonly:view
         }, {
             field: 'applyUser',
             title: '申请人',

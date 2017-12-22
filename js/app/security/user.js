@@ -69,35 +69,36 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        var status = selRecords[0].status,
-            toStatus;
-        status == 0 ? toStatus = 2 : toStatus = 0;
-        reqApi({
-            code: '805091',
-            json: {
-                userId: selRecords[0].userId,
-                toStatus: toStatus
-            }
-        }).then(function() {
-            sucList();
-        });
+        confirm("确定注销/激活该用户？").then(function() {
+            reqApi({
+                code: '805091',
+                json: {
+                    userId: selRecords[0].userId,
+                    updater: getUserName()
+                }
+            }).then(function() {
+                toastr.info("操作成功");
+                $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+            });
+
+        },function(){});
     });
 
-    $('#activeBtn').click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        reqApi({
-            code: '805091',
-            json: {
-                userId: selRecords[0].userId,
-                toStatus: '0'
-            }
-        }).then(function() {
-            sucList();
-        });
-    });
+    // $('#activeBtn').click(function() {
+    //     var selRecords = $('#tableList').bootstrapTable('getSelections');
+    //     if (selRecords.length <= 0) {
+    //         toastr.info("请选择记录");
+    //         return;
+    //     }
+    //     reqApi({
+    //         code: '805091',
+    //         json: {
+    //             userId: selRecords[0].userId,
+    //             toStatus: '0'
+    //         }
+    //     }).then(function() {
+    //         sucList();
+    //     });
+    // });
 
 });
