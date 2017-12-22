@@ -5,10 +5,6 @@ $(function () {
         title: '',
         checkbox: true
     }, {
-        field: 'code',
-        title: '借款编号',
-        search: true
-    }, {
         field: 'applyUser',
         title: '申请人',
         type: 'select',
@@ -19,39 +15,71 @@ $(function () {
         } ,      
         search: true
     }, {
+        field: 'mobile',
+        title: '手机号',
+        formatter: function(v, data){
+            return data.user.mobile;
+        }
+    }, {
+        field: 'overdueCode',
+        title: '代码',
+        formatter: function (v, data) {
+            return data.user.overdueCode
+        }
+    }, {
+        field: 'approver',
+        title: '审核人'
+    }, {
+        field: 'mobile',
+        title: '放款时间',
+        formatter: function(v, data){
+            return data.user.mobile;
+        }
+    }, {
+        field: 'applyDatetime',
+        title: '还款时间',
+        formatter: dateTimeFormat,
+    },{
         field: 'amount',
         title: '借款金额',
         amount: true,
     }, {
-        field: 'duration',
-        title: '借款时长(天)',
+        field: 'code',
+        title: '借款编号',
+        search: true
     }, {
-        field: 'lxAmount',
-        title: '正常利息',
-        amount: true,
+        field: 'mobile',
+        title: '打款金额（元）',
+        formatter: function(v, data){
+            return data.user.mobile;
+        }
     }, {
-        field: 'fwAmount',
-        title: '服务费',
-        amount: true,
+        field: 'loanType',
+        title: '放款方式',
+        formatter: function(v,data){
+            return  Dict.getNameForList1('loan_type','623907',data.borrow.loanType)
+        }
     }, {
-        field: 'glAmount',
-        title: '账户管理费',
-        amount: true,
+        field: 'mobile',
+        title: '续期费用（元）',
+        formatter: function(v, data){
+            return data.user.mobile;
+        }
     }, {
-        field: 'xsAmount',
-        title: '快速信审费',
-        amount: true,
-    }, {
-        field: 'yhAmount',
-        title: '优惠金额',
-        amount: true,
+        field: 'mobile',
+        title: '还款金额（元）',
+        formatter: function(v, data){
+            return data.user.mobile;
+        }
+    },  {
+        field: 'type',
+        title: '还款方式',
+        key: "repay_apply_type",
+        keyCode:"623907",
+        formatter: Dict.getNameForList("repay_apply_type","623907"),
     }, {
         field: 'renewalCount',
-        title: '订单续期(次)',
-    }, {
-        field: 'signDatetime',
-        title: '签约时间',
-        formatter: dateTimeFormat
+        title: '续期次数',
     }, {
         field: 'status',
         title: '状态',

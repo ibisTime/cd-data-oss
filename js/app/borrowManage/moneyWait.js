@@ -19,6 +19,18 @@ $(function () {
              return data.user.mobile
         } ,     
         search: true
+    },{
+        field: 'mobile',
+        title: '手机号',
+        formatter: function(v, data){
+            return data.user.mobile;
+        }
+    },{
+        field: 'overdueCode',
+        title: '代码',
+        formatter: function (v, data) {
+            return data.user.overdueCode
+        }
     }, {
         field: 'amount',
         title: '借款金额',
@@ -70,6 +82,9 @@ $(function () {
         title: '签约时间',
         formatter: dateTimeFormat
     }, {
+        field: 'approver',
+        title: '审核人'
+    },{
         field: 'status',
         title: '状态',
         type: "select",
@@ -162,7 +177,8 @@ $(function () {
                 handler: function() {
                     dw.close().remove();
                 }
-            }]
+            }],
+
         });
 
         dw.__center();  
@@ -209,5 +225,25 @@ $(function () {
             });
         },function(){});       
        
-    });    
+    });
+
+    $('#piliangPayBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+
+        var data = { code: selRecords[0].code};
+        confirm("确认查询代付结果？").then(function() {
+            reqApi({
+                code: '623083',
+                json: data
+            }).then(function() {
+                toastr.info("操作成功");
+                $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+            });
+        },function(){});
+
+    });
 });

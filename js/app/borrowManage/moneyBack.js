@@ -5,10 +5,6 @@ $(function () {
         title: '',
         checkbox: true
     }, {
-        field: 'code',
-        title: '借款编号',
-        search: true
-    }, {
         field: 'applyUser',
         title: '申请人',
         type: 'select',
@@ -18,14 +14,43 @@ $(function () {
              return data.user.mobile
         } ,      
         search: true
+    },{
+        field: 'mobile',
+        title: '手机号',
+        formatter: function(v, data){
+            return data.user.mobile;
+        }
+    }, {
+        field: 'overdueCode',
+        title: '代码',
+        formatter: function (v, data) {
+            return data.user.overdueCode
+        }
+    }, {
+        field: 'approver',
+        title: '审核人'
+    },{
+        field: 'fkDatetime',
+        title: '放款时间',
+        formatter: dateTimeFormat
+    }, {
+        field: 'mobile',
+        title: '到期时间',
+        formatter: function(v, data){
+            return data.user.mobile;
+        }
+    },{
+        field: 'remainDays',
+        title: '还款剩余天数',
     }, {
         field: 'amount',
         title: '借款金额',
         amount: true,
-    }, {
-        field: 'remainDays',
-        title: '还款剩余天数',
-    }
+    },  {
+        field: 'code',
+        title: '借款编号',
+        search: true
+    },
     // , {
     //     field: 'lxAmount',
     //     title: '正常利息',
@@ -50,15 +75,19 @@ $(function () {
     //     field: 'renewalCount',
     //     title: '订单续期(次)',
     // }
-    , {
-        field: 'signDatetime',
-        title: '签约时间',
-        formatter: dateTimeFormat
-    }, {
-        field: 'fkDatetime',
-        title: '放款时间',
-        formatter: dateTimeFormat
-    }, {
+      {
+            field: 'mobile',
+            title: '优惠费用（元）',
+            formatter: function(v, data){
+                return data.user.mobile;
+            }
+        }, {
+            field: 'mobile',
+            title: '实际打款（元）',
+            formatter: function(v, data){
+                return data.user.mobile;
+            }
+        },  {
         field: 'loanType',
         title: '放款方式',
         type: "select",
@@ -74,6 +103,12 @@ $(function () {
         keyCode:"623907",
         formatter: Dict.getNameForList("borrow_status","623907")
     }, {
+            field: 'mobile',
+            title: '续期次数',
+            formatter: function(v, data){
+                return data.user.mobile;
+            }
+        }, {
         field: 'remark',
         title: '备注',
     }];
@@ -98,7 +133,16 @@ $(function () {
         
         
         window.location.href = "../afetrLoan/renewalRecords.html?Code=" + selRecords[0].code+"&v=1";
-    });    
+    });
+    $('#contractManageBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
 
-    
+
+        window.location.href = "./moneyBack_contractManage?Code=" + selRecords[0].code+"&v=1";
+    });
+
 });

@@ -19,7 +19,19 @@ $(function () {
              return data.user.mobile
         } ,     
         search: true
+    },{
+        field: 'mobile',
+        title: '手机号',
+        formatter: function(v, data){
+            return data.user.mobile;
+        }
     }, {
+        field: 'overdueCode',
+        title: '代码',
+        formatter: function (v, data) {
+            return data.user.overdueCode
+        }
+    },  {
         field: 'amount',
         title: '借款金额',
         amount: true,
@@ -69,7 +81,10 @@ $(function () {
         field: 'signDatetime',
         title: '签约时间',
         formatter: dateTimeFormat
-    }, {
+    },{
+        field: 'approver',
+        title: '审核人'
+    },  {
         field: 'status',
         title: '状态',
         type: "select",

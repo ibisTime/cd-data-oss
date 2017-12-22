@@ -27,26 +27,16 @@ $(function() {
             return data.user.mobile;
         }
     }, {
-        field: 'productCode',
-        title: '申请产品',
-        type: 'select',
-        formatter: function(v,data){
-            data2[data.productCode] = data.product.name;
-            $('#productCode').renderDropdown2(data2);            
-            return data.product.name
-        },
-        search: true
-    }, {
         field: 'amount',
         title: '借款金额',
         formatter: function(v,data){
             return moneyFormat(data.product.amount)
         }
-    }, {
-        field: 'duration',
-        title: '借款时长(天)',
-        formatter: function(v,data){
-            return data.product.duration 
+    },{
+        field: 'overdueCode',
+        title: '代码',
+        formatter: function (v, data) {
+            return data.user.overdueCode
         }
     }, {
         field: 'applyDatetime',
@@ -75,14 +65,14 @@ $(function() {
         }
     },{
         field: 'remark',
-        title: '备注',
+        title: '备注'
     }];
     buildList({
         router: 'members',
         columns: columns,
         pageCode: '623030',
         searchParams: {
-            statusList:[1,2]
+            statusList:[2]
         }
     });
 

@@ -20,16 +20,12 @@ $(function() {
             return data.user.mobile
         },
         search: true
-    }, {
-        field: 'productCode',
-        title: '申请产品',
-        type: 'select',
-        formatter: function(v,data){
-            data2[data.productCode] = data.product.name;
-            $('#productCode').renderDropdown2(data2);            
-            return data.product.name
-        },
-        search: true
+    },{
+        field: 'mobile',
+        title: '手机号',
+        formatter: function(v, data){
+            return data.user.mobile;
+        }
     }, {
         field: 'amount',
         title: '借款金额',
@@ -43,16 +39,25 @@ $(function() {
             return moneyFormat(data.sxAmount)
         }
     }, {
-        field: 'duration',
-        title: '借款时长(天)',
-        formatter: function(v,data){
-            return data.product.duration 
+        field: 'overdueCode',
+        title: '代码',
+        formatter: function (v, data) {
+            return data.user.overdueCode
         }
+    }, {
+        field: 'approver',
+        title: '审核人'
     }, {
         field: 'applyDatetime',
         title: '申请时间',
         formatter: function(v,data){
             return dateTimeFormat(data.applyDatetime)
+        }
+    }, {
+        field: 'approveDatetime',
+        title: '审核时间',
+        formatter: function(v,data){
+            return dateTimeFormat(data.approveDatetime)
         }
     }, {
         field: 'status',
@@ -70,6 +75,9 @@ $(function() {
         },
         // search: true
     },{
+        field: 'approveNote',
+        title: '审核说明'
+    }, {
         field: 'remark',
         title: '备注',
     }];

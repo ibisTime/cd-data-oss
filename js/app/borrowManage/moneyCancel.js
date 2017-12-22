@@ -14,11 +14,17 @@ $(function () {
         title: '申请人',
         type: 'select',
         formatter:function(v,data){
-            data1[v] = data.user.mobile;
+            data1[v] = data.user.realName;
             $('#applyUser').renderDropdown2(data1);
-             return data.user.mobile
+             return data.user.realName
         } ,     
         search: true
+    },{
+        field: 'mobile',
+        title: '手机号',
+        formatter: function(v, data){
+            return data.user.mobile;
+        }
     }, {
         field: 'amount',
         title: '借款金额',
@@ -27,26 +33,7 @@ $(function () {
         field: 'yhAmount',
         title: '优惠金额',
         amount: true,
-    }, {
-        field: 'duration',
-        title: '借款时长(天)',
-    }, {
-        field: 'lxAmount',
-        title: '正常利息',
-        amount: true,
-    }, {
-        field: 'fwAmount',
-        title: '服务费',
-        amount: true,
-    }, {
-        field: 'glAmount',
-        title: '账户管理费',
-        amount: true,
-    }, {
-        field: 'xsAmount',
-        title: '快速信审费',
-        amount: true,
-    }, {
+    },  {
         field: 'bankcardNumber',
         title: '签约银行卡号',
         formatter:function(v,data){
@@ -59,6 +46,9 @@ $(function () {
         title: '签约时间',
         formatter: dateTimeFormat
     }, {
+        field: 'approver',
+        title: '审核人'
+    },{
         field: 'status',
         title: '状态',
         type: "select",
@@ -70,7 +60,7 @@ $(function () {
         title: '审核意见',
     }, {
         field: 'remark',
-        title: '备注',
+        title: '备注'
     }];
 
     buildList({
