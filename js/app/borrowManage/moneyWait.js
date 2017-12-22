@@ -103,7 +103,8 @@ $(function () {
             statusList: [1,8],
             isArchive: 0
         },
-        pageCode: '623085'
+        pageCode: '623085',
+        singleSelect: false
     });
 
     $('#checkBtn').off('click').click(function() {
@@ -229,11 +230,17 @@ $(function () {
             toastr.info("请选择记录");
             return;
         }
-
-        var data = { code: selRecords[0].code};
-        confirm("确认查询代付结果？").then(function() {
+        var codeList = [];
+        for(var v=0;v<selRecords.length;v++) {
+            codeList.push(selRecords[v].code)
+        }
+        var data = {
+            codeList: codeList,
+            updater: getUserName()
+        };
+        confirm("批量付款？").then(function() {
             reqApi({
-                code: '623083',
+                code: '623082',
                 json: data
             }).then(function() {
                 sucList();
