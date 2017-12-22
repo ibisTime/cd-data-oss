@@ -3046,6 +3046,43 @@ function chosen1() {
   $('select', $("#model-form")).chosen && $('select', $("#model-form")).not('.norender').chosen();
 }
 
+//计算密码强度
+function calculateSecurityLevel(password) {
+  var strength_L = 0;
+  var strength_M = 0;
+  var strength_H = 0;
+
+  for (var i = 0; i < password.length; i++) {
+    var code = password.charCodeAt(i);
+    // 数字
+    if (code >= 48 && code <= 57) {
+      strength_L++;
+      // 小写字母 大写字母
+    } else if ((code >= 65 && code <= 90) ||
+      (code >= 97 && code <= 122)) {
+      strength_M++;
+      // 特殊符号
+    } else if ((code >= 32 && code <= 47) ||
+      (code >= 58 && code <= 64) ||
+      (code >= 94 && code <= 96) ||
+      (code >= 123 && code <= 126)) {
+      strength_H++;
+    }
+  }
+  // 弱
+  if ((strength_L == 0 && strength_M == 0) ||
+    (strength_L == 0 && strength_H == 0) ||
+    (strength_M == 0 && strength_H == 0)) {
+    return "1";
+  }
+  // 强
+  if (0 != strength_L && 0 != strength_M && 0 != strength_H) {
+    return "3";
+  }
+  // 中
+  return "2";
+}
+
 function confirm(msg, okText, cancelText) {
   return (new Promise(function(resolve, reject) {
     var d = dialog({
