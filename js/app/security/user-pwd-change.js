@@ -14,7 +14,7 @@ $(function() {
 		data.loginPwdStrength = calculateSecurityLevel(data.newLoginPwd);
 		data.userId = sessionStorage.getItem("userId");
 		reqApi({
-			code: '805049',
+			code: '805064',
 			json: data
 		}).then(function(data) {
 			location.href = "../main.html";

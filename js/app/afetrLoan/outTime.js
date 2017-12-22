@@ -122,8 +122,7 @@ $(function () {
                 code: '623080',
                 json: data
             }).then(function() {
-                toastr.info("操作成功");
-                $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+              sucList();
             });
         },function(){});        
        

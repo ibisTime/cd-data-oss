@@ -1,34 +1,45 @@
 <link rel="import" href="../head.html?__inline">
+<script src="../../js/lib/hygzqd.js"></script>
 <script src="../../js/app/oansBefore/audit-report.js"></script>
+<script src="http://cdnjs.tongdun.cn/preloan/tdreport.1.4.min.js"></script>
 <style type="text/css">
-.opean {
-    font-size: 0;
-    line-height: 0;
-    border-width: 10px;
-    border-color: #d6d6d6;
-    border-bottom-width: 0;
-    border-style: dashed;
-    border-top-style: solid;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    position: relative;
-    top: 0px;
-}
+    .opean {
+        font-size: 0;
+        line-height: 0;
+        border-width: 10px;
+        border-color: #d6d6d6;
+        border-bottom-width: 0;
+        border-style: dashed;
+        border-top-style: solid;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        position: relative;
+        top: 0px;
+    }
 
-.close {
-    font-size: 0;
-    line-height: 0;
-    border-width: 10px;
-    border-color: #333;
-    border-top-width: 0;
-    border-style: dashed;
-    border-bottom-style: solid;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    display: inline-block;
-    float: left;
-    margin-top: 10px;
-}
+    .close {
+        font-size: 0;
+        line-height: 0;
+        border-width: 10px;
+        border-color: #333;
+        border-top-width: 0;
+        border-style: dashed;
+        border-bottom-style: solid;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        display: inline-block;
+        float: left;
+        margin-top: 10px;
+    }
+    .yys-pannel h6 {
+        margin-top: 0;
+        margin-left: 20px;
+        border-bottom: solid 1px #d0dee5;
+        line-height: 30px;
+    }
+    .yys-pannel h6 span{
+        border-bottom: solid 3px #66c9f3;
+    }
 </style>
 <div class="place">
     <span>位置：</span>
@@ -66,10 +77,50 @@
             </div>   -->
             <div class="form-title"><span id="page-title4" class="pageTitle4">运营商认证</span><i class="close" style="margin-left: 134px;"> </i></div>
             <div class="pannel3" style="display:none;">
-                <div class="tools">
+                <div class="tools" id="yysrzTool">
                     <ul class="toolbar">
                         <li style="display:block;" id="CompatibleBtn"><span><img src="/static/images/t01.png"></span>查看运营商兼容报告</li>
                     </ul>
+                </div>
+                <div class="yys-pannel" id="yysrzPannel">
+                    <h6><span>用户信息</span></h6>
+                    <ul class="form-info" id="userInfoList">
+                        <div class="tc">正在努力地加载数据中，请稍候……</div>
+                    </ul>
+                    <h6><span>手机信息</span></h6>
+                    <ul class="form-info" id="mobileInfoList">
+                        <div class="tc">正在努力地加载数据中，请稍候……</div>
+                    </ul>
+                    <h6><span>紧急联系人</span></h6>
+                    <table id="jjlxrInfoList"></table>
+                    <h6><span>风险联系人</span></h6>
+                    <table id="fxlxrInfoList"></table>
+                    <h6><span>金融机构联系人</span></h6>
+                    <table id="jrjglxrInfoList"></table>
+                    <h6><span>金融机构联系人明细</span></h6>
+                    <table id="jrjglxrmxInfoList"></table>
+                    <h6><span>全部通话统计</span></h6>
+                    <table id="qbthtjInfoList"></table>
+                    <h6><span>每月通话统计</span></h6>
+                    <table id="mythtjInfoList"></table>
+                    <h6><span>联系人归属地统计</span></h6>
+                    <table id="lxrgsdtjInfoList"></table>
+                    <h6><span>运营商消费统计</span></h6>
+                    <table id="yysxftjInfoList"></table>
+                    <h6><span>每月消费统计</span></h6>
+                    <table id="myxftjInfoList"></table>
+                    <h6><span>静默活跃统计</span></h6>
+                    <table id="jmhytjInfoList"></table>
+                    <h6><span>连续无通话静默大于3天纪录</span></h6>
+                    <table id="jmdy3tInfoList"></table>
+                    <h6><span>连续无通话静默大于15天纪录</span></h6>
+                    <table id="jmdy15tInfoList"></table>
+                    <h6><span>出行记录分析</span></h6>
+                    <table id="cxjlfxInfoList"></table>
+                    <h6><span>近3个月各时间段通话统计</span></h6>
+                    <table id="j3ythtjInfoList"></table>
+                    <h6><span>全部联系人明细</span></h6>
+                    <table id="qblxrmxInfoList"></table>
                 </div>
             </div>
             <div class="form-title"><span id="page-title7" class="pageTitle7">同盾贷前审核报告</span><i class="close" style="margin-left: 120px;"> </i></div>
