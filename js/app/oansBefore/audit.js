@@ -14,12 +14,18 @@ $(function() {
         field: 'applyUser',
         title: '申请人',
         type: 'select',
-        formatter: function(v,data){
-            data1[v] = data.user.mobile;
+        formatter: function(v, data){
+            data1[v] = data.user.realName + '-' + data.user.mobile;
             $('#applyUser').renderDropdown2(data1);           
-            return data.user.mobile
+            return data.user.realName;
         },
         search: true
+    }, {
+        field: 'mobile',
+        title: '手机号',
+        formatter: function(v, data){
+            return data.user.mobile;
+        }
     }, {
         field: 'productCode',
         title: '申请产品',
