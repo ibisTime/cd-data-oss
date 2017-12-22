@@ -1,6 +1,5 @@
 $(function() {
     var code = getQueryString('code');
-    var userId = getQueryString('userId');
     var id = getQueryString('id');
     var view = getQueryString('v');
     
