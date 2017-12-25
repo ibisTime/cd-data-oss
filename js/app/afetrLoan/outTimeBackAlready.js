@@ -9,9 +9,9 @@ $(function () {
         title: '申请人',
         type: 'select',
         formatter:function(v,data){
-            data1[v] = data.user.mobile
+            data1[v] = data.user.realName
             $('#applyUser').renderDropdown2(data1)
-             return data.user.mobile
+             return data.user.realName
         } ,      
         search: true
     },{
@@ -30,17 +30,11 @@ $(function () {
         field: 'approver',
         title: '审核人'
     },  {
-        field: 'mobile',
-        title: '放款时间',
-        formatter: function(v, data){
-            return data.user.mobile;
-        }
+        field: 'fkDatetime',
+        title: '放款时间'
     }, {
-        field: 'mobile',
-        title: '到期时间',
-        formatter: function(v, data){
-            return data.user.mobile;
-        }
+        field: 'hkDatetime',
+        title: '到期时间'
     }, {
         field: 'yqDays',
         title: '逾期天数',
@@ -54,29 +48,26 @@ $(function () {
         search: true
     }, {
         field: 'mobile',
-        title: '实际放款金额',
-        formatter: function(v, data){
-            return data.user.mobile;
-        }
+        title: '实际放款金额'
     }, {
         field: 'mobile',
-        title: '逾期费用',
-        formatter: function(v, data){
-            return data.user.mobile;
-        }
+        title: '逾期费用'
     }, {
-        field: 'mobile',
-        title: '实际还款金额',
-        formatter: function(v, data){
-            return data.user.mobile;
+        field: 'realHkAmount',
+        title: '实际还款金额'
+    }, {
+        field: 'payType',
+        title: '还款方式',
+        formatter: function (v, data) {
+            if(data.payType === '5') {
+                return '宝付银行卡代扣（自动）';
+            }else if(data.payType === '6') {
+                return '宝付银行卡代扣（客户）';
+            }else {
+                return '宝付银行卡代扣（平台）' ;
+            }
         }
     },{
-        field: 'type',
-        title: '还款方式',
-        key: "repay_apply_type",
-        keyCode:"623907",
-        formatter: Dict.getNameForList("repay_apply_type","623907"),
-    }, {
         field: 'status',
         title: '状态',
         type: "select",

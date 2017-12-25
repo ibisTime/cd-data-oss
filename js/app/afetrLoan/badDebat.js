@@ -9,9 +9,9 @@ $(function () {
         title: '申请人',
         type: 'select',
         formatter:function(v,data){
-            data1[v] = data.user.mobile
+            data1[v] = data.user.realName
             $('#applyUser').renderDropdown2(data1)
-             return data.user.mobile
+             return data.user.realName
         } ,      
         search: true
     },{
@@ -30,24 +30,18 @@ $(function () {
         field: 'approver',
         title: '审核人'
     },{
-        field: 'mobile',
-        title: '放款时间',
-        formatter: function(v, data){
-            return data.user.mobile;
-        }
+        field: 'fkDatetime',
+        title: '放款时间'
     }, {
-        field: 'mobile',
-        title: '到期时间',
-        formatter: function(v, data){
-            return data.user.mobile;
-        }
+        field: 'hkDatetime',
+        title: '到期时间'
     },  {
         field: 'yqDays',
-        title: '逾期天数',
+        title: '逾期天数'
     },{
         field: 'amount',
         title: '借款金额',
-        amount: true,
+        amount: true
     }, {
         field: 'code',
         title: '借款编号',
@@ -61,19 +55,13 @@ $(function () {
     }, {
         field: 'yqlxAmount',
         title: '逾期利息',
-        amount: true,
+        amount: true
     },  {
-        field: 'mobile',
-        title: '应收',
-        formatter: function(v, data){
-            return data.user.mobile;
-        }
+        field: 'totalAmount',
+        title: '应收'
     }, {
-        field: 'mobile',
-        title: '逾期次数',
-        formatter: function(v, data){
-            return data.user.mobile;
-        }
+        field: 'renewalCount',
+        title: '逾期次数'
     },  {
         field: 'status',
         title: '状态',

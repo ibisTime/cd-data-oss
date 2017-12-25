@@ -34,11 +34,11 @@ $(function () {
     },{
         field: 'amount',
         title: '借款金额',
-        amount: true,
+        amount: true
     }, {
         field: 'yhAmount',
         title: '优惠金额',
-        amount: true,
+        amount: true
     },  {
         field: 'bankcardNumber',
         title: '签约银行卡号',

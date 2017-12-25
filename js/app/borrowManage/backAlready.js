@@ -9,9 +9,9 @@ $(function () {
         title: '申请人',
         type: 'select',
         formatter:function(v,data){
-            data1[v] = data.user.mobile
+            data1[v] = data.user.realName
             $('#applyUser').renderDropdown2(data1)
-             return data.user.mobile
+             return data.user.realName
         } ,      
         search: true
     }, {
@@ -30,13 +30,10 @@ $(function () {
         field: 'approver',
         title: '审核人'
     }, {
-        field: 'mobile',
-        title: '放款时间',
-        formatter: function(v, data){
-            return data.user.mobile;
-        }
+        field: 'fkDatetime',
+        title: '放款时间'
     }, {
-        field: 'applyDatetime',
+        field: ' realHkDatetime',
         title: '还款时间',
         formatter: dateTimeFormat,
     },{
@@ -49,10 +46,7 @@ $(function () {
         search: true
     }, {
         field: 'mobile',
-        title: '打款金额（元）',
-        formatter: function(v, data){
-            return data.user.mobile;
-        }
+        title: '打款金额（元）'
     }, {
         field: 'loanType',
         title: '放款方式',
@@ -61,22 +55,22 @@ $(function () {
         }
     }, {
         field: 'mobile',
-        title: '续期费用（元）',
-        formatter: function(v, data){
-            return data.user.mobile;
-        }
+        title: '续期费用（元）'
     }, {
-        field: 'mobile',
-        title: '还款金额（元）',
-        formatter: function(v, data){
-            return data.user.mobile;
-        }
+        field: 'realHkAmount',
+        title: '还款金额（元）'
     },  {
-        field: 'type',
+        field: 'payType',
         title: '还款方式',
-        key: "repay_apply_type",
-        keyCode:"623907",
-        formatter: Dict.getNameForList("repay_apply_type","623907"),
+        formatter: function (v, data) {
+            if(data.payType === '5') {
+                return '宝付银行卡代扣（自动）';
+            }else if(data.payType === '6') {
+                return '宝付银行卡代扣（客户）';
+            }else {
+                return '宝付银行卡代扣（平台）' ;
+            }
+        }
     }, {
         field: 'renewalCount',
         title: '续期次数',

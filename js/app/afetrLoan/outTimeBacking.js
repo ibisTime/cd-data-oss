@@ -9,9 +9,9 @@ $(function () {
         title: '申请人',
         type: 'select',
         formatter:function(v,data){
-            data1[v] = data.user.mobile
-            $('#applyUser').renderDropdown2(data1)
-             return data.user.mobile
+            data1[v] = data.user.realName;
+            $('#applyUser').renderDropdown2(data1);
+             return data.user.realName
         } ,      
         search: true
     },{
@@ -34,18 +34,15 @@ $(function () {
         title: '放款时间',
         formatter: dateTimeFormat
     }, {
-        field: 'mobile',
-        title: '到期时间',
-        formatter: function(v, data){
-            return data.user.mobile;
-        }
+        field: 'hkDatetime',
+        title: '到期时间'
     }, {
         field: 'yqDays',
-        title: '逾期天数',
+        title: '逾期天数'
     },{
         field: 'amount',
         title: '借款金额',
-        amount: true,
+        amount: true
     }, {
         field: 'code',
         title: '借款编号',
@@ -58,24 +55,15 @@ $(function () {
         keyCode:"623907",
         formatter: Dict.getNameForList("loan_type","623907")
     },{
-            field: 'mobile',
-            title: '实际放款金额',
-            formatter: function(v, data){
-                return data.user.mobile;
-            }
-        }, {
-            field: 'renewalCount',
-            title: '续期次数',
-            formatter: function(v, data){
-                return data.user.mobile;
-            }
-        }, {
-            field: 'mobile',
-            title: '应收',
-            formatter: function(v, data){
-                return data.user.mobile;
-            }
-        }];
+        field: 'mobile',
+        title: '实际放款金额'
+    }, {
+        field: 'renewalCount',
+        title: '续期次数'
+    }, {
+        field: 'totalAmount',
+        title: '应收'
+    }];
 
     buildList({
         columns: columns,

@@ -9,9 +9,9 @@ $(function () {
         title: '申请人',
         type: 'select',
         formatter:function(v,data){
-            data1[v] = data.user.mobile
+            data1[v] = data.user.realName
             $('#applyUser').renderDropdown2(data1)
-             return data.user.mobile
+             return data.user.realName
         } ,      
         search: true
     },{
@@ -34,60 +34,29 @@ $(function () {
         title: '放款时间',
         formatter: dateTimeFormat
     }, {
-        field: 'mobile',
-        title: '到期时间',
-        formatter: function(v, data){
-            return data.user.mobile;
-        }
+        field: 'hkDatetime',
+        title: '到期时间'
     },{
         field: 'remainDays',
         title: '还款剩余天数',
     }, {
         field: 'amount',
         title: '借款金额',
-        amount: true,
+        amount: true
     },  {
         field: 'code',
         title: '借款编号',
         search: true
-    },
-    // , {
-    //     field: 'lxAmount',
-    //     title: '正常利息',
-    //     amount: true,
-    // }, {
-    //     field: 'fwAmount',
-    //     title: '服务费',
-    //     amount: true,
-    // }, {
-    //     field: 'glAmount',
-    //     title: '账户管理费',
-    //     amount: true,
-    // }, {
-    //     field: 'xsAmount',
-    //     title: '快速信审费',
-    //     amount: true,
-    // }, {
-    //     field: 'yhAmount',
-    //     title: '优惠金额',
-    //     amount: true,
-    // }, {
-    //     field: 'renewalCount',
-    //     title: '订单续期(次)',
-    // }
-      {
-            field: 'mobile',
-            title: '优惠费用（元）',
-            formatter: function(v, data){
-                return data.user.mobile;
-            }
-        }, {
-            field: 'mobile',
-            title: '实际打款（元）',
-            formatter: function(v, data){
-                return data.user.mobile;
-            }
-        },  {
+    }, {
+        field: 'yhAmount',
+        title: '优惠费用（元）',
+        formatter: function (v, data) {
+            return data.user.yhAmount;
+        }
+    }, {
+        field: 'mobile',
+        title: '实际打款（元）'
+    }, {
         field: 'loanType',
         title: '放款方式',
         type: "select",
@@ -103,14 +72,11 @@ $(function () {
         keyCode:"623907",
         formatter: Dict.getNameForList("borrow_status","623907")
     }, {
-            field: 'mobile',
-            title: '续期次数',
-            formatter: function(v, data){
-                return data.user.mobile;
-            }
-        }, {
+        field: 'renewalCount',
+        title: '续期次数'
+    }, {
         field: 'remark',
-        title: '备注',
+        title: '备注'
     }];
 
     buildList({
@@ -121,7 +87,8 @@ $(function () {
             isArchive: 0,
             isOverdue: 0
         },
-        pageCode: '623085'
+        pageCode: '623085',
+        singleSelect: false
     });
  
     $('#renewalBtn').click(function() {
@@ -143,6 +110,30 @@ $(function () {
 
 
         window.location.href = "./moneyBack_contractManage?Code=" + selRecords[0].code+"&v=1";
+    });
+// 批量扣款
+    $('#piliangKoukuanBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        var codeList = [];
+        for(var v=0;v<selRecords.length;v++) {
+            codeList.push(selRecords[v].code)
+        }
+        var data = {
+            codeList: codeList,
+            updater: getUserName()
+        };
+        confirm("批量付款？").then(function() {
+            reqApi({
+                code: '623084',
+                json: data
+            }).then(function() {
+                sucList();
+            });
+        },function(){});
     });
 
 });

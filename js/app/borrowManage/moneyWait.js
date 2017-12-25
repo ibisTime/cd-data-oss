@@ -34,7 +34,7 @@ $(function () {
     }, {
         field: 'amount',
         title: '借款金额',
-        amount: true,
+        amount: true
     }, {
         field: 'lxAmount',
         title: '综合费用',

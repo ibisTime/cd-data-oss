@@ -57,7 +57,7 @@ $(function () {
         formatter: Dict.getNameForList("borrow_status","623907")
     }, {
         field: 'approveNote',
-        title: '审核意见',
+        title: '审核意见'
     }, {
         field: 'remark',
         title: '备注'
