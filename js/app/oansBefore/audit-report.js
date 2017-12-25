@@ -489,7 +489,8 @@
         }
 
         if(infoCarrierFlag  !== "0"){
-            if (true) {
+            infoCarrier = JSON.parse(infoCarrier);
+            if (infoCarrier.user_id) {
                 $('#yysrzPannel').hide();
                 $('#CompatibleBtn').on('click',function(){
                     compatible(infoContactFlag)
@@ -729,7 +730,6 @@
    }
    // 添加运营商数据
    function addYysrz (data) {
-        data = JSON.parse(data);
         addYysUserInfo(data);
         addYysMobInfo(data);
         addYysJjlxrInfo(data);

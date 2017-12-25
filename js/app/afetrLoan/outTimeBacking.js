@@ -35,7 +35,8 @@ $(function () {
         formatter: dateTimeFormat
     }, {
         field: 'hkDatetime',
-        title: '到期时间'
+        title: '到期时间',
+        formatter: dateTimeFormat
     }, {
         field: 'yqDays',
         title: '逾期天数'
@@ -54,15 +55,19 @@ $(function () {
         key: "loan_type",
         keyCode:"623907",
         formatter: Dict.getNameForList("loan_type","623907")
-    },{
-        field: 'mobile',
-        title: '实际放款金额'
+    }, {
+        field: 'dkAmount',
+        title: '实际放款金额',
+        formatter: function (v, data) {
+            return moneyFormat(data.amount - data.lxAmount - data.xsAmount - data.glAmount - data.fwAmount + data.yhAmount);
+        }
     }, {
         field: 'renewalCount',
         title: '续期次数'
     }, {
         field: 'totalAmount',
-        title: '应收'
+        title: '应收',
+        formatter: moneyFormat
     }];
 
     buildList({
@@ -73,7 +78,8 @@ $(function () {
             isOverdue: 1,
             isArchive: 0
         },
-        pageCode: '623085'
+        pageCode: '623085',
+        singleSelect: false
     });
  
     $('#renewalBtn').click(function() {
@@ -127,7 +133,29 @@ $(function () {
         },function(){});  
       
        
-    });       
+    });
 
-    
+    $('#piliangKoukuanBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        var codeList = [];
+        for(var v=0;v<selRecords.length;v++) {
+            codeList.push(selRecords[v].code)
+        }
+        var data = {
+            codeList: codeList,
+            updater: getUserName()
+        };
+        confirm("批量付款？").then(function() {
+            reqApi({
+                code: '623084',
+                json: data
+            }).then(function() {
+                sucList();
+            });
+        },function(){});
+    });
 });

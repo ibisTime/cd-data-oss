@@ -35,9 +35,7 @@ $(function() {
     }, {
         field: 'sxAmount',
         title: '授信金额',
-        formatter: function(v,data){
-            return moneyFormat(data.sxAmount)
-        }
+        formatter: moneyFormat
     }, {
         field: 'overdueCode',
         title: '代码',
@@ -50,15 +48,11 @@ $(function() {
     }, {
         field: 'applyDatetime',
         title: '申请时间',
-        formatter: function(v,data){
-            return dateTimeFormat(data.applyDatetime)
-        }
+        formatter: dateTimeFormat
     },{
         field: 'approveDatetime',
         title: '审核时间',
-        formatter: function(v,data){
-            return dateTimeFormat(data.approveDatetime)
-        }
+        formatter: dateTimeFormat
     },{
         field: 'status',
         title: '状态',
@@ -78,7 +72,7 @@ $(function() {
         title: '审核说明'
     },{
         field: 'remark',
-        title: '备注',
+        title: '备注'
     }];
     buildList({
         router: 'members',

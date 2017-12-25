@@ -9,16 +9,16 @@ $(function () {
         title: '申请人',
         type: 'select',
         formatter:function(v,data){
-            data1[v] = data.user.realName
-            $('#applyUser').renderDropdown2(data1)
+            data1[v] = data.user.realName;
+            $('#applyUser').renderDropdown2(data1);
              return data.user.realName
         } ,      
         search: true
     },{
-        field: 'mobile',
+        field: 'code',
         title: '账号',
         formatter: function(v, data){
-            return data.user.mobile;
+            return data.code;
         }
     }, {
         field: 'overdueCode',
@@ -31,10 +31,12 @@ $(function () {
         title: '审核人'
     },{
         field: 'fkDatetime',
-        title: '放款时间'
+        title: '放款时间',
+        formatter: dateTimeFormat
     }, {
         field: 'hkDatetime',
-        title: '到期时间'
+        title: '到期时间',
+        formatter: dateTimeFormat
     },  {
         field: 'yqDays',
         title: '逾期天数'
@@ -47,18 +49,19 @@ $(function () {
         title: '借款编号',
         search: true
     }, {
-        field: 'mobile',
+        field: 'dkAmount',
         title: '实际打款金额',
-        formatter: function(v, data){
-            return data.user.mobile;
-        }
+        formatter: function (v, data) {
+            return moneyFormat(data.amount-data.lxAmount-data.xsAmount-data.glAmount-data.fwAmount+data.yhAmount);
+    }
     }, {
         field: 'yqlxAmount',
         title: '逾期利息',
         amount: true
     },  {
         field: 'totalAmount',
-        title: '应收'
+        title: '应收',
+        formatter: moneyFormat
     }, {
         field: 'renewalCount',
         title: '逾期次数'

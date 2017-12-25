@@ -31,34 +31,42 @@ $(function () {
         title: '审核人'
     }, {
         field: 'fkDatetime',
-        title: '放款时间'
+        title: '放款时间',
+        formatter: dateTimeFormat
     }, {
-        field: ' realHkDatetime',
+        field: 'realHkDatetime',
         title: '还款时间',
-        formatter: dateTimeFormat,
+        formatter: dateTimeFormat
     },{
         field: 'amount',
         title: '借款金额',
-        amount: true,
+        amount: true
     }, {
         field: 'code',
         title: '借款编号',
         search: true
     }, {
-        field: 'mobile',
-        title: '打款金额（元）'
+        field: 'dkAmount',
+        title: '打款金额（元）',
+        formatter: function (v, data) {
+            return moneyFormat(data.amount-data.lxAmount-data.xsAmount-data.glAmount-data.fwAmount+data.yhAmount);
+        }
     }, {
         field: 'loanType',
         title: '放款方式',
         formatter: function(v,data){
-            return  Dict.getNameForList1('loan_type','623907',data.borrow.loanType)
+            return  Dict.getNameForList1('loan_type','623907',data.loanType)
         }
     }, {
-        field: 'mobile',
-        title: '续期费用（元）'
+        field: 'yqMoney',
+        title: '续期费用（元）',
+        formatter: function (v, data) {
+            return moneyFormat(data.renewalCount * (data.yqlxAmount+data.lxAmount+data.xsAmount+data.glAmount+data.fwAmount));
+        }
     }, {
         field: 'realHkAmount',
-        title: '还款金额（元）'
+        title: '还款金额（元）',
+        formatter: moneyFormat
     },  {
         field: 'payType',
         title: '还款方式',
@@ -73,7 +81,7 @@ $(function () {
         }
     }, {
         field: 'renewalCount',
-        title: '续期次数',
+        title: '续期次数'
     }, {
         field: 'status',
         title: '状态',

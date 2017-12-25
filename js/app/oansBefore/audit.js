@@ -41,9 +41,7 @@ $(function() {
     }, {
         field: 'applyDatetime',
         title: '申请时间',
-        formatter: function(v,data){
-            return dateTimeFormat(data.applyDatetime)
-        }
+        formatter: dateTimeFormat
     }, {
         field: 'status',
         title: '状态',

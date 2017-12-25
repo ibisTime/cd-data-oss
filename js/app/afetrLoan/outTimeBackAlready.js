@@ -31,30 +31,36 @@ $(function () {
         title: '审核人'
     },  {
         field: 'fkDatetime',
-        title: '放款时间'
+        title: '放款时间',
+        formatter: dateTimeFormat
     }, {
         field: 'hkDatetime',
-        title: '到期时间'
+        title: '到期时间',
+        formatter: dateTimeFormat
     }, {
         field: 'yqDays',
-        title: '逾期天数',
+        title: '逾期天数'
     }, {
         field: 'amount',
         title: '借款金额',
-        amount: true,
+        amount: true
     },{
         field: 'code',
         title: '借款编号',
         search: true
     }, {
-        field: 'mobile',
-        title: '实际放款金额'
+        field: 'dkAmount',
+        title: '实际放款金额',
+        formatter: function (v, data) {
+            return moneyFormat(data.amount - data.lxAmount - data.xsAmount - data.glAmount - data.fwAmount + data.yhAmount);
+        }
     }, {
-        field: 'mobile',
+        field: 'yqlxAmount',
         title: '逾期费用'
     }, {
         field: 'realHkAmount',
-        title: '实际还款金额'
+        title: '实际还款金额',
+        formatter: moneyFormat
     }, {
         field: 'payType',
         title: '还款方式',
@@ -76,7 +82,7 @@ $(function () {
         formatter: Dict.getNameForList("borrow_status","623907")
     }, {
         field: 'remark',
-        title: '备注',
+        title: '备注'
     }];
 
     buildList({

@@ -15,9 +15,9 @@ $(function() {
         title: '申请人',
         type: 'select',
         formatter: function(v,data){
-            data1[v] = data.user.mobile;
+            data1[v] = data.user.realName;
             $('#applyUser').renderDropdown2(data1);           
-            return data.user.mobile
+            return data.user.realName
         },
         search: true
     },{
@@ -50,15 +50,11 @@ $(function() {
     }, {
         field: 'applyDatetime',
         title: '申请时间',
-        formatter: function(v,data){
-            return dateTimeFormat(data.applyDatetime)
-        }
+        formatter:dateTimeFormat
     }, {
         field: 'approveDatetime',
         title: '审核时间',
-        formatter: function(v,data){
-            return dateTimeFormat(data.approveDatetime)
-        }
+        formatter: dateTimeFormat
     }, {
         field: 'status',
         title: '状态',
@@ -72,14 +68,14 @@ $(function() {
         formatter: function(v,data){
             // return data.status
             return "审核不通过"
-        },
+        }
         // search: true
     },{
         field: 'approveNote',
         title: '审核说明'
     }, {
         field: 'remark',
-        title: '备注',
+        title: '备注'
     }];
     buildList({
         router: 'members',

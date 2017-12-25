@@ -35,10 +35,11 @@ $(function () {
         formatter: dateTimeFormat
     }, {
         field: 'hkDatetime',
-        title: '到期时间'
+        title: '到期时间',
+        formatter: dateTimeFormat
     },{
         field: 'remainDays',
-        title: '还款剩余天数',
+        title: '还款剩余天数'
     }, {
         field: 'amount',
         title: '借款金额',
@@ -51,11 +52,14 @@ $(function () {
         field: 'yhAmount',
         title: '优惠费用（元）',
         formatter: function (v, data) {
-            return data.user.yhAmount;
+            return moneyFormat(data.yhAmount);
         }
     }, {
-        field: 'mobile',
-        title: '实际打款（元）'
+        field: 'dkAmount',
+        title: '实际打款（元）',
+        formatter: function (v, data) {
+            return moneyFormat(data.amount-data.lxAmount-data.xsAmount-data.glAmount-data.fwAmount+data.yhAmount);
+        }
     }, {
         field: 'loanType',
         title: '放款方式',
