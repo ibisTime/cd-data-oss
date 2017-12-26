@@ -1586,9 +1586,9 @@ function buildDetail(options) {
   //是否请求详情
   if (code) {
     reqApi({
-			code: options.detailCode,
-			json: detailParams
-		}).done(function(d) {
+      code: options.detailCode,
+      json: detailParams
+    }).done(function(d) {
       var data = d;
       if (options._keys) {
         options._keys.forEach(function(key) {
