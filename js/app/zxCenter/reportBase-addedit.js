@@ -1,6 +1,5 @@
 $(function () {
   var code = getQueryString('code');
-  var userId = getQueryString('userId');
   var userInfoDict = {
     'education': {},
     'marriage': {},

@@ -1,5 +1,4 @@
 $(function() {
-
     var columns = [{
         field: '',
         title: '',
@@ -23,12 +22,11 @@ $(function() {
         title: '修改时间',
         formatter: dateTimeFormat
     }];
-
     buildList({
         columns: columns,
         pageCode: '805225',
         searchParams: {
-            'channelType': '0',
+            channelType: '0',
             companyCode: OSS.companyCode
         }
     });
@@ -38,8 +36,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-
-        window.location.href = "interfaceManage_edit.html?Code=" + selRecords[0].code+"&description="+selRecords[0].description;
+        window.location.href = "interfaceManage_edit.html?code=" + selRecords[0].code;
     })
 
 });
