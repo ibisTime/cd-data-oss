@@ -122,6 +122,7 @@ $(function() {
          
             
         window.location.href = "./alreadyQuery_addedit.html?userId=" + selRecords[0].user.userId+"&code="+selRecords[0].code+"&v=1";
-    });    
-       
+    });
+
+
 });

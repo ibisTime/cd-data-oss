@@ -101,8 +101,27 @@ $(function () {
         window.location.href = "./moneyCheck_cancel.html?Code=" + selRecords[0].code+"&v=1";
         
 
-    });    
-    
-    
-    
+    });
+
+    $('#reportBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "../oansBefore/audit_report.html?userId=" + selRecords[0].user.userId;
+
+    });
+
+    $('#detailBtn').off("click").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+
+
+
+        window.location.href = "./moneyCheck_addedit.html?userId=" + selRecords[0].user.userId+"&code="+selRecords[0].code+"&v=1";
+    });
 });

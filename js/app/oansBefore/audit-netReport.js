@@ -1,6 +1,6 @@
  $(function() {
     var userId = getQueryString('userId');
-    var html, html1, html2, data, jdtReport,
+     var html, html1, html2, data, jdtReport,
         extraData, personApplication, personBasic, personInfo,
          behavior_check, cell_behavior, collection_contact,
         contact_list, contact_region, deliver_address, ebusiness_expense,
@@ -13,7 +13,7 @@
     
 
     if(jdtReport = sessionStorage.getItem('jdtReport') ){
-        data = JSON.parse(jdtReport)
+        data = JSON.parse(jdtReport);
         loading.hideLoading();
         extraData = data.appInfo.extraData;
         personApplication = data.appInfo.personApplication;

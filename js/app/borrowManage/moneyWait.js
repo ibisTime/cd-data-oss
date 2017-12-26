@@ -248,4 +248,26 @@ $(function () {
         },function(){});
 
     });
+
+    $('#reportBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "../oansBefore/audit_report.html?userId=" + selRecords[0].user.userId;
+
+    });
+
+    $('#detailBtn').off("click").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+
+
+
+        window.location.href = "./moneyWait_addedit.html?userId=" + selRecords[0].user.userId+"&code="+selRecords[0].code+"&v=1";
+    });
 });

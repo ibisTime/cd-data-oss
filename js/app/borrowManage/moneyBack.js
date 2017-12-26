@@ -105,16 +105,17 @@ $(function () {
         
         window.location.href = "../afetrLoan/renewalRecords.html?Code=" + selRecords[0].code+"&v=1";
     });
-    $('#contractManageBtn').click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-
-
-        window.location.href = "./moneyBack_contractManage?Code=" + selRecords[0].code+"&v=1";
-    });
+    // 合同管理
+    // $('#contractManageBtn').click(function() {
+    //     var selRecords = $('#tableList').bootstrapTable('getSelections');
+    //     if (selRecords.length <= 0) {
+    //         toastr.info("请选择记录");
+    //         return;
+    //     }
+    //
+    //
+    //     window.location.href = "./contractManage.html?Code=" + selRecords[0].code+"&v=1";
+    // });
 // 批量扣款
     $('#piliangKoukuanBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
@@ -140,4 +141,25 @@ $(function () {
         },function(){});
     });
 
+    $('#reportBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "../oansBefore/audit_report.html?userId=" + selRecords[0].user.userId;
+
+    });
+
+    $('#detailBtn').off("click").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+
+
+
+        window.location.href = "./moneyBack_addedit.html?userId=" + selRecords[0].user.userId+"&code="+selRecords[0].code+"&v=1";
+    });
 });

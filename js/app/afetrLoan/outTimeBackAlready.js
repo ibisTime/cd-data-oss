@@ -56,7 +56,8 @@ $(function () {
         }
     }, {
         field: 'yqlxAmount',
-        title: '逾期费用'
+        title: '逾期费用',
+        formatter: moneyFormat
     }, {
         field: 'realHkAmount',
         title: '实际还款金额',
@@ -117,8 +118,28 @@ $(function () {
 
         },function(){});
 
-    });    
-    
+    });
 
-    
+    $('#reportBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "../oansBefore/audit_report.html?userId=" + selRecords[0].user.userId;
+
+    });
+
+    $('#detailBtn').off("click").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+
+
+
+        window.location.href = "./outTimeBackAlready_addedit.html?userId=" + selRecords[0].user.userId+"&code="+selRecords[0].code+"&v=1";
+    });
+
 });
