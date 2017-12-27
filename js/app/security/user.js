@@ -77,28 +77,9 @@ $(function() {
                     updater: getUserName()
                 }
             }).then(function() {
-                toastr.info("操作成功");
-                $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                sucList();
             });
 
         },function(){});
     });
-
-    // $('#activeBtn').click(function() {
-    //     var selRecords = $('#tableList').bootstrapTable('getSelections');
-    //     if (selRecords.length <= 0) {
-    //         toastr.info("请选择记录");
-    //         return;
-    //     }
-    //     reqApi({
-    //         code: '805091',
-    //         json: {
-    //             userId: selRecords[0].userId,
-    //             toStatus: '0'
-    //         }
-    //     }).then(function() {
-    //         sucList();
-    //     });
-    // });
-
 });

@@ -6,9 +6,13 @@ function getQueryString(name) {
 	}
 	return '';
 }
+function isBUser () {
+  var reg = new RegExp('^' + OSS.BUrl);
+  return reg.test(location.href);
+}
 if(!sessionStorage.getItem('loginKind')){
-    var kind = document.domain.substr(0, 1)=='w'?'B':'P';
-    sessionStorage.setItem('loginKind', kind);
+	var kind = isBUser() ? 'B' : 'P';
+	sessionStorage.setItem('loginKind', kind);
 }
 $(function(){
 	window.sessionStorage.setItem('systemCode', OSS.system);

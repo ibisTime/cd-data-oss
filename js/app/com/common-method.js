@@ -996,7 +996,10 @@ function buildList(options) {
   if (options.tableId) {
     tableEl = $('#' + options.tableId);
   }
-
+  tableEl.on('load-success.bs.table', function () {
+    updateTableInfo('tableList');
+  });
+  var tableInfo = JSON.parse(sessionStorage.getItem('tableInfo') || '{}')[location.pathname] || {};
   //表格初始化
   tableEl.bootstrapTable({
     method: "post",
@@ -1046,8 +1049,8 @@ function buildList(options) {
     pagination: true,
     sidePagination: 'server',
     totalRows: 0,
-    pageNumber: 1,
-    pageSize: options.pageSize || 10,
+    pageNumber: tableInfo.pageNumber || 1,
+    pageSize: tableInfo.pageSize || options.pageSize || 10,
     pageList: options.pageList || [10, 20, 30, 40, 50],
     columns: options.columns
   });
@@ -2227,7 +2230,8 @@ function sleep(ms) {
 
 function sucList() {
   toastr.success('操作成功');
-  $('#tableList').bootstrapTable('refresh', {url: $('#tableList').bootstrapTable('getOptions').url});
+  var option = $('#tableList').bootstrapTable('getOptions');
+  $('#tableList').bootstrapTable('refreshOptions', { pageNumber: option.pageNumber, pageSize: option.pageSize });
 }
 
 function sucDetail() {
@@ -3408,4 +3412,13 @@ function updateListSearch() {
   var params = $('.search-form').serializeObject();
   searchs[pathName] = params;
   sessionStorage.setItem('listSearchs', JSON.stringify(searchs));
+}
+
+function updateTableInfo(id) {
+  var searchs = JSON.parse(sessionStorage.getItem('tableInfo') || '{}');
+  var pathName = location.pathname;
+  var option = $('#' + id).bootstrapTable('getOptions');
+  var params = {pageNumber:option.pageNumber,pageSize:option.pageSize};
+  searchs[pathName] = params;
+  sessionStorage.setItem('tableInfo', JSON.stringify(searchs));
 }
