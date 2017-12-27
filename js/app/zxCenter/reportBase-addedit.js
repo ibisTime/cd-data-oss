@@ -26,6 +26,7 @@ $(function () {
       addHygzqdrz(report['PZM6']);
       addQzrz(report['PZM7']);
       addTdrz(report['PTD8']);
+      addRemark(report['reportRemarkList']);
     }, function (obj, error) {
       if (error.errorInfo === '报告已过期,不能查看') {
         setTimeout(goBack, 1000);
@@ -1004,6 +1005,25 @@ $(function () {
       data = JSON.parse(data);
       tdData = JSON.parse(data.tdData);
       personInfo = JSON.parse(data.personInfo);
+    }
+  }
+  // 添加备注数据
+  function addRemark(data) {
+    if (!data) {
+      $('#remarkPannel').hide();
+    } else {
+      $('#remarkTableList').bootstrapTable({
+        striped: true,
+        columns: [{
+          title: '备注内容',
+          field: 'remark'
+        }, {
+          title: '备注时间',
+          field: 'createDatetime',
+          formatter: dateTimeFormat
+        }],
+        data: data
+      });
     }
   }
   // 获取报告详情和数据字典
