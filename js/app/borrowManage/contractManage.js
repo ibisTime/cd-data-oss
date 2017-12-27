@@ -1,34 +1,30 @@
 $(function () {
     var code = getQueryString('code');
     var data1 = {};
+    var data2 = {};
     var columns = [{
         field: '',
         title: '',
         checkbox: true
     }, {
-        field: 'applyUser',
+        field: 'userId',
         title: '申请人',
         type: 'select',
         formatter:function(v,data){
             data1[v] = data.user.realName;
-            $('#applyUser').renderDropdown2(data1);
+            $('#userId').renderDropdown2(data1);
              return data.user.realName
         } ,      
         search: true
     }, {
-        field: 'applyUser',
+        field: 'mobile',
         title: '账号',
-        type: 'select',
         formatter:function(v,data){
-            data1[v] = data.user.mobile;
-            $('#applyUser').renderDropdown2(data1);
             return data.user.mobile
-        } ,
-        search: true
+        }
     },{
         field: 'code',
-        title: '借款编号',
-        search: true
+        title: '借款编号'
     }];
 
     buildList({

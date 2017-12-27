@@ -17,20 +17,17 @@ $(function() {
             content = data.content;
             return content
         },
-        // afterSet:function(data){
-        //     var html='<div class="tools" id="content" style="margin-left: 20px;">'+
-        //         '<div>'+
-        //         content+
-        //         '</div>'+
-        //         '<ul class="toolbar"  style="float: left;">'+
-        //         '<li style="display:block;" id="reportBtn"><span><img src="/static/images/t01.png"></span>查看资信报告</li>'+
-        //         '</ul>'+
-        //         '</div>';
-        //     $('#mobile').append(html);
-        //     $('#reportBtn').click(function() {
-        //         window.location.href = "../oansBefore/audit_report.html?userId=" + userId;
-        //     });
-        // },
+        afterSet:function(data){
+            var html='<div class="tools" id="content" style="margin-left: 20px;">'+
+                '<ul class="toolbar"  style="float: left;">'+
+                '<li style="display:block;" id="reportBtn"><span><img src="/static/images/t01.png"></span>查看资信报告</li>'+
+                '</ul>'+
+                '</div>';
+            $('#mobile').after(html);
+            $('#reportBtn').click(function() {
+                window.location.href = "../oansBefore/audit_report.html?userId=" + userId;
+            });
+        }
     }];
     
     buildDetail({
@@ -46,12 +43,6 @@ $(function() {
         },
         afterData: function () {
             if(download) {
-                // var div = document.createElement("div");
-                // div.innerHTML = content;
-                // div.setAttribute('id','content');
-                // // console.log(div);
-                // var dom = $('#content').appendTo('body');
-                // console.log(dom);
                 setTimeout(function () {
                     html2canvas($('#mobile')[0], {
                         onrendered: function (canvas) {
@@ -86,10 +77,10 @@ $(function() {
                             pdf.save('content.pdf');
                         }
                     })
-                }, 2000)
+                }, 0)
             }
         }
-    })
+    });
 $('label').css('display','none');
 
 
