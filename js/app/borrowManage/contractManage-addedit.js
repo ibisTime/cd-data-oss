@@ -5,7 +5,7 @@ $(function() {
     var view = getQueryString('v');
     var download = getQueryString('download');
 
-    var borrowCount,overdueCode,renewalCount;
+    var borrowCount,overdueCode,renewalCount,content,title;
     
     var fields = [ {
         field: 'mobile',
@@ -15,6 +15,7 @@ $(function() {
             overdueCode = data.user.overdueCode;
             renewalCount = data.user.renewalCount;
             content = data.content;
+            title = data.title;
             return content
         },
         afterSet:function(data){
@@ -74,7 +75,7 @@ $(function() {
                                     }
                                 }
                             }
-                            pdf.save('content.pdf');
+                            pdf.save(title+'.pdf');
                         }
                     })
                 }, 0)

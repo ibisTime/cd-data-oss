@@ -3,9 +3,7 @@ $(function () {
     var columns = [ {
         field: 'today',
         title: '日期',
-        formatter: function (v) {
-            return dateFormat(v, 'yyyy-MM-dd');
-        }
+        formatter: dateTimeFormat
     },{
         field: 'regNum',
         title: '注册人数'
@@ -141,72 +139,5 @@ $(function () {
         columns: columns,
         pageCode: '623700',
     });
- 
-    $('#renewalBtn').click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        
-        
-        window.location.href = "../afetrLoan/renewalRecords.html?Code=" + selRecords[0].code+"&v=1";
-    });
-    // 合同管理
-    // $('#contractManageBtn').click(function() {
-    //     var selRecords = $('#tableList').bootstrapTable('getSelections');
-    //     if (selRecords.length <= 0) {
-    //         toastr.info("请选择记录");
-    //         return;
-    //     }
-    //
-    //
-    //     window.location.href = "./contractManage.html?Code=" + selRecords[0].code+"&v=1";
-    // });
-// 批量扣款
-    $('#piliangKoukuanBtn').click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        var codeList = [];
-        for(var v=0;v<selRecords.length;v++) {
-            codeList.push(selRecords[v].code)
-        }
-        var data = {
-            codeList: codeList,
-            updater: getUserName()
-        };
-        confirm("批量付款？").then(function() {
-            reqApi({
-                code: '623084',
-                json: data
-            }).then(function() {
-                sucList();
-            });
-        },function(){});
-    });
 
-    $('#reportBtn').click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        window.location.href = "../oansBefore/audit_report.html?userId=" + selRecords[0].user.userId;
-
-    });
-
-    $('#detailBtn').off("click").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-
-
-
-        window.location.href = "./moneyBack_addedit.html?userId=" + selRecords[0].user.userId+"&code="+selRecords[0].code+"&v=1";
-    });
 });

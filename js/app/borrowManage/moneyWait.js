@@ -186,24 +186,24 @@ $(function () {
 
     });  
 
-    $('#paidBtn').click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        
-        var data = { code: selRecords[0].code,  updater: getUserName(),remark:"申请宝付代付" };
-        confirm("确认申请宝付代付？").then(function() {
-            reqApi({
-                code: '623082',
-                json: data
-            }).then(function() {
-                sucList();
-            });
-        },function(){});        
-       
-    });     
+    // $('#paidBtn').click(function() {
+    //     var selRecords = $('#tableList').bootstrapTable('getSelections');
+    //     if (selRecords.length <= 0) {
+    //         toastr.info("请选择记录");
+    //         return;
+    //     }
+    //
+    //     var data = { code: selRecords[0].code,  updater: getUserName(),remark:"申请宝付代付" };
+    //     confirm("确认申请宝付代付？").then(function() {
+    //         reqApi({
+    //             code: '623082',
+    //             json: data
+    //         }).then(function() {
+    //             sucList();
+    //         });
+    //     },function(){});
+    //
+    // });
     
     $('#queryBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
@@ -224,7 +224,7 @@ $(function () {
        
     });
 
-    $('#piliangPayBtn').click(function() {
+    $('#paidBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
             toastr.info("请选择记录");
