@@ -3,8 +3,6 @@ $(function() {
         "C": "C端用户",
         // "P": "平台用户"
     };
-    var data1 = {}, data2 = {};
-  
 
     var columns = [{
         field: '',
@@ -17,7 +15,7 @@ $(function() {
         search: true,
         pageCode: '805120',
         keyName: 'userId',
-        valueName: 'realName',
+        valueName: '{{realName.DATA}}',
         params: {
             updater: '',
             kind: 'C'
@@ -70,17 +68,9 @@ $(function() {
     },{
         field: 'status',
         title: '状态',
-        // type: "select",
-        // listCode: "623907",
-        // params:{
-        //     parentKey:"apply_status",
-        // },
-        // keyName:"dkey",
-        // valueName:"dvalue",
         formatter: function(v,data){
             return "审核通过"
-        },
-        // search: true
+        }
     },{
         field: 'approveNote',
         title: '审核说明'
@@ -93,8 +83,11 @@ $(function() {
         columns: columns,
         pageCode: '623030',
         searchParams: {
-            // companyCode:OSS.companyCode
             statusList:[4,5,6,7,8,10]
+        },
+        beforeSearch: function (data) {
+            data['applyUser'] = data['mobile'];
+            delete data['mobile'];
         }
     });
 
@@ -114,16 +107,14 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-
         if (selRecords[0].status != 2) {
-                    toastr.info(selRecords[0].user.mobile + "不是待审核状态!");
-                    return;
-                }        
-
+            toastr.info(selRecords[0].user.mobile + "不是待审核状态!");
+            return;
+        }
         var dataCode = selRecords[0].code;
         window.location.href = "audit_check.html?userId=" + selRecords[0].userId+"&code="+selRecords[0].code+"&v=1";
 
-    });       
+    });
 
     
     $('#detailBtn').off("click").click(function() {
@@ -132,11 +123,6 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-
-         
-            
         window.location.href = "./alreadyQuery_addedit.html?userId=" + selRecords[0].user.userId+"&code="+selRecords[0].code+"&v=1";
     });
-
-
 });

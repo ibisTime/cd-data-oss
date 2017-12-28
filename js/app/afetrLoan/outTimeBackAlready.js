@@ -65,15 +65,16 @@ $(function () {
     }, {
         field: 'payType',
         title: '还款方式',
-        formatter: function (v, data) {
-            if(data.payType === '5') {
-                return '宝付银行卡代扣（自动）';
-            }else if(data.payType === '6') {
-                return '宝付银行卡代扣（客户）';
-            }else {
-                return '宝付银行卡代扣（平台）' ;
-            }
-        }
+        // formatter: function (v, data) {
+        //     if(data.payType === '5') {
+        //         return '宝付银行卡代扣（自动）';
+        //     }else if(data.payType === '6') {
+        //         return '宝付银行卡代扣（客户）';
+        //     }else {
+        //         return '宝付银行卡代扣（平台）' ;
+        //     }
+        // }
+        formatter: Dict.getNameForList('pay_type','623907')
     },{
         field: 'status',
         title: '状态',

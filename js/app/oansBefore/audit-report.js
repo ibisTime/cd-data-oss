@@ -548,7 +548,9 @@
         }        
 
         if(infoCarrierFlag == "0"){
-            unverified("page-title4"); 
+            unverified("page-title4");
+            $('#yysrzTool').css('display','none');
+            $('#yysrzPannel').css('display','none');
         }else if(infoCarrierFlag == "1"){
             verified("page-title4");
         }else{

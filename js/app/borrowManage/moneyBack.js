@@ -8,15 +8,29 @@ $(function () {
         field: 'applyUser',
         title: '申请人',
         type: 'select',
-        formatter:function(v,data){
-            data1[v] = data.user.realName
-            $('#applyUser').renderDropdown2(data1)
-             return data.user.realName
-        } ,      
-        search: true
+        search: true,
+        pageCode: '805120',
+        keyName: 'userId',
+        valueName: '{{realName.DATA}}',
+        params: {
+            updater: '',
+            kind: 'C'
+        },
+        formatter: function(v,data){
+            return data.user.realName
+        }
     },{
         field: 'mobile',
         title: '手机号',
+        type: 'select',
+        search: true,
+        pageCode: '805120',
+        keyName: 'userId',
+        valueName: 'mobile',
+        params: {
+            updater: '',
+            kind: 'C'
+        },
         formatter: function(v, data){
             return data.user.mobile;
         }
@@ -92,7 +106,11 @@ $(function () {
             isOverdue: 0
         },
         pageCode: '623085',
-        singleSelect: false
+        singleSelect: false,
+        beforeSearch: function (data) {
+            data['applyUser'] = data['mobile'];
+            delete data['mobile'];
+        }
     });
  
     $('#renewalBtn').click(function() {
@@ -131,7 +149,12 @@ $(function () {
             codeList: codeList,
             updater: getUserName()
         };
-        confirm("批量付款？").then(function() {
+        if(selRecords.length == 1) {
+            text = '确认代扣？'
+        }else {
+            text = '确认批量代扣？'
+        }
+        confirm(text).then(function() {
             reqApi({
                 code: '623084',
                 json: data

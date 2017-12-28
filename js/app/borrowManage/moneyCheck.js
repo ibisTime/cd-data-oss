@@ -13,19 +13,33 @@ $(function () {
         field: 'applyUser',
         title: '申请人',
         type: 'select',
-        formatter:function(v,data){
-            data1[v] = data.user.realName;
-            $('#applyUser').renderDropdown2(data1);
-             return data.user.realName
-        } ,     
-        search: true
-    }, {
+        search: true,
+        pageCode: '805120',
+        keyName: 'userId',
+        valueName: '{{realName.DATA}}',
+        params: {
+            updater: '',
+            kind: 'C'
+        },
+        formatter: function(v,data){
+            return data.user.realName
+        }
+    },{
         field: 'mobile',
         title: '手机号',
+        type: 'select',
+        search: true,
+        pageCode: '805120',
+        keyName: 'userId',
+        valueName: 'mobile',
+        params: {
+            updater: '',
+            kind: 'C'
+        },
         formatter: function(v, data){
             return data.user.mobile;
         }
-    },{
+    },  {
         field: 'overdueCode',
         title: '代码',
         formatter: function (v, data) {
@@ -74,7 +88,11 @@ $(function () {
             status: 0,
             isArchive: 0
         },
-        pageCode: '623085'
+        pageCode: '623085',
+        beforeSearch: function (data) {
+            data['applyUser'] = data['mobile'];
+            delete data['mobile'];
+        }
     });
 
     $('#checkBtn').off('click').click(function() {

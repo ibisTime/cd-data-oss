@@ -7,29 +7,47 @@ $(function () {
         title: '',
         checkbox: true
     }, {
-        field: 'userId',
+        field: 'applyUser',
         title: '申请人',
         type: 'select',
-        formatter:function(v,data){
-            data1[v] = data.user.realName;
-            $('#userId').renderDropdown2(data1);
-             return data.user.realName
-        } ,      
-        search: true
-    }, {
-        field: 'mobile',
-        title: '账号',
-        formatter:function(v,data){
-            return data.user.mobile
+        search: true,
+        pageCode: '805120',
+        keyName: 'userId',
+        valueName: '{{realName.DATA}}',
+        params: {
+            updater: '',
+            kind: 'C'
+        },
+        formatter: function(v,data){
+            return data.user.realName
         }
     },{
+        field: 'mobile',
+        title: '帐号',
+        type: 'select',
+        search: true,
+        pageCode: '805120',
+        keyName: 'userId',
+        valueName: 'mobile',
+        params: {
+            updater: '',
+            kind: 'C'
+        },
+        formatter: function(v, data){
+            return data.user.mobile;
+        }
+    },  {
         field: 'code',
         title: '借款编号'
     }];
 
     buildList({
         columns: columns,
-        pageCode: '623094'
+        pageCode: '623094',
+        beforeSearch: function (data) {
+            data['userId'] = data['mobile'];
+            delete data['mobile'];
+        }
     });
  
     $('#renewalBtn').click(function() {

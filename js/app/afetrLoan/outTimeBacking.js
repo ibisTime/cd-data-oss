@@ -149,7 +149,12 @@ $(function () {
             codeList: codeList,
             updater: getUserName()
         };
-        confirm("批量付款？").then(function() {
+        if(selRecords.length == 1) {
+            text = '确认代扣？'
+        }else {
+            text = '确认批量代扣？'
+        }
+        confirm(text).then(function() {
             reqApi({
                 code: '623084',
                 json: data

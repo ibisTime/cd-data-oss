@@ -8,19 +8,33 @@ $(function () {
         field: 'applyUser',
         title: '申请人',
         type: 'select',
-        formatter:function(v,data){
-            data1[v] = data.user.realName
-            $('#applyUser').renderDropdown2(data1)
-             return data.user.realName
-        } ,      
-        search: true
-    }, {
+        search: true,
+        pageCode: '805120',
+        keyName: 'userId',
+        valueName: '{{realName.DATA}}',
+        params: {
+            updater: '',
+            kind: 'C'
+        },
+        formatter: function(v,data){
+            return data.user.realName
+        }
+    },{
         field: 'mobile',
         title: '手机号',
+        type: 'select',
+        search: true,
+        pageCode: '805120',
+        keyName: 'userId',
+        valueName: 'mobile',
+        params: {
+            updater: '',
+            kind: 'C'
+        },
         formatter: function(v, data){
             return data.user.mobile;
         }
-    }, {
+    },  {
         field: 'overdueCode',
         title: '代码',
         formatter: function (v, data) {
@@ -70,15 +84,16 @@ $(function () {
     },  {
         field: 'payType',
         title: '还款方式',
-        formatter: function (v, data) {
-            if(data.payType === '5') {
-                return '宝付银行卡代扣（自动）';
-            }else if(data.payType === '6') {
-                return '宝付银行卡代扣（客户）';
-            }else {
-                return '宝付银行卡代扣（平台）' ;
-            }
-        }
+        // formatter: function (v, data) {
+        //     if(data.payType === '5') {
+        //         return '宝付银行卡代扣（自动）';
+        //     }else if(data.payType === '6') {
+        //         return '宝付银行卡代扣（客户）';
+        //     }else {
+        //         return '宝付银行卡代扣（平台）' ;
+        //     }
+        // }
+        formatter: Dict.getNameForList('pay_type','623907')
     }, {
         field: 'renewalCount',
         title: '续期次数'
@@ -102,7 +117,11 @@ $(function () {
             isArchive: 0,
             isOverdue: 0
         },
-        pageCode: '623085'
+        pageCode: '623085',
+        beforeSearch: function (data) {
+            data['applyUser'] = data['mobile'];
+            delete data['mobile'];
+    }
     });
  
      $('#filedBtn').click(function() {

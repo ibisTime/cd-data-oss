@@ -14,33 +14,33 @@ $(function() {
         field: 'applyUser',
         title: '申请人',
         type: 'select',
+        search: true,
+        pageCode: '805120',
+        keyName: 'userId',
+        valueName: '{{realName.DATA}}',
+        params: {
+            updater: '',
+            kind: 'C'
+        },
         formatter: function(v,data){
             return data.user.realName
-        },
-        search: true,
-        pageCode: '805120',
-        keyName: 'userId',
-        valueName: 'mobile',
-        params: {
-            updater: '',
-            kind: 'B'
         }
     },{
-        field: 'userId',
+        field: 'mobile',
         title: '手机号',
         type: 'select',
-        formatter: function(v, data){
-            return data.user.mobile;
-        },
         search: true,
         pageCode: '805120',
         keyName: 'userId',
         valueName: 'mobile',
         params: {
             updater: '',
-            kind: 'B'
+            kind: 'C'
+        },
+        formatter: function(v, data){
+            return data.user.mobile;
         }
-    }, {
+    },  {
         field: 'amount',
         title: '借款金额',
         formatter: function(v,data){
@@ -98,6 +98,10 @@ $(function() {
         searchParams: {
             // companyCode:OSS.companyCode
             statusList: [3]
+        },
+        beforeSearch: function (data) {
+            data['applyUser'] = data['mobile'];
+            delete data['mobile'];
         }
     });
 
