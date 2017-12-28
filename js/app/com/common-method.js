@@ -1266,7 +1266,7 @@ function buildDetail(options) {
     btnHtml += '</li>';
     html += btnHtml;
   } else {
-    html += '<li><input id="subBtn" type="button" class="btn margin-left-100" value="保存"/><input id="backBtn" type="button" class="btn margin-left-20" value="返回"/></li>';
+    html += '<li><input id="subBtn" type="button" class="btn margin-left-100" value="'+(options.btnSucTxt||'保存')+'"/><input id="backBtn" type="button" class="btn margin-left-20" value="返回"/></li>';
   }
   if (options.container) {
     options.container.append(html);

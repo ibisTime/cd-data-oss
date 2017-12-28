@@ -1,6 +1,18 @@
 $(function() {
-	
+
 	var code = getQueryString('code');
+	var roleList = {};
+	reqApi({
+		sync: true,
+		code: '805021',
+		json: {}
+	}).then(function (data) {
+    data.forEach(function (t) {
+    	if (t.code != 'salesman') {
+        roleList[t.code] = t.name;
+			}
+		});
+  });
 	
 	var fields = [{
 		field: 'kind',
@@ -16,10 +28,8 @@ $(function() {
 		field: 'roleCode',
 		required: true,
 		type: 'select',
-		listCode: '805021',
-		keyName: 'code',
-		valueName: 'name'
-	}, 	{
+    data: roleList
+	}, {
 		title: '备注',
 		field: 'remark',
 		maxlength: 250
@@ -29,14 +39,7 @@ $(function() {
 		fields: fields,
 		code: code,
 		detailCode: '805121',
-		addCode: '805042',
-		beforeSubmit: function (data) {
-			if (data.roleCode == 'salesman') {
-				data.kind = 'B';
-				data.mobile = data.loginName;
-			}
-			return data;
-        }
+		addCode: '805042'
 	});
-	
+
 });

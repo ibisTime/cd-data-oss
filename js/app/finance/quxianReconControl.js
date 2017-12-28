@@ -18,10 +18,8 @@ $(function() {
     }, {
         field: 'channelType',
         title: '渠道',
-        // type: 'select',
         key: 'channel_type',
         formatter: Dict.getNameForList('channel_type')
-        // search: true
     }, {
         field: 'bizType',
         title: '业务类型',
@@ -44,7 +42,6 @@ $(function() {
         title: '状态',
         type: 'select',
         key: 'jour_status',
-
         formatter: Dict.getNameForList('jour_status'),
         search: true
     }, {
@@ -63,14 +60,13 @@ $(function() {
         field: 'workDate',
         title: '拟对账日期',
         type: 'date',
-        search: true,
+        search: true
     }];
     buildList({
         columns: columns,
         pageCode: '802520',
         beforeDetail: function(data) {
             location.href = "ledger_addedit.html?v=1&code=" + data.code;
-            // location.href = "autoReconControl_addedit.html?v=1&code=" + data.code;
         },
         beforeEdit: function(r) {
             if (r.status != '1') {
@@ -83,18 +79,17 @@ $(function() {
             "accountNumber":"",
             "type":"P",
             "kind":"0",
-            "companyCode":OSS.companyCode,
-            "systemCode":OSS.companyCode,
+            "companyCode": OSS.companyCode,
+            "systemCode": OSS.companyCode,
             "bizType": -11,
             "channelType": 'out'
         },
         beforeSearch: function(data) {
             if (data.workDate) {
-                data.workDate = data.workDate.replace(/-/g, "");;
-                return data;
-            } else {
+                data.workDate = data.workDate.replace(/-/g, "");
                 return data;
             }
+            return data;
         }
     });
 

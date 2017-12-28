@@ -60,9 +60,9 @@ $(function() {
         field: 'status',
         title: '状态',
         type: 'select',
-        key: 'jour_status',
+        key: 'hl_status',
         search: true,
-        formatter: Dict.getNameForList('jour_status'),
+        formatter: Dict.getNameForList('hl_status'),
     }, {
         field: 'jourCode',
         title: '流水编号'
@@ -72,15 +72,18 @@ $(function() {
         columns: columns,
         pageCode: '802805',
         searchParams: {
-            'channelType': '0',
             companyCode: OSS.companyCode
         }
     });
 
-    $("#checkBtn").click(function() {
+    $("#checkBtn").off('click').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
             toastr.info("请选择记录");
+            return;
+        }
+        if (selRecords[0].status !== '1') {
+            toastr.warning('该记录不是待审批状态');
             return;
         }
         window.location.href = "unfairOutAccount_check.html?v=1&Code=" + selRecords[0].code;

@@ -52,7 +52,7 @@ $(function() {
         type: 'select',
         key: 'jour_status',
         search: true,
-        formatter: Dict.getNameForList('jour_status'),
+        formatter: Dict.getNameForList('jour_status')
     }, {
         field: 'remark',
         title: '备注'

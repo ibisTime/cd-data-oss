@@ -8,10 +8,8 @@ $(function() {
             userId: OSS.SYS_USER
         }
     }).done(function(data) {
-        $("#amount-CNY").text("￥" + moneyFormat(data[0].amount));
+        $("#amount-CNY").text(moneyFormat(data[0].amount));
         accountNumberCNY = data[0].accountNumber;
-        // $("#amount-JF").text(moneyFormat(data[1].amount));
-        // accountNumberJF = data[1].accountNumber;
     });
 
     reqApi({
@@ -20,7 +18,7 @@ $(function() {
             userId: OSS.SYS_USER + "_TG"
         }
     }).then(function(data) {
-        $("#amount-TG").text("￥" + moneyFormat(data[0].amount));
+        $("#amount-TG").text(moneyFormat(data[0].amount));
         accountNumberTG = data[0].accountNumber;
     });
 

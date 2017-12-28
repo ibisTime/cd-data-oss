@@ -14,17 +14,11 @@ $(function() {
         title: '账户余额',
         field: 'amount',
         formatter: moneyFormat
-    },
-    //     {
-    //     title: '冻结金额',
-    //     field: 'frozenAmount',
-    //     formatter: moneyFormat
-    // },
-        {
+    }, {
         title: "注册时间",
         field: "createDatetime",
         formatter: dateTimeFormat
-    },{
+    }, {
         title: "状态",
         field: "status",
         type: "select",
@@ -37,31 +31,33 @@ $(function() {
         columns: [{
             title: '流水编号',
             field: 'code'
-        },{
+        }, {
             title: '业务类型',
             field: 'bizType',
             type: "select",
             key: "currency",
             formatter: Dict.getNameForList("biz_type")
-        },{
+        }, {
             title: '变动金额',
             field: 'transAmount',
             formatter: moneyFormat
-        },{
+        }, {
             title: '变动前金额',
             field: 'preAmount',
             formatter: moneyFormat
-        },{
+        }, {
             title: '变动后金额',
             field: 'postAmount',
             formatter: moneyFormat
-        },{
+        }, {
             title: '变动时间',
-            field: 'createDatetime'
-        },{
+            field: 'createDatetime',
+            formatter: dateTimeFormat
+        }, {
             title: '状态',
-            field: 'status'
-        },{
+            field: 'status',
+            formatter: Dict.getNameForList('jour_status')
+        }, {
             title: '备注',
             field: 'remark'
         }],
@@ -71,8 +67,7 @@ $(function() {
             userId:userId,
             companyCode:OSS.companyCode
         }
-    }
-    ];
+    }];
     buildDetail({
         fields: columns,
         view: view,
@@ -85,5 +80,4 @@ $(function() {
         detailCode: '802503',
         _keys: [0]
     });
-
 });

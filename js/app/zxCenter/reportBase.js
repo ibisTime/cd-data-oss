@@ -80,6 +80,16 @@ $(function() {
                 .replace(/PTD8/, "同盾认证");
         }
     }, {
+        title: '状态',
+        field: 'status',
+        search: true,
+        type: 'select',
+        data: {
+            '0': '未读',
+            '1': '已读',
+            '2': '已过期'
+        }
+    }, {
         title: "完整度",
         field: "intact",
         formatter: function (v, data) {

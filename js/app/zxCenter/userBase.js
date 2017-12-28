@@ -61,7 +61,6 @@ $(function() {
             kind: "C",
             companyCode: OSS.companyCode
         }
-
     });
     $('#newestReportBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
@@ -116,6 +115,4 @@ $(function() {
         }, function(){});
 
     });
-
-
 });

@@ -18,6 +18,9 @@ $(function() {
                 return '首页'
             }
         },
+        data: {
+            'index_banner': '首页'
+        },
         search: true
     }, {
         title: '顺序',

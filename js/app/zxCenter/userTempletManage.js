@@ -5,7 +5,19 @@ $(function() {
         checkbox: true
     }, {
         title: '所属业务员',
-        field: 'salesUserMobile'
+        field: 'userId',
+        search: true,
+        pageCode: '805120',
+        keyName: 'userId',
+        valueName: 'mobile',
+        params: {
+            updater: '',
+            kind: 'B'
+        },
+        type: 'select',
+        formatter: function (v, data) {
+            return data['salesUserMobile'];
+        }
     }, {
         title: '模板名称',
         field: 'name'
@@ -30,7 +42,6 @@ $(function() {
         pageCode: '805235',
         deleteCode: '805231',
         searchParams: {
-            kind: "C",
             companyCode:OSS.companyCode,
             orderColumn: 'update_datetime',
             orderDir: 'desc'

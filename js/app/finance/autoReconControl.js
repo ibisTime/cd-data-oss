@@ -44,7 +44,6 @@ $(function() {
         title: '状态',
         type: 'select',
         key: 'jour_status',
-
         formatter: Dict.getNameForList('jour_status'),
         search: true
     }, {
@@ -63,14 +62,13 @@ $(function() {
         field: 'workDate',
         title: '拟对账日期',
         type: 'date',
-        search: true,
+        search: true
     }];
     buildList({
         columns: columns,
         pageCode: '802520',
         beforeDetail: function(data) {
             location.href = "ledger_addedit.html?v=1&code=" + data.code;
-            // location.href = "autoReconControl_addedit.html?v=1&code=" + data.code;
         },
         beforeEdit: function(r) {
             if (r.status != '1') {

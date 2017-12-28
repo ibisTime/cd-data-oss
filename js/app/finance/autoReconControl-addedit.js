@@ -22,15 +22,13 @@
         title: '币种',
         type: 'select',
         key: 'currency',
-
         formatter: Dict.getNameForList("currency"),
-        readonly: true,
+        readonly: true
     }, {
         field: 'channelType',
         title: '渠道类型',
         type: 'select',
         key: 'channel_type',
-
         formatter: Dict.getNameForList('channel_type'),
         readonly: true
     }, {
@@ -38,9 +36,8 @@
         title: '业务类型',
         type: 'select',
         key: 'biz_type',
-
         formatter: Dict.getNameForList('biz_type'),
-        readonly: true,
+        readonly: true
     }, {
         field: 'bizNote',
         title: '业务说明',
@@ -70,7 +67,6 @@
         title: '状态',
         type: 'select',
         key: 'jour_status',
-
         formatter: Dict.getNameForList('jour_status'),
         readonly: true
     }, {
@@ -87,7 +83,7 @@
         amount1: true,
         value: '0',
         required: true,
-        readonly: false,
+        readonly: false
     }, {
         title: '对账说明',
         field: 'checkNote',
@@ -106,34 +102,8 @@
         detailCode: '802522',
         editCode: '802800',
         view: view,
-        beforeSubmit: function(data) {
-            data.order = data.code;
-            return true;
-        }
+        btnSucTxt: '确认'
     };
-    options.buttons = [{
-        title: '确认',
-        handler: function() {
-            if ($('#jsForm').valid()) {
-                var data = {};
-                data['checkAmount'] = $("#checkAmount").val();
-                data['checkUser'] = getUserName();
-                data['code'] = code;
-                data["checkNote"] = $("#checkNote").val();
-                reqApi({
-                    code: "802800",
-                    json: data
-                }).done(function() {
-                    sucDetail();
-                });
-            }
-        }
-    }, {
-        title: '返回',
-        handler: function() {
-            goBack();
-        }
-    }];
     buildDetail(options);
 
     var h = "<p class='huilv' style='padding: 5px 0 0 194px;display: block;color:red;'>0表示平账,负数表示需减钱,正数表示需加钱</p>";

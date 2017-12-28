@@ -1,11 +1,10 @@
 $(function() {
     var code = getQueryString('code');
-    var jourCode = getQueryString('jourCode');
     var view = getQueryString('v');
 
     var columns = [{
         field: 'realName',
-        title: '户名',
+        title: '户名'
     }, {
         field: 'channelType',
         title: '渠道',

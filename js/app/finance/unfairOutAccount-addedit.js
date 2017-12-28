@@ -38,8 +38,8 @@ $(function() {
         }, {
             field: 'status',
             title: '状态',
-            key: 'jour_status',
-            formatter: Dict.getNameForList('jour_status'),
+            key: 'hl_status',
+            formatter: Dict.getNameForList('hl_status'),
             readonly:view
         }, {
             field: 'applyUser',
