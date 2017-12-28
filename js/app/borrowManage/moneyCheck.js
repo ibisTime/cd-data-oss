@@ -53,11 +53,8 @@ $(function () {
         title: '签约时间',
         formatter: dateTimeFormat
     }, {
-        field: 'mobile',
-        title: '审核人',
-        formatter: function(v, data){
-            return data.user.mobile;
-        }
+        field: 'approver',
+        title: '审核人'
     },{
         field: 'status',
         title: '状态',

@@ -15,21 +15,31 @@ $(function() {
         title: '申请人',
         type: 'select',
         formatter: function(v,data){
-            data1[v] = data.user.realName;
-            $('#applyUser').renderDropdown2(data1);           
             return data.user.realName
         },
-        search: true
+        search: true,
+        pageCode: '805120',
+        keyName: 'userId',
+        valueName: 'mobile',
+        params: {
+            updater: '',
+            kind: 'B'
+        }
     },{
         field: 'userId',
         title: '手机号',
         type: 'select',
         formatter: function(v, data){
-            data2[data.user.userId] = data.user.mobile;
-            $('#userId').renderDropdown2(data2);
             return data.user.mobile;
         },
-        search: true
+        search: true,
+        pageCode: '805120',
+        keyName: 'userId',
+        valueName: 'mobile',
+        params: {
+            updater: '',
+            kind: 'B'
+        }
     }, {
         field: 'amount',
         title: '借款金额',

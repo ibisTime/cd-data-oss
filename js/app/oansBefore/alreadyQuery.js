@@ -10,27 +10,36 @@ $(function() {
         field: '',
         title: '',
         checkbox: true
-    }, {
+    },{
         field: 'applyUser',
         title: '申请人',
         type: 'select',
-        formatter: function(v,data){
-            data1[v] = data.user.realName;
-            $('#applyUser').renderDropdown2(data1);           
-            return data.user.realName
+        search: true,
+        pageCode: '805120',
+        keyName: 'userId',
+        valueName: 'realName',
+        params: {
+            updater: '',
+            kind: 'C'
         },
-        search: true
-    }, {
-        field: 'userId',
+        formatter: function(v,data){
+            return data.user.realName
+        }
+    },{
+        field: 'mobile',
         title: '手机号',
         type: 'select',
-        formatter: function(v, data){
-            data2[data.user.userId] = data.user.mobile;
-            $('#userId').renderDropdown2(data2);
-            return data.user.mobile;
+        search: true,
+        pageCode: '805120',
+        keyName: 'userId',
+        valueName: 'mobile',
+        params: {
+            updater: '',
+            kind: 'C'
         },
-        search: true
-
+        formatter: function(v, data){
+            return data.user.mobile;
+        }
     },  {
         field: 'amount',
         title: '借款金额',
