@@ -3,7 +3,7 @@ $(function() {
         "C": "C端用户",
         // "P": "平台用户"
     };
-    var data1 = {},data2 = {};
+    var data1 = {}, data2 = {};
   
 
     var columns = [{
@@ -21,11 +21,16 @@ $(function() {
         },
         search: true
     }, {
-        field: 'mobile',
+        field: 'userId',
         title: '手机号',
+        type: 'select',
         formatter: function(v, data){
+            data2[data.user.userId] = data.user.mobile;
+            $('#userId').renderDropdown2(data2);
             return data.user.mobile;
-        }
+        },
+        search: true
+
     },  {
         field: 'amount',
         title: '借款金额',
