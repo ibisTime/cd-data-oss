@@ -17,6 +17,22 @@ $(function() {
         field: 'mobile',
         search: true
     }, {
+        title: '真实姓名',
+        field: 'realName',
+        afterSet: function (v) {
+          if (!v) {
+              $("#realName").closest('li').hide();
+          }
+        }
+    }, {
+        title: '身份证',
+        field: 'idNo',
+        afterSet: function (v) {
+            if (!v) {
+                $("#idNo").closest('li').hide();
+            }
+        }
+    }, {
         title: '账户余额',
         field: 'amount',
         formatter: function () {

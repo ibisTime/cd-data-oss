@@ -56,17 +56,13 @@ $(function() {
         title: "类型",
         field: "type",
         type: "select",
-        formatter: function (v,data) {
-            if (data.type === '0') {
-                return '获客'
-            } else {
-                return '订阅'
-            }
+        formatter: function (v, data) {
+            return data.type === '0' ? '获客' : '订阅';
         }
     }, {
         title: "报告规格",
         field: "portList",
-        formatter: function (v,data) {
+        formatter: function (v, data) {
             return data.portList.replace(/F1/, "手机认证")
                 .replace(/F2/, "芝麻认证")
                 .replace(/F3/, "基本信息认证")
@@ -101,6 +97,12 @@ $(function() {
         title: "填写时间",
         field: "createDatetime",
         formatter: dateTimeFormat
+    }, {
+        title: '最新备注',
+        field: 'reportRemarkList',
+        formatter: function (v) {
+            return v ? v[v.length - 1].remark : '-';
+        }
     }];
     buildList({
         router: 'reportBase',
