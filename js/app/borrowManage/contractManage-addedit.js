@@ -1,19 +1,15 @@
 $(function() {
-    
     var code = getQueryString('code');
     var userId = getQueryString('userId');
     var view = getQueryString('v');
     var download = getQueryString('download');
 
-    var borrowCount,overdueCode,renewalCount,content,title;
+    var content,title;
     
     var fields = [ {
         field: 'mobile',
         title: '合同内容',
         formatter:function(v,data){
-            borrowCount = data.user.borrowCount;
-            overdueCode = data.user.overdueCode;
-            renewalCount = data.user.renewalCount;
             content = data.content;
             title = data.title;
             return content
@@ -36,12 +32,6 @@ $(function() {
         code: code,
         view:view,
         detailCode: '623093',
-        addCode: '623000',
-        editCode: '623001',
-        beforeSubmit:function(data){
-            data.updater = getUserId();
-            return data;
-        },
         afterData: function () {
             if(download) {
                 setTimeout(function () {
