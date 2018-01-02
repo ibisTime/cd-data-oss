@@ -72,7 +72,7 @@ $(function() {
             }
         }
     });
-$('label').css('display','none');
+    $('label').css('display','none');
 
 
 

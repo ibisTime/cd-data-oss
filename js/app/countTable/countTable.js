@@ -1,5 +1,4 @@
 $(function () {
-    var data1 = {};
     var columns = [ {
         field: 'today',
         title: '日期',
