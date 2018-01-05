@@ -33,10 +33,7 @@ $(function() {
         title: '借款时长(天)',
     }, {
         field: 'yqDays',
-        title: '逾期天数',
-        formatter:function(v,data){
-            return data.yqDays
-        }
+        title: '逾期天数'
     }, {
         field: 'lxAmount',
         title: '正常利息',

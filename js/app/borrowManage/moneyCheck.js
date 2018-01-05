@@ -66,9 +66,6 @@ $(function () {
         field: 'signDatetime',
         title: '签约时间',
         formatter: dateTimeFormat
-    }, {
-        field: 'approver',
-        title: '审核人'
     },{
         field: 'status',
         title: '状态',

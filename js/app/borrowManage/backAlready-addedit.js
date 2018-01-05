@@ -82,10 +82,7 @@ $(function() {
         formatter:Dict.getNameForList('pay_type','623907')
     }, {
         field: 'renewalCount',
-        title: '订单续期(次)',
-        formatter: function (v, data) {
-            return data.user.renewalCount
-        }
+        title: '订单续期(次)'
     }, {
         field: 'signDatetime',
         title: '签约时间',

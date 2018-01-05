@@ -1780,10 +1780,11 @@ function buildDetail(options) {
             data.city && $('#city').html(data.city);
             data.area && $('#area').html(data.area);
           } else {
-            if (displayValue) {
-              $('#' + item.field).html(( (item.amount || item.amount1)
-								? moneyFormat(displayValue)
-                : displayValue ) || '-');
+            if (displayValue != undefined) {
+              $('#' + item.field).html(
+                  (item.amount || item.amount1)
+					? moneyFormat(displayValue)
+                    : displayValue != undefined ? displayValue : '-');
             } else {
               $('#' + item.field).html('-');
             }

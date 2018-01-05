@@ -2,7 +2,9 @@ $(function () {
     var columns = [ {
         field: 'today',
         title: '日期',
-        formatter: dateTimeFormat
+        formatter: function (v, data) {
+            return dateFormat(data.today,'yyyy-MM-dd')
+        }
     },{
         field: 'regNum',
         title: '注册人数'
