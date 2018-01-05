@@ -90,7 +90,7 @@ $(function() {
         field: "intact",
         formatter: function (v, data) {
             if (data.intact) {
-                return ((+data.intact) * 100 + '%');
+                return (+data.intact*100).toFixed(2)+'%'
             }
         }
     }, {
