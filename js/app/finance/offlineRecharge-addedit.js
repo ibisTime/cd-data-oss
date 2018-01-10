@@ -30,16 +30,6 @@
         amount: true,
         formatter: moneyFormat
     }, {
-        field: 'payCardInfo',
-        title: '开户行',
-        required: true,
-        maxlength: 255
-    }, {
-        field: 'payCardNo',
-        title: '银行卡号',
-        bankCard: true,
-        required: true,
-    }, {
         field: 'applyNote',
         title: '充值说明',
         maxlength: 255

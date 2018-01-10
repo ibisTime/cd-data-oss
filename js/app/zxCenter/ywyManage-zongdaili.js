@@ -3,10 +3,6 @@ $(function() {
         title: '手机号',
         field: 'mobile',
         required: true
-    },{
-        title: '推荐人手机号',
-        field: 'userReferee',
-        required: true
     }];
 
     buildDetail({
@@ -16,7 +12,8 @@ $(function() {
             data.updater = getUserId();
             data.kind = 'B';
             data.loginName = data.mobile;
-            data.userRefereeKind = 'B';
+            data.userReferee = getUserId();
+            data.userRefereeKind = 'P';
             return data;
         }
     });

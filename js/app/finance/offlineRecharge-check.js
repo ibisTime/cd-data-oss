@@ -106,6 +106,9 @@ $(function() {
         key: 'biz_type',
         formatter: Dict.getNameForList('biz_type'),
     }, {
+        title: '付款户名',
+        field: 'payAccountName'
+    }, {
         field: 'channelType',
         title: '支付渠道',
         type: 'select',

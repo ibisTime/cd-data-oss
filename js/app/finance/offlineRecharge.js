@@ -27,11 +27,8 @@ $(function() {
         title: '业务类型',
         formatter: Dict.getNameForList('biz_type')
     }, {
-        field: 'payCardInfo',
-        title: '开户行',
-    }, {
-        field: 'payCardNo',
-        title: '银行卡号',
+        title: '付款户名',
+        field: 'payAccountName'
     }, {
         field: 'status',
         title: '状态',

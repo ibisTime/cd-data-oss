@@ -21,6 +21,16 @@ $(function() {
         field: "createDatetime",
         formatter: dateTimeFormat
     },{
+        title: "等级",
+        field: "level",
+    },{
+        title: "折扣",
+        field: "divRate",
+        formatter: function (v, data) {
+            return (data.divRate != null?(data.divRate * 100) + "%":'-')
+
+        }
+    },{
         title: "状态",
         field: "status",
         type: "select",
@@ -102,8 +112,26 @@ $(function() {
         }
         window.location.href = "./ywyManage_getClient.html?v=1&userId=" + selRecords[0].userId;
     });
+    $('#zongdailiBtn').click(function() {
+        window.location.href = "./ywyManage_zongdaili.html";
+    });
     $('#daizhuceBtn').click(function() {
         window.location.href = "./ywyManage_daizhuce.html";
     });
+    $('#setLevelBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "./ywyManage_addedit.html?v=1&userId=" + selRecords[0].userId + "&level=true";
+    });
 
+    $('#setDiscountBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "./ywyManage_addedit.html?v=1&userId=" + selRecords[0].userId + "&discount=true";    });
 });
