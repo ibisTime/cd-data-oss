@@ -85,6 +85,9 @@ $(function() {
         title: '账号',
         field: 'accountNumber',
         required: true
+    },{
+        title: '付款户名',
+        field: 'payAccountName'
     }, {
         title: '户名',
         field: 'accountName',
@@ -105,9 +108,6 @@ $(function() {
         type: 'select',
         key: 'biz_type',
         formatter: Dict.getNameForList('biz_type'),
-    }, {
-        title: '付款户名',
-        field: 'payAccountName'
     }, {
         field: 'channelType',
         title: '支付渠道',

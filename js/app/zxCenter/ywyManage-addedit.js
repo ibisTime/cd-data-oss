@@ -2,7 +2,7 @@ $(function() {
     var userId = getQueryString('userId');
     var view = getQueryString('v');
     var level = getQueryString('level');
-    var discount = getQueryString('discount');
+    // var discount = getQueryString('discount');
     var amount;
     reqApi({
         code: '802503',
@@ -43,12 +43,12 @@ $(function() {
         field: "divRate",
         formatter: function(v, data) {
             if(data.divRate != null) {
-                return (discount?data.divRate :(data.divRate * 100)+'%' )
+                return (level?data.divRate :(data.divRate * 100)+'%' )
             } else {
                 return '-'
             }
         },
-        readonly: discount?false:true,
+        readonly: level?false:true,
         help: '输入时请输入0-1之间的数字，不需要输入百分号'
     }, {
         title: '账户余额',
@@ -79,15 +79,18 @@ $(function() {
         },
         detailCode: '805121'
     };
-    if(level || discount) {
+    if(level) {
         options.buttons = [{
         title: '确认',
         handler: function() {
             if ($('#jsForm').valid()) {
-                var code = level?'805094':'805093';
+                var code = '805094';
                 var data = {};
-                data['userId'] = userId;
-                if(level) {
+
+                if($("#divRate").val()>=0 && $("#divRate").val()<=1) {
+                    data["divRate"] = $("#divRate").val();
+                    data["updater"] = getUserName();
+                    data['userId'] = userId;
                     data["level"] = $("#level").val();
                     reqApi({
                         code: code,
@@ -95,19 +98,8 @@ $(function() {
                     }).done(function() {
                         sucDetail();
                     });
-                }else {
-                    if($("#divRate").val()>=0 && $("#divRate").val()<=1) {
-                        data["divRate"] = $("#divRate").val();
-                        data["updater"] = getUserName();
-                        reqApi({
-                            code: code,
-                            json: data
-                        }).done(function() {
-                            sucDetail();
-                        });
-                    } else {
-                        toastr.info('请按要求输入合法的数字')
-                    }
+                } else {
+                    toastr.info('折扣为0-1之间的数字，不需要输入百分号')
                 }
             }
         }

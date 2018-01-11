@@ -7,7 +7,10 @@ $(function() {
     }, {
         field: 'code',
         title: '编号',
-    }, {
+    },{
+        title: '付款户名',
+        field: 'payAccountName'
+    },  {
         field: 'accountName',
         title: '户名',
         search: true
@@ -26,9 +29,6 @@ $(function() {
         field: 'bizType',
         title: '业务类型',
         formatter: Dict.getNameForList('biz_type')
-    }, {
-        title: '付款户名',
-        field: 'payAccountName'
     }, {
         field: 'status',
         title: '状态',
