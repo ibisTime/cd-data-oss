@@ -47,10 +47,7 @@ $(function() {
             type: "select",
             key: "currency",
             formatter: Dict.getNameForList("biz_type")
-        }, {
-            title: '业务说明',
-            field: 'bizNote'
-        }, {
+        },  {
             title: '变动金额',
             field: 'transAmount',
             formatter: moneyFormat
@@ -71,6 +68,9 @@ $(function() {
             field: 'status',
             formatter: Dict.getNameForList('jour_status')
         }, {
+            title: '业务说明',
+            field: 'bizNote'
+        },{
             title: '备注',
             field: 'remark'
         }],

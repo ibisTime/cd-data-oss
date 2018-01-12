@@ -4,7 +4,7 @@ $(function() {
         field: 'mobile',
         required: true
     },{
-        title: '推荐人手机号',
+        title: '推荐人业务员手机号',
         field: 'userReferee',
         required: true
     }];

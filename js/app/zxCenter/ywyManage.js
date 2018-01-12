@@ -54,7 +54,9 @@ $(function() {
         pageCode: '805120',
         searchParams: {
             kind: "B",
-            companyCode:OSS.companyCode
+            companyCode:OSS.companyCode,
+            orderColumn: 'create_datetime',
+            orderDir: 'DESC'
         }
     });
 
