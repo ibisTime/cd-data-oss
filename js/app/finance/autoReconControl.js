@@ -83,7 +83,7 @@ $(function() {
             "kind":"0",
             "companyCode":OSS.companyCode,
             "systemCode":OSS.companyCode,
-            "bizType": 11,
+            "bizType": 'ZXZX_ZZ',
             "channelType": 'out'
         },
         beforeSearch: function(data) {

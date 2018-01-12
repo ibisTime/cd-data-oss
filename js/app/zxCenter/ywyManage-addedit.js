@@ -3,7 +3,7 @@ $(function() {
     var view = getQueryString('v');
     var level = getQueryString('level');
     // var discount = getQueryString('discount');
-    var amount;
+    var amount,remark;
     reqApi({
         code: '802503',
         json: {
@@ -57,6 +57,14 @@ $(function() {
             return moneyFormat(amount);
         }
     }, {
+        title: "推荐人",
+        field: "loginName",
+        formatter: function (v, data) {
+            if(data.refereeUser) {
+                return data.refereeUser.loginName
+            }
+        }
+    },{
         title: "注册时间",
         field: "createDatetime",
         formatter: dateTimeFormat
@@ -68,7 +76,10 @@ $(function() {
         formatter: Dict.getNameForList("user_status")
     }, {
         title: '备注',
-        field: 'remark'
+        field: 'remark',
+        afterSet: function (data) {
+            remark = data;
+        }
     }
     ];
     var options = {
@@ -92,6 +103,7 @@ $(function() {
                     data["updater"] = getUserName();
                     data['userId'] = userId;
                     data["level"] = $("#level").val();
+                    data["remark"] = remark;
                     reqApi({
                         code: code,
                         json: data

@@ -7,17 +7,15 @@ $(function() {
         field: 'mobile',
         readonly: view
     },{
-        field: 'refereeUser',
-        title: '推荐人',
+        title: "推荐人",
+        field: "loginName",
         search:true,
         readonly: view,
-        formatter: function (v,data) {
-            if(data.refereeUser){
-                return data.refereeUser.mobile;
+        formatter: function (v, data) {
+            if (data.refereeUser) {
+                return data.refereeUser.loginName
             }
-
         }
-
     },{
         field: 'count',
         title: '报告数量',

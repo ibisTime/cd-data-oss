@@ -18,7 +18,17 @@ $(function() {
         title: "注册时间",
         field: "createDatetime",
         formatter: dateTimeFormat
-    }, {
+    },
+    //     {
+    //     title: "推荐人",
+    //     field: "loginName",
+    //     formatter: function (v, data) {
+    //         if(data.refereeUser.loginName) {
+    //             return data.refereeUser.loginName
+    //         }
+    //     }
+    // },
+        {
         title: "状态",
         field: "status",
         type: "select",
@@ -37,6 +47,9 @@ $(function() {
             type: "select",
             key: "currency",
             formatter: Dict.getNameForList("biz_type")
+        }, {
+            title: '业务说明',
+            field: 'bizNote'
         }, {
             title: '变动金额',
             field: 'transAmount',

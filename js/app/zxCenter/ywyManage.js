@@ -17,12 +17,8 @@ $(function() {
             return moneyFormat(data.amount);
         }
     }, {
-        title: "注册时间",
-        field: "createDatetime",
-        formatter: dateTimeFormat
-    },{
-        title: "等级",
-        field: "level",
+            title: "等级",
+            field: "level"
     },{
         title: "折扣",
         field: "divRate",
@@ -30,6 +26,18 @@ $(function() {
             return (data.divRate != null?(data.divRate * 100) + "%":'-')
 
         }
+    },{
+        title: "推荐人",
+        field: "loginName",
+        formatter: function (v, data) {
+            if(data.refereeUser) {
+                return data.refereeUser.loginName
+            }
+        }
+    }, {
+        title: "注册时间",
+        field: "createDatetime",
+        formatter: dateTimeFormat
     },{
         title: "状态",
         field: "status",
@@ -127,11 +135,4 @@ $(function() {
         window.location.href = "./ywyManage_addedit.html?v=1&userId=" + selRecords[0].userId + "&level=true";
     });
 
-    $('#setDiscountBtn').click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        window.location.href = "./ywyManage_addedit.html?v=1&userId=" + selRecords[0].userId + "&discount=true";    });
 });

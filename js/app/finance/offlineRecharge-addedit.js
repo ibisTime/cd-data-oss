@@ -41,7 +41,7 @@
         view: view,
         beforeSubmit: function(data) {
             data.applyUser = getUserId();
-            data.bizType = "11";
+            data.bizType = 'ZXZX_ZZ';
             return data;
         }
     };

@@ -9,7 +9,8 @@ $(function() {
         title: '编号',
     },{
         title: '付款户名',
-        field: 'payAccountName'
+        field: 'payAccountName',
+        search: true
     },  {
         field: 'accountName',
         title: '户名',
@@ -79,7 +80,8 @@ $(function() {
         searchParams: {
             channelType: '90',
             companyCode: OSS.companyCode,
-            type: 'B'
+            type: 'B',
+            payAccountNumber:OSS.companyCode
         },
         beforeDetail: function(data) {
             location.href = "offlineRecharge_check.html?code=" + data.code + "&detail=1";
